@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "dev": "node scripts/server.mjs",
+    "build": "node scripts/build.mjs"
+  },
+  "private": true
+}
