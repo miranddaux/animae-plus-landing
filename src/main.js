@@ -24,30 +24,17 @@ const faqs = [
 ];
 
 const phone = (inner, cls = '') => `<div class="phone ${cls}" aria-hidden="true"><div class="phone__in">${inner}</div></div>`;
-const feedScreen = `
-  <div class="ui-tabs"><b>Amigos</b><span>Comunidade</span></div>
-  <div class="ui-stories"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></div>
-  <div class="ui-post"><div class="ui-post__h"><i style="--c:#ff5c02"></i><div><b>Marina concluiu um anime</b><small>há 12 minutos</small></div></div>
-  <div class="ui-post__img"><span>ATAQUE<br>FINAL</span></div><p>Esse final me destruiu. Alguém aí?</p></div>`;
-const communityScreen = `
-  <div class="ui-tabs"><span>Amigos</span><b>Comunidade</b></div>
-  <div class="ui-chips"><em>Um dia</em><em>Novidades</em><em>Debates</em></div>
-  <div class="ui-post"><div class="ui-post__h"><i style="--c:#3c7bff"></i><div><b>Naruto_89</b><small>Ep. 220 · Teoria em andamento</small></div></div><p>“Esse episódio mudou como eu vejo o Kakashi. Alguém mais sentiu isso?”</p></div>
-  <div class="ui-post"><div class="ui-post__h"><i style="--c:#ff2e8a"></i><div><b>Luna</b><small>concluiu Frieren</small></div></div><p>Final lindo demais. Sem spoilers aqui.</p></div>`;
-const discoverScreen = `
-  <div class="ui-tabs"><b>Descoberta</b><span>Para você</span></div>
-  <div class="ui-grid"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i><i style="--c:#3c7bff"></i><i style="--c:#ff5c02"></i></div>
-  <p class="ui-note">Recomendações por emoção, não por popularidade.</p>`;
-const badgesScreen = `
-  <div class="ui-tabs"><b>Badges</b><span>Nível 12</span></div>
-  <div class="xp"><i style="width:68%"></i></div>
-  <div class="ui-badges"><i>⚡</i><i>🔥</i><i>🏅</i><i>🎴</i><i>🌙</i><i>⭐</i></div>
-  <p class="ui-note">680 / 1000 XP para o próximo nível.</p>`;
+const IMG = './assets/img/';
+const shot = (f, alt) => `<img class="shot" src="${IMG}${f}" alt="${alt}" loading="lazy">`;
+const detalheScreen = shot('app-detalhe.webp', 'Tela de um anime no ANIMAE, com progresso de episódios');
+const listaScreen = shot('app-lista.webp', 'Minha Lista no ANIMAE, com progresso por anime');
+const perfilScreen = shot('app-perfil.webp', 'Perfil no ANIMAE, com XP, sequência e conquistas');
+const buscaScreen = shot('app-busca.webp', 'Busca e descoberta no ANIMAE');
 
 const tabs = [
-  { id: 'feed', label: 'Feed social', title: 'Um feed que entende o que você sentiu', text: 'Não é cronológico. Não é por popularidade. É por ressonância emocional. Posts de quem assistiu o mesmo episódio que você, no mesmo estado de espírito, aparecem primeiro. Conversa real acontece aqui.', a: feedScreen, b: communityScreen },
-  { id: 'descoberta', label: 'Descoberta', title: 'O próximo anime que vai te marcar', text: 'Descoberta guiada pelo que você sentiu, não pelo que está em alta. Encontre o próximo anime favorito a partir de quem tem o seu gosto.', a: discoverScreen, b: feedScreen },
-  { id: 'badges', label: 'Badges', title: 'Sua jornada vira conquista', text: 'Cada episódio rende XP. Cumpra marcos, desbloqueie badges e mostre quem você é no mundo anime.', a: badgesScreen, b: discoverScreen },
+  { id: 'diario', label: 'Seu diário', title: 'Marque cada episódio e veja sua jornada', text: 'Acompanhe o que você assiste, anime por anime. Um toque marca o episódio, o progresso avança e a sua lista fica sempre em dia, do jeito que você quer.', a: listaScreen, b: detalheScreen },
+  { id: 'descoberta', label: 'Descoberta', title: 'O próximo anime que vai te marcar', text: 'Busque por anime, personagem ou gente. Explore por temporada e por gênero e encontre o próximo favorito a partir do que você já gosta.', a: buscaScreen, b: detalheScreen },
+  { id: 'badges', label: 'Perfil e badges', title: 'Sua jornada vira conquista', text: 'Cada episódio rende XP. Mantenha a sequência, suba de nível, desbloqueie conquistas e mostre quem você é no mundo anime.', a: perfilScreen, b: listaScreen },
 ];
 
 document.querySelector('#root').innerHTML = `
@@ -72,9 +59,9 @@ document.querySelector('#root').innerHTML = `
       </div>
       <p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Android primeiro</b> · grátis no acesso antecipado</span></p>
       <div class="hero__stage">
-        <div class="bubble">Tá olhando o quê? Entra logo na lista.</div>
-        <img class="hero__draco" src="${SYMBOL}" alt="Draco, mascote do ANIMAE" width="260" height="223">
-        ${phone(feedScreen, 'phone--hero')}
+        <div class="bubble">Também tô esperando o app. Entra na lista.</div>
+        <img class="hero__draco" src="${IMG}draco-triste.webp" alt="Draco, mascote do ANIMAE, esperando o app com o celular na mão" width="240" height="240">
+        ${phone(detalheScreen, 'phone--hero')}
       </div>
     </div>
   </section>
@@ -87,11 +74,11 @@ document.querySelector('#root').innerHTML = `
         <article class="bcard bcard--tall">
           <h3>Descoberta às cegas</h3>
           <p>Sem contexto sobre o que você sente, os algoritmos empurram qualquer coisa. Você quer o próximo anime que vai te quebrar, não qualquer anime.</p>
-          <div class="strip"><i style="--c:#7a1f1f">魂</i><i style="--c:#8a6a12">火</i><i style="--c:#3f7a1a">月</i><i style="--c:#1a7a52">龍</i><i style="--c:#1a5f7a">空</i><i style="--c:#3b2a8a">影</i></div>
+          <div class="strip"><img src="${IMG}banner-naruto.webp" alt="" loading="lazy"><img src="${IMG}banner-dragonball.webp" alt="" loading="lazy"><img src="${IMG}banner-onepiece.webp" alt="" loading="lazy"></div>
         </article>
         <article class="bcard">
           <div><h3>Comunidade pulverizada</h3><p>Sua tribo está espalhada em 10 plataformas. Discord, Twitter, Reddit, MAL. Ninguém sabe onde se reunir de verdade.</p></div>
-          <img src="${SYMBOL}" alt="" width="120" height="103">
+          <img class="bcard__draco" src="${IMG}draco-sobrecarga.webp" alt="" width="180" height="209" loading="lazy">
         </article>
         <article class="bcard">
           <div><h3>Social sem sentimento</h3><p>Os apps de anime existentes tratam você como número. Nenhum pergunta o que você sentiu. Nenhum conecta por emoção.</p></div>
@@ -129,7 +116,7 @@ document.querySelector('#root').innerHTML = `
         <p class="sub">O ANIMAE não é um projeto de fim de semana. É construído por quem passou anos em produto: cada decisão tem um porquê e cada feature nasce de uma hipótese. Quem entra na lista acompanha tudo e ajuda a decidir o que vem depois.</p>
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
-      <div class="split__card">${phone(feedScreen, 'phone--tall')}</div>
+      <div class="split__card">${phone(perfilScreen, 'phone--tall')}</div>
     </div>
   </section>
 
