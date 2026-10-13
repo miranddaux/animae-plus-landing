@@ -13,7 +13,7 @@ const MAIN_LABEL = STAGE === 'live' ? 'Baixar no Android' : 'Entrar na lista';
 const MAIN_URL = STAGE === 'live' ? PLAY_URL : '#lista';
 
 const main = (extra = '') => `<a class="btn ${extra}" href="${MAIN_URL}" ${MAIN_URL.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>${MAIN_LABEL}</a>`;
-const playIcon = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+const playIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 const faqs = [
   { q: 'O ANIMAE vai ser pago?', a: 'O acesso inicial é gratuito. No futuro existirá um plano premium com recursos avançados, mas a camada social principal sempre terá versão free. Quem entra na lista garante condições especiais de fundador.' },
@@ -69,7 +69,7 @@ document.querySelector('#root').innerHTML = `
       <p class="lead">O ANIMAE não é streaming. É o diário social de anime: marque o que você assiste, ganhe XP e badges e fale com quem sentiu o mesmo depois de um final que destroça.</p>
       <div class="hero__cta">
         ${main()}
-        <a class="btn btn--pink" href="${WEB_URL}" target="_blank" rel="noopener">${playIcon} Ver o app</a>
+        <a class="btn btn--pink" href="${WEB_URL}" target="_blank" rel="noopener">Ver o app na web ${playIcon}</a>
       </div>
       <p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Android primeiro</b> · grátis no acesso antecipado</span></p>
       <div class="hero__stage">
