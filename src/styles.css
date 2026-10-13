@@ -245,8 +245,8 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 .footer__lista{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-bottom:28px;margin-bottom:24px;border-bottom:1px solid rgba(255,255,255,.08)}
 .footer__lista p{margin:0;font-size:14px;color:var(--t2);max-width:44ch}
 .form--mini{width:auto;margin:0;gap:8px;flex:0 1 420px}
-.form--mini input{height:44px;padding:0 16px;font-size:14px;background:rgba(255,255,255,.06)}
+.form--mini input{height:48px;padding:0 16px;font-size:14px;background:rgba(255,255,255,.06)}
 .form--mini input::placeholder{color:var(--t2);opacity:1}
-.btn.btn--mini{min-width:0;height:44px;padding:0 20px;font-size:14px;background:transparent;color:var(--primary);border:1.5px solid var(--primary);box-shadow:none}
-.btn.btn--mini:hover{background:var(--primary);color:var(--deep)}
+.btn.btn--mini{min-width:0;height:48px;padding:0 32px;font-size:14px;box-shadow:0 6px 12px rgba(255,92,2,.2)}
+.footer__in{font-size:12px}.footer__in a,.footer__in p{font-size:12px}
 @media (max-width:640px){.form--mini{flex:1 1 100%}}
