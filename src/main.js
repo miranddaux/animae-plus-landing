@@ -66,13 +66,14 @@ document.querySelector('#root').innerHTML = `
   <section class="hero">
     <div class="wrap hero__in">
       <h1>O lugar onde a conversa<br>continua depois do episódio</h1>
-      <p class="lead">O ANIMAE não é streaming. É o diário social de anime: o lugar onde você encontra quem sentiu o mesmo depois de um final que destroça.</p>
+      <p class="lead">O ANIMAE não é streaming. É o diário social de anime: marque o que você assiste, ganhe XP e badges e fale com quem sentiu o mesmo depois de um final que destroça.</p>
       <div class="hero__cta">
         ${main()}
         <a class="btn btn--pink" href="${WEB_URL}" target="_blank" rel="noopener">${playIcon} Ver o app</a>
       </div>
       <p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Android primeiro</b> · grátis no acesso antecipado</span></p>
       <div class="hero__stage">
+        <div class="bubble">Tá olhando o quê? Entra logo na lista.</div>
         <img class="hero__draco" src="${SYMBOL}" alt="Draco, mascote do ANIMAE" width="260" height="223">
         ${phone(feedScreen, 'phone--hero')}
       </div>
@@ -126,8 +127,8 @@ document.querySelector('#root').innerHTML = `
   <section class="sec">
     <div class="wrap split">
       <div class="split__text">
-        <h2>Tudo que existe ao redor do anime em um lugar</h2>
-        <p class="sub">O ANIMAE não é um projeto de fim de semana. É construído com a disciplina de quem passou anos em produto: cada decisão tem um porquê, cada feature tem uma hipótese.</p>
+        <h2>Feito com cuidado, em público</h2>
+        <p class="sub">O ANIMAE não é um projeto de fim de semana. É construído por quem passou anos em produto: cada decisão tem um porquê e cada feature nasce de uma hipótese. Quem entra na lista acompanha tudo e ajuda a decidir o que vem depois.</p>
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
       <div class="split__card">${phone(feedScreen, 'phone--tall')}</div>
@@ -137,9 +138,10 @@ document.querySelector('#root').innerHTML = `
   <section class="sec proofsec" id="baixar">
     <div class="wrap center">
       <div class="dots dots--lg"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i><i style="--c:#32d27f"></i></div>
-      <p class="big">Android</p>
-      <p class="sub"><b>Primeiro</b> no Google Play. Entre na lista e seja avisado no dia do lançamento.</p>
+      <p class="big">Android primeiro</p>
+      <p class="sub">O app chega primeiro ao Google Play. Entre na lista e seja avisado no dia do lançamento.</p>
       <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
+      <p class="dracoquote"><img src="${SYMBOL}" alt="" width="48" height="41"><span>“A fila não anda sozinha. Entra logo.” <b>— Draco</b></span></p>
     </div>
   </section>
 
