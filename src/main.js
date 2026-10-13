@@ -1,151 +1,193 @@
+// ── Configuração de lançamento ─────────────────────────────────────────
+// Fase "teste": botão leva ao convite do teste fechado do Google Play.
+// Quando o app estiver em produção, troque STAGE para 'live' e PLAY_URL pela página da loja.
+const STAGE = 'teste';
+const TEST_URL = '';   // cole aqui o link de convite do teste fechado
+const PLAY_URL = 'https://play.google.com/store/apps/details?id=com.animaee.app';
+const WEB_URL = 'https://animae-plus-main.vercel.app';
+// ───────────────────────────────────────────────────────────────────────
+
 const LOGO = './assets/brand/logo-horizontal-dark.svg';
 const SYMBOL = './assets/brand/symbol.svg';
+const MAIN_LABEL = STAGE === 'live' ? 'Baixar no Android' : 'Testar no Android';
+const MAIN_URL = STAGE === 'live' ? PLAY_URL : (TEST_URL || '#baixar');
 
-const steps = [
-  { n: '01', title: 'Marque o que você assiste', text: 'Episódio por episódio, do seu jeito. Sua jornada fica organizada sem você abrir uma planilha.' },
-  { n: '02', title: 'Suba de nível', text: 'Cada episódio rende XP. Complete marcos, desbloqueie badges e mostre quem você é no mundo anime.' },
-  { n: '03', title: 'Ache a sua gente', text: 'Veja o que seus amigos estão assistindo, converse sobre o episódio e descubra o próximo anime favorito.' },
-];
-
-const features = [
-  { icon: '⚡', title: 'XP e níveis', text: 'Assistir vira progresso de verdade. Quanto mais você vive, mais sobe.' },
-  { icon: '🏅', title: 'Badges', text: 'Conquistas para maratonistas, explorador de gêneros, finalizador de séries e mais.' },
-  { icon: '🎴', title: 'Perfil otaku', text: 'Sua vitrine: o que você viu, o que ama e o seu nível. Orgulho nerd, sem vergonha.' },
-  { icon: '💬', title: 'Feed da comunidade', text: 'Reações, teorias e papo sobre o episódio, com gente que entende a referência.' },
-];
+const main = (extra = '') => `<a class="btn ${extra}" href="${MAIN_URL}" ${MAIN_URL.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>${MAIN_LABEL}</a>`;
+const playIcon = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
 
 const faqs = [
-  { q: 'O ANIMAE é um app de streaming?', a: 'Não. A gente não exibe episódios. O ANIMAE é o diário social de anime: você marca o que assiste (em qualquer plataforma), acompanha seu progresso e conversa com a comunidade.' },
-  { q: 'Vai ser pago?', a: 'O acesso antecipado é gratuito. No futuro, deve existir um plano premium com recursos extras, mas a base — marcar, evoluir e conversar — continua aberta.' },
-  { q: 'Quando sai?', a: 'Estamos em teste fechado no Google Play agora. Quem entrar na lista é chamado primeiro, antes da abertura geral.' },
-  { q: 'Tem Android e iOS?', a: 'Android primeiro, depois iOS. Também existe uma versão web para acompanhar o projeto.' },
-  { q: 'Como funcionam os badges?', a: 'Você ganha badges ao cumprir marcos da sua jornada: finalizar séries, manter ritmo, explorar gêneros novos. Eles aparecem no seu perfil.' },
-  { q: 'O que é “build in public”?', a: 'O app é feito por uma pessoa só, em público. Você acompanha a evolução e ajuda a decidir o que entra. Quem está na lista tem voz.' },
+  { q: 'O ANIMAE vai ser pago?', a: 'O acesso inicial é gratuito. No futuro existirá um plano premium com recursos avançados, mas a camada social principal sempre terá versão free. Quem entra agora no teste ajuda a moldar o app.' },
+  { q: 'Por que não tem episódio?', a: 'O ANIMAE não é streaming. Você assiste onde preferir e usa o app para marcar, evoluir e conversar com quem sentiu o mesmo que você.' },
+  { q: 'O que é “build in public”?', a: 'O app é construído por uma pessoa, em público. Você acompanha cada decisão e pode influenciar o que entra. Quem testa tem voz.' },
+  { q: 'Quando vai sair?', a: 'O app está em teste fechado no Google Play. Quando a loja liberar o lançamento aberto, o botão desta página passa a ser “Baixar na Google Play”.' },
+  { q: 'Como funcionam os badges?', a: 'Você ganha badges ao cumprir marcos da sua jornada, como finalizar séries ou explorar gêneros novos. Eles ficam no seu perfil.' },
+  { q: 'Tem Android e iOS?', a: 'Android primeiro. Existe também uma versão web. Para ser avisado do iOS, deixe seu e-mail no final da página.' },
 ];
 
-const cta = (label, ghost = false, href = '#lista') =>
-  `<a class="btn ${ghost ? 'btn--ghost' : ''}" href="${href}">${label}</a>`;
+const phone = (inner, cls = '') => `<div class="phone ${cls}" aria-hidden="true"><div class="phone__in">${inner}</div></div>`;
+const feedScreen = `
+  <div class="ui-tabs"><b>Amigos</b><span>Comunidade</span></div>
+  <div class="ui-stories"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></div>
+  <div class="ui-post"><div class="ui-post__h"><i style="--c:#ff5c02"></i><div><b>Marina concluiu um anime</b><small>há 12 minutos</small></div></div>
+  <div class="ui-post__img"><span>ATAQUE<br>FINAL</span></div><p>Esse final me destruiu. Alguém aí?</p></div>`;
+const communityScreen = `
+  <div class="ui-tabs"><span>Amigos</span><b>Comunidade</b></div>
+  <div class="ui-chips"><em>Um dia</em><em>Novidades</em><em>Debates</em></div>
+  <div class="ui-post"><div class="ui-post__h"><i style="--c:#3c7bff"></i><div><b>Naruto_89</b><small>Ep. 220 · Teoria em andamento</small></div></div><p>“Esse episódio mudou como eu vejo o Kakashi. Alguém mais sentiu isso?”</p></div>
+  <div class="ui-post"><div class="ui-post__h"><i style="--c:#ff2e8a"></i><div><b>Luna</b><small>concluiu Frieren</small></div></div><p>Final lindo demais. Sem spoilers aqui.</p></div>`;
+const discoverScreen = `
+  <div class="ui-tabs"><b>Descoberta</b><span>Para você</span></div>
+  <div class="ui-grid"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i><i style="--c:#3c7bff"></i><i style="--c:#ff5c02"></i></div>
+  <p class="ui-note">Recomendações por emoção, não por popularidade.</p>`;
+const badgesScreen = `
+  <div class="ui-tabs"><b>Badges</b><span>Nível 12</span></div>
+  <div class="xp"><i style="width:68%"></i></div>
+  <div class="ui-badges"><i>⚡</i><i>🔥</i><i>🏅</i><i>🎴</i><i>🌙</i><i>⭐</i></div>
+  <p class="ui-note">680 / 1000 XP para o próximo nível.</p>`;
 
-const appCard = `
-  <div class="appcard" aria-hidden="true">
-    <div class="appcard__top"><img src="${SYMBOL}" alt="" width="28" height="24"><span>Minha jornada</span><b>Nv. 12</b></div>
-    <div class="xp"><i style="width:68%"></i></div>
-    <p class="xp__label">680 / 1000 XP · próximo badge: Maratonista</p>
-    <div class="row"><span class="dot"></span><div><strong>Frieren</strong><small>Ep. 18 de 28</small></div><em>64%</em></div>
-    <div class="row"><span class="dot dot--blue"></span><div><strong>Jujutsu Kaisen</strong><small>Ep. 9 de 24</small></div><em>38%</em></div>
-    <div class="row"><span class="dot dot--pink"></span><div><strong>Dandadan</strong><small>Ep. 12 de 12</small></div><em>✓</em></div>
-  </div>`;
+const tabs = [
+  { id: 'feed', label: 'Feed social', title: 'Um feed que entende o que você sentiu', text: 'Não é cronológico. Não é por popularidade. É por ressonância emocional. Posts de quem assistiu o mesmo episódio que você, no mesmo estado de espírito, aparecem primeiro. Conversa real acontece aqui.', a: feedScreen, b: communityScreen },
+  { id: 'descoberta', label: 'Descoberta', title: 'O próximo anime que vai te marcar', text: 'Descoberta guiada pelo que você sentiu, não pelo que está em alta. Encontre o próximo anime favorito a partir de quem tem o seu gosto.', a: discoverScreen, b: feedScreen },
+  { id: 'badges', label: 'Badges', title: 'Sua jornada vira conquista', text: 'Cada episódio rende XP. Cumpra marcos, desbloqueie badges e mostre quem você é no mundo anime.', a: badgesScreen, b: discoverScreen },
+];
 
 document.querySelector('#root').innerHTML = `
 <header class="nav">
   <div class="wrap nav__in">
-    <a href="#top" aria-label="ANIMAE"><img class="nav__logo" src="${LOGO}" alt="ANIMAE" width="130" height="32"></a>
-    <nav class="nav__links" aria-label="Seções">
-      <a href="#como">Como funciona</a><a href="#recursos">Recursos</a><a href="#faq">FAQ</a>
-    </nav>
-    ${cta('Entrar na lista')}
+    <a href="#top" aria-label="ANIMAE"><img class="nav__logo" src="${LOGO}" alt="ANIMAE" width="190" height="47"></a>
+    <div class="nav__right">
+      <nav class="nav__links" aria-label="Seções"><a href="#app">O app</a><a href="#como">Como funciona</a><a href="#faq">FAQ</a></nav>
+      ${main('btn--sm')}
+    </div>
   </div>
 </header>
 
 <main id="top">
   <section class="hero">
     <div class="wrap hero__in">
-      <div class="hero__copy">
-        <p class="eyebrow">O diário social de anime</p>
-        <h1>Seu anime.<br>Sua jornada.<br><span>Sua gente.</span></h1>
-        <p class="lead">Marque o que você assiste, suba de nível, ganhe badges e encontre quem entende a sua obsessão. Sem planilha. Sem frescura.</p>
-        <div class="hero__cta">
-          ${cta('Quero entrar na lista')}
-          ${cta('Ver como funciona', true, '#como')}
-        </div>
-        <p class="hint">Acesso antecipado gratuito · Android primeiro</p>
+      <h1>O lugar onde a conversa<br>continua depois do episódio</h1>
+      <p class="lead">O ANIMAE não é streaming. É o diário social de anime: o lugar onde você encontra quem sentiu o mesmo depois de um final que destroça.</p>
+      <div class="hero__cta">
+        ${main()}
+        <a class="btn btn--pink" href="${WEB_URL}" target="_blank" rel="noopener">${playIcon} Ver o app</a>
       </div>
-      <div class="hero__art">
-        <div class="bubble">Tá olhando o quê? Entra logo na lista.</div>
-        <img class="hero__draco" src="${SYMBOL}" alt="Draco, o mascote do ANIMAE" width="320" height="275">
-        ${appCard}
+      <p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Teste fechado</b> no Android · vagas limitadas</span></p>
+      <div class="hero__stage">
+        <img class="hero__draco" src="${SYMBOL}" alt="Draco, mascote do ANIMAE" width="260" height="223">
+        ${phone(feedScreen, 'phone--hero')}
       </div>
-    </div>
-  </section>
-
-  <section class="sec sec--alt" id="problema">
-    <div class="wrap narrow center">
-      <p class="eyebrow">O problema</p>
-      <h2>Lista num app, papo em outro, teoria num terceiro.</h2>
-      <p class="lead">Seu anime vive espalhado: um app para anotar, um servidor para conversar, um fórum para a teoria. No fim, você tem oito abas e nenhuma comunidade.</p>
-      <p class="quote"><img src="${SYMBOL}" alt="" width="36" height="31"><span>“Eu também não queria mais um app. Esse presta.” <b>— Draco</b></span></p>
     </div>
   </section>
 
   <section class="sec" id="como">
     <div class="wrap">
-      <p class="eyebrow center">Como funciona</p>
-      <h2 class="center">Três passos. Zero planilha.</h2>
-      <ol class="steps">
-        ${steps.map(s => `<li class="card"><span class="step__n">${s.n}</span><h3>${s.title}</h3><p>${s.text}</p></li>`).join('')}
-      </ol>
+      <h2 class="center">Você ama anime<br>mas vive fragmentado em 8 apps</h2>
+      <p class="sub center">Tracking no MAL, conversa no Discord, teorias no Reddit. Você orbita o conteúdo sem nunca ter uma base.</p>
+      <div class="bento">
+        <article class="bcard bcard--tall">
+          <h3>Descoberta às cegas</h3>
+          <p>Sem contexto sobre o que você sente, os algoritmos empurram qualquer coisa. Você quer o próximo anime que vai te quebrar, não qualquer anime.</p>
+          <div class="strip"><i style="--c:#7a1f1f">魂</i><i style="--c:#8a6a12">火</i><i style="--c:#3f7a1a">月</i><i style="--c:#1a7a52">龍</i><i style="--c:#1a5f7a">空</i><i style="--c:#3b2a8a">影</i></div>
+        </article>
+        <article class="bcard">
+          <div><h3>Comunidade pulverizada</h3><p>Sua tribo está espalhada em 10 plataformas. Discord, Twitter, Reddit, MAL. Ninguém sabe onde se reunir de verdade.</p></div>
+          <img src="${SYMBOL}" alt="" width="120" height="103">
+        </article>
+        <article class="bcard bcard--pink">
+          <div><h3>Social sem sentimento</h3><p>Os apps de anime existentes tratam você como número. Nenhum pergunta o que você sentiu. Nenhum conecta por emoção.</p></div>
+          <img src="${SYMBOL}" alt="" width="120" height="103">
+        </article>
+      </div>
+      <div class="center"><a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a></div>
     </div>
   </section>
 
-  <section class="sec sec--alt" id="recursos">
+  <section class="sec" id="app">
     <div class="wrap">
-      <p class="eyebrow center">Por que é diferente</p>
-      <h2 class="center">Não é uma lista. É a sua jornada otaku.</h2>
-      <p class="lead center narrow">MyAnimeList e AniList organizam. O ANIMAE faz você sentir que está evoluindo — e deixa seus amigos verem.</p>
-      <div class="grid4">
-        ${features.map(f => `<article class="card"><span class="ico">${f.icon}</span><h3>${f.title}</h3><p>${f.text}</p></article>`).join('')}
+      <h2 class="center">Tudo que existe ao redor<br>do anime em um lugar</h2>
+      <div class="tabs" role="tablist">
+        ${tabs.map((t, i) => `<button role="tab" class="tab ${i === 0 ? 'is-on' : ''}" data-tab="${t.id}" aria-selected="${i === 0}"><img src="${SYMBOL}" alt="" width="36" height="31">${t.label}</button>`).join('')}
       </div>
+      ${tabs.map((t, i) => `
+      <div class="panel" data-panel="${t.id}" ${i ? 'hidden' : ''} role="tabpanel">
+        <div class="panel__phones">${phone(t.a)}${phone(t.b, 'phone--low')}</div>
+        <div class="panel__fade"></div>
+        <div class="panel__text"><h3>${t.title}</h3><p>${t.text}</p></div>
+      </div>`).join('')}
+      <div class="center"><a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap split">
+      <div class="split__text">
+        <h2>Tudo que existe ao redor do anime em um lugar</h2>
+        <p class="sub">O ANIMAE não é um projeto de fim de semana. É construído com a disciplina de quem passou anos em produto: cada decisão tem um porquê, cada feature tem uma hipótese.</p>
+        <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
+      </div>
+      <div class="split__card">${phone(feedScreen, 'phone--tall')}</div>
+    </div>
+  </section>
+
+  <section class="sec proofsec" id="baixar">
+    <div class="wrap center">
+      <div class="dots dots--lg"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i><i style="--c:#32d27f"></i></div>
+      <p class="big">Android</p>
+      <p class="sub"><b>Primeiro</b> no Google Play, em teste fechado agora</p>
+      <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
     </div>
   </section>
 
   <section class="sec" id="faq">
-    <div class="wrap narrow">
-      <p class="eyebrow">Transparência total</p>
+    <div class="wrap faqwrap">
       <h2>Perguntas frequentes</h2>
       <div class="faq">
         ${faqs.map((f, i) => `
-          <div class="faq__item">
-            <button class="faq__q" aria-expanded="false" aria-controls="faq-a-${i}">${f.q}<span aria-hidden="true">+</span></button>
-            <div class="faq__a" id="faq-a-${i}" hidden>${f.a}</div>
-          </div>`).join('')}
+        <div class="faq__item ${i === 0 ? 'is-open' : ''}">
+          <button class="faq__q" aria-expanded="${i === 0}" aria-controls="fa-${i}">${f.q}<span class="faq__ic" aria-hidden="true"></span></button>
+          <div class="faq__a" id="fa-${i}" ${i ? 'hidden' : ''}>${f.a}</div>
+        </div>`).join('')}
       </div>
     </div>
   </section>
 
-  <section class="sec sec--cta newsletter" id="lista">
-    <div class="wrap narrow center">
-      <img class="cta__draco" src="${SYMBOL}" alt="" width="96" height="82">
-      <h2>Seu próximo episódio começa aqui.</h2>
-      <p class="lead">Entre na lista e seja chamado primeiro. O Draco não vai pedir duas vezes. (Já pediu.)</p>
-      <form class="form" novalidate>
-        <label class="sr" for="email">Seu e-mail</label>
-        <input id="email" type="email" placeholder="seuemail@exemplo.com" autocomplete="email" required>
-        <button class="btn" type="submit">Entrar na lista</button>
-      </form>
-      <p class="hint">Sem spam. Só novidades do app.</p>
+  <section class="sec">
+    <div class="wrap">
+      <div class="box newsletter" id="lista">
+        <h2>O ANIMAE é esse lugar</h2>
+        <p class="sub">Teste agora no Android. Quer ser avisado do iOS e do lançamento? Deixe seu e-mail.</p>
+        <div class="box__cta">${main()}</div>
+        <form class="form" novalidate>
+          <label class="sr" for="email">Seu e-mail</label>
+          <input id="email" type="email" placeholder="Digite seu endereço de e-mail" autocomplete="email" required>
+          <button class="btn btn--pink" type="submit">Avisar-me</button>
+        </form>
+        <small>Grátis, sem cartão e sem spam.</small>
+      </div>
     </div>
   </section>
 </main>
 
 <footer class="footer">
   <div class="wrap footer__in">
-    <img src="${LOGO}" alt="ANIMAE" width="104" height="26">
-    <span>Feito por fã, para fãs. © 2026 ANIMAE</span>
+    <div class="footer__l"><a href="#">Termos de Privacidade</a></div>
+    <p>Criado por Thiago Miranda <i></i> © 2026 Animae <i></i> Todos os direitos reservados</p>
   </div>
 </footer>`;
 
-document.querySelectorAll('.faq__q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const open = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!open));
-    btn.querySelector('span').textContent = open ? '+' : '–';
-    document.getElementById(btn.getAttribute('aria-controls')).hidden = open;
-  });
-});
+document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => {
+  document.querySelectorAll('.tab').forEach(t => { t.classList.toggle('is-on', t === tab); t.setAttribute('aria-selected', String(t === tab)); });
+  document.querySelectorAll('.panel').forEach(p => { p.hidden = p.dataset.panel !== tab.dataset.tab; });
+}));
+
+document.querySelectorAll('.faq__q').forEach(btn => btn.addEventListener('click', () => {
+  const item = btn.parentElement, open = item.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded', String(open));
+  document.getElementById(btn.getAttribute('aria-controls')).hidden = !open;
+}));
 
 document.querySelector('.form').addEventListener('submit', event => {
   event.preventDefault();
-  const button = event.currentTarget.querySelector('button');
-  button.textContent = 'Você está na lista ✓';
-  button.disabled = true;
+  const b = event.currentTarget.querySelector('button');
+  b.textContent = 'Anotado ✓'; b.disabled = true;
 });
