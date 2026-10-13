@@ -94,11 +94,11 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 .strip i{flex:1;height:100%;display:grid;place-items:center;font:800 40px var(--font);font-style:normal;color:#fff;background:linear-gradient(to bottom,#1f2333 0%,var(--c) 70%)}
 
 .tabcard{position:relative;margin:64px 0 48px}
-.tabs{display:flex;justify-content:center;gap:8px;margin:0 auto 16px;width:max-content;max-width:100%}
-.tab{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:16px;width:280px;height:72px;padding:0 24px;background:#1f2333;color:var(--t0);border:1px solid rgba(255,255,255,.14);border-radius:var(--r-md);font:700 18px/1 var(--display);cursor:pointer;text-align:center;transition:border-color .3s}
+.tabs{position:relative;z-index:1;display:flex;justify-content:center;gap:0;margin:0 auto -1px;width:max-content;max-width:100%}
+.tab{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:16px;width:280px;height:72px;padding:0 24px;background:#1f2333;color:var(--t0);border:1px solid rgba(255,255,255,.12);border-bottom:0;border-left-width:0;border-radius:0;font:700 18px/1 var(--display);cursor:pointer;text-align:center;transition:border-color .3s}
+.tab:first-child{border-left-width:1px;border-top-left-radius:var(--r-md)}.tab:last-child{border-top-right-radius:var(--r-md)}
 .tab::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--primary);transform:translateX(-101%);transition:transform .5s cubic-bezier(.65,0,.35,1)}
 .tab:hover::before{transform:none}
-.tab:hover{border-color:var(--primary)}
 .tab img{width:32px;height:auto;flex:none}
 .tab.is-on{background:var(--primary);border-color:var(--primary)}
 .tab.is-on::before{display:none}
