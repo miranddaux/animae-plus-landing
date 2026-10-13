@@ -125,6 +125,12 @@ document.querySelector('#root').innerHTML = `
     </div>
   </section>
 
+  <section class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      ${Array.from({ length: 2 }, () => `<div class="marquee__set">${['Entra na lista', 'A conversa continua', 'Seu anime. Sua jornada. Sua gente.', 'O diário social de anime'].map(t => `<span>${t}</span><img src="${SYMBOL}" alt="" width="72" height="62">`).join('')}</div>`).join('')}
+    </div>
+  </section>
+
   <section class="sec" id="faq">
     <div class="wrap faqwrap">
       <h2>Perguntas frequentes</h2>
@@ -148,32 +154,22 @@ document.querySelector('#root').innerHTML = `
     </div>
   </section>
 
-  <section class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      ${Array.from({ length: 2 }, () => `<div class="marquee__set">${['Entra na lista', 'A conversa continua', 'Seu anime. Sua jornada. Sua gente.', 'O diário social de anime'].map(t => `<span>${t}</span><img src="${SYMBOL}" alt="" width="72" height="62">`).join('')}</div>`).join('')}
-    </div>
-  </section>
-
-  <section class="sec">
-    <div class="wrap">
-      <div class="box newsletter" id="lista">
-        <h2>O ANIMAE é esse lugar</h2>
-        <p class="sub">Entre na lista e seja avisado no dia em que o app chegar ao Android. Também avisamos do iOS.</p>
-        <form class="form" novalidate>
-          <label class="sr" for="email">Seu e-mail</label>
-          <input id="email" type="email" placeholder="Digite seu endereço de e-mail" autocomplete="email" required>
-          <button class="btn" type="submit">Entrar na lista</button>
-        </form>
-        <small>Grátis, sem cartão e sem spam.</small>
-      </div>
-    </div>
-  </section>
 </main>
 
-<footer class="footer">
-  <div class="wrap footer__in">
-    <div class="footer__l"><a href="#">Termos de Privacidade</a></div>
-    <p>Criado por Thiago Miranda <i></i> © 2026 Animae <i></i> Todos os direitos reservados</p>
+<footer class="footer" id="lista">
+  <div class="wrap">
+    <div class="footer__lista">
+      <p>Seja avisado no lançamento. Android primeiro, iOS depois. Grátis, sem spam.</p>
+      <form class="form form--mini" novalidate>
+        <label class="sr" for="email">Seu e-mail</label>
+        <input id="email" type="email" placeholder="Seu e-mail" autocomplete="email" required>
+        <button class="btn btn--mini" type="submit">Entrar na lista</button>
+      </form>
+    </div>
+    <div class="footer__in">
+      <div class="footer__l"><a href="#">Termos de Privacidade</a></div>
+      <p>Criado por Thiago Miranda <i></i> © 2026 Animae <i></i> Todos os direitos reservados</p>
+    </div>
   </div>
 </footer>`;
 
@@ -190,6 +186,8 @@ document.querySelectorAll('.faq__q').forEach(btn => btn.addEventListener('click'
   btn.setAttribute('aria-expanded', String(open));
   document.getElementById(btn.getAttribute('aria-controls')).hidden = !open;
 }));
+
+document.querySelectorAll('a[href="#lista"]').forEach(a => a.addEventListener('click', () => setTimeout(() => document.getElementById('email')?.focus({ preventScroll: true }), 700)));
 
 document.querySelector('.form').addEventListener('submit', event => {
   event.preventDefault();
@@ -262,7 +260,6 @@ if (g && !reduce) {
   g.from('.split__card', { x: 64, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.split', start: 'top 80%', once: true }, clearProps: 'transform,opacity' });
   g.from('.dots--lg i', { scale: 0, duration: .5, stagger: .08, ease: 'back.out(2)', scrollTrigger: { trigger: '.proofsec', start: 'top 80%', once: true } });
   g.from('.faq__item', { y: 24, opacity: 0, duration: .6, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '.faq', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
-  g.from('.box', { y: 56, rotationX: 10, opacity: 0, transformPerspective: 1000, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.box', start: 'top 88%', once: true }, clearProps: 'transform,opacity' });
   g.from('.footer__in', { opacity: 0, duration: .8, scrollTrigger: { trigger: '.footer', start: 'top 100%', once: true } });
 
   // parallax leve no Draco do hero e flutuação
