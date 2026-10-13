@@ -125,16 +125,6 @@ document.querySelector('#root').innerHTML = `
     </div>
   </section>
 
-  <section class="sec proofsec" id="baixar">
-    <div class="wrap center">
-      <div class="dots dots--lg"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i><i style="--c:#32d27f"></i></div>
-      <p class="big">Android primeiro</p>
-      <p class="sub">O app chega primeiro ao Google Play. Entre na lista e seja avisado no dia do lançamento.</p>
-      <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
-      <p class="dracoquote"><img src="${SYMBOL}" alt="" width="48" height="41"><span>“A fila não anda sozinha. Entra logo.” <b>— Draco</b></span></p>
-    </div>
-  </section>
-
   <section class="sec" id="faq">
     <div class="wrap faqwrap">
       <h2>Perguntas frequentes</h2>
@@ -145,6 +135,16 @@ document.querySelector('#root').innerHTML = `
           <div class="faq__a" id="fa-${i}" ${i ? 'hidden' : ''}>${f.a}</div>
         </div>`).join('')}
       </div>
+    </div>
+  </section>
+
+  <section class="sec proofsec" id="baixar">
+    <div class="wrap center">
+      <div class="dots dots--lg"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i><i style="--c:#32d27f"></i></div>
+      <p class="big">Android primeiro</p>
+      <p class="sub">O app chega primeiro ao Google Play. Entre na lista e seja avisado no dia do lançamento.</p>
+      <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
+      <p class="dracoquote"><img src="${SYMBOL}" alt="" width="48" height="41"><span>“A fila não anda sozinha. Entra logo.” <b>— Draco</b></span></p>
     </div>
   </section>
 

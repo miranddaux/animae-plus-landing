@@ -155,7 +155,7 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 .marquee__set img{height:64px;width:auto;flex:none}
 
 .footer{padding:32px 0}
-.footer__in{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:16px}
+.footer__in{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:14px}
 .footer__in p{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .footer__in p i{width:8px;height:8px;border-radius:50%;background:var(--primary)}
 .footer a{text-decoration:none}.footer a:hover{color:var(--primary)}
