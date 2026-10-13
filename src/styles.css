@@ -25,7 +25,7 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 .sub{margin:24px auto 0;max-width:52ch;font-size:clamp(16px,1.25vw,24px);line-height:1.5}
 
 /* botões: hover preenche com um retângulo lateral */
-.btn{--fill:#b8460f;position:relative;isolation:isolate;overflow:hidden;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:12px;height:64px;min-width:280px;padding:0 56px;border:0;border-radius:var(--r-md);background:var(--primary);color:var(--t0);font:800 18px/1 var(--display);letter-spacing:0;text-decoration:none;cursor:pointer;box-shadow:0 8px 16px rgba(255,92,2,.25)}
+.btn{--fill:#b8460f;position:relative;isolation:isolate;overflow:hidden;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:12px;height:64px;min-width:248px;padding:0 48px;border:0;border-radius:var(--r-md);background:var(--primary);color:var(--t0);font:800 18px/1 var(--display);letter-spacing:0;text-decoration:none;cursor:pointer;box-shadow:0 8px 16px rgba(255,92,2,.25)}
 .btn::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--fill);transform:translateX(-101%);transition:transform .5s cubic-bezier(.65,0,.35,1)}
 .btn:hover::before,.btn:focus-visible::before{transform:none}
 .btn:focus-visible,.faq__q:focus-visible,.tab:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
