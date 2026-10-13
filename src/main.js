@@ -18,7 +18,6 @@ const playIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" ar
 const faqs = [
   { q: 'O ANIMAE vai ser pago?', a: 'O acesso inicial é gratuito. No futuro existirá um plano premium com recursos avançados, mas a camada social principal sempre terá versão free. Quem entra na lista garante condições especiais de fundador.' },
   { q: 'Por que não tem episódio?', a: 'O ANIMAE não é streaming. Você assiste onde preferir e usa o app para marcar, evoluir e conversar com quem sentiu o mesmo que você.' },
-  { q: 'O que é “build in public”?', a: 'O app é construído por uma pessoa, em público. Você acompanha cada decisão e pode influenciar o que entra. Quem está na lista tem voz.' },
   { q: 'Quando vai sair?', a: 'Estamos finalizando o app. Quem entra na lista é avisado primeiro, no dia em que ele chegar ao Google Play.' },
   { q: 'Como funcionam os badges?', a: 'Você ganha badges ao cumprir marcos da sua jornada, como finalizar séries ou explorar gêneros novos. Eles ficam no seu perfil.' },
   { q: 'Tem Android e iOS?', a: 'Android primeiro. Existe também uma versão web. Entre na lista para ser avisado também do iOS.' },
