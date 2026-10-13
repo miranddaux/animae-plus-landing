@@ -6,6 +6,7 @@ const PLAY_URL = 'https://play.google.com/store/apps/details?id=com.animaee.app'
 const WEB_URL = 'https://animae-plus-main.vercel.app';
 // ───────────────────────────────────────────────────────────────────────
 
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const LOGO = './assets/brand/logo-horizontal-dark.svg';
 const SYMBOL = './assets/brand/symbol.svg';
 const MAIN_LABEL = STAGE === 'live' ? 'Baixar no Android' : 'Entrar na lista';
@@ -92,7 +93,7 @@ document.querySelector('#root').innerHTML = `
           <div><h3>Comunidade pulverizada</h3><p>Sua tribo está espalhada em 10 plataformas. Discord, Twitter, Reddit, MAL. Ninguém sabe onde se reunir de verdade.</p></div>
           <img src="${SYMBOL}" alt="" width="120" height="103">
         </article>
-        <article class="bcard bcard--pink">
+        <article class="bcard">
           <div><h3>Social sem sentimento</h3><p>Os apps de anime existentes tratam você como número. Nenhum pergunta o que você sentiu. Nenhum conecta por emoção.</p></div>
           <img src="${SYMBOL}" alt="" width="120" height="103">
         </article>
@@ -104,15 +105,20 @@ document.querySelector('#root').innerHTML = `
   <section class="sec" id="app">
     <div class="wrap">
       <h2 class="center">Tudo que existe ao redor<br>do anime em um lugar</h2>
-      <div class="tabs" role="tablist">
-        ${tabs.map((t, i) => `<button role="tab" class="tab ${i === 0 ? 'is-on' : ''}" data-tab="${t.id}" aria-selected="${i === 0}"><img src="${SYMBOL}" alt="" width="36" height="31">${t.label}</button>`).join('')}
+      <div class="tabcard">
+        <div class="tabs" role="tablist">
+          <img class="tabs__peek" src="${SYMBOL}" alt="" width="200" height="172">
+          ${tabs.map((t, i) => `<button role="tab" class="tab ${i === 0 ? 'is-on' : ''}" data-tab="${t.id}" aria-selected="${i === 0}"><img src="${SYMBOL}" alt="" width="40" height="34"><span>${t.label}</span></button>`).join('')}
+        </div>
+        <div class="tabcard__body">
+          ${tabs.map((t, i) => `
+          <div class="panel" data-panel="${t.id}" ${i ? 'hidden' : ''} role="tabpanel">
+            <div class="panel__phones">${phone(t.a)}${phone(t.b, 'phone--low')}</div>
+            <div class="panel__fade"></div>
+            <div class="panel__text"><h3>${t.title}</h3><p>${t.text}</p></div>
+          </div>`).join('')}
+        </div>
       </div>
-      ${tabs.map((t, i) => `
-      <div class="panel" data-panel="${t.id}" ${i ? 'hidden' : ''} role="tabpanel">
-        <div class="panel__phones">${phone(t.a)}${phone(t.b, 'phone--low')}</div>
-        <div class="panel__fade"></div>
-        <div class="panel__text"><h3>${t.title}</h3><p>${t.text}</p></div>
-      </div>`).join('')}
       <div class="center"><a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a></div>
     </div>
   </section>
@@ -150,6 +156,12 @@ document.querySelector('#root').innerHTML = `
     </div>
   </section>
 
+  <section class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      ${Array.from({ length: 2 }, () => `<div class="marquee__set">${['Entra na lista', 'A conversa continua', 'Seu anime. Sua jornada. Sua gente.', 'O diário social de anime'].map(t => `<span>${t}</span><img src="${SYMBOL}" alt="" width="72" height="62">`).join('')}</div>`).join('')}
+    </div>
+  </section>
+
   <section class="sec">
     <div class="wrap">
       <div class="box newsletter" id="lista">
@@ -174,8 +186,11 @@ document.querySelector('#root').innerHTML = `
 </footer>`;
 
 document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => {
+  if (tab.classList.contains('is-on')) return;
   document.querySelectorAll('.tab').forEach(t => { t.classList.toggle('is-on', t === tab); t.setAttribute('aria-selected', String(t === tab)); });
-  document.querySelectorAll('.panel').forEach(p => { p.hidden = p.dataset.panel !== tab.dataset.tab; });
+  const next = document.querySelector(`.panel[data-panel="${tab.dataset.tab}"]`);
+  document.querySelectorAll('.panel').forEach(p => { p.hidden = p !== next; });
+  if (window.gsap && !reduce) gsap.fromTo(next.children, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: .6, stagger: .08, ease: 'power3.out', clearProps: 'transform,opacity' });
 }));
 
 document.querySelectorAll('.faq__q').forEach(btn => btn.addEventListener('click', () => {
@@ -189,3 +204,82 @@ document.querySelector('.form').addEventListener('submit', event => {
   const b = event.currentTarget.querySelector('button');
   b.textContent = 'Você está na lista ✓'; b.disabled = true;
 });
+
+
+/* ── Animações (GSAP). Sem GSAP ou com movimento reduzido, a página fica estática. ── */
+const g = window.gsap;
+const nav = document.querySelector('.nav');
+const onScroll = () => nav.classList.toggle('is-stuck', scrollY > 24);
+addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+if (g && !reduce) {
+  if (window.ScrollTrigger) g.registerPlugin(ScrollTrigger);
+
+  // divide o título em palavras para o efeito 3D de impressão
+  const split = el => {
+    const walk = node => [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(w => {
+          if (!w) return;
+          if (/^\s+$/.test(w)) { frag.append(' '); return; }
+          const o = document.createElement('span'); o.className = 'w';
+          const i = document.createElement('span'); i.className = 'wi'; i.textContent = w;
+          o.append(i); frag.append(o);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1 && n.tagName !== 'BR') walk(n);
+    });
+    walk(el);
+    return el.querySelectorAll('.wi');
+  };
+
+  const reveal = (el, vars = {}) => {
+    const words = split(el);
+    const st = vars.trigger === false ? undefined : { trigger: el, start: 'top 88%', once: true };
+    g.from(words, { rotationX: -95, yPercent: 60, opacity: 0, transformOrigin: '50% 100% -24', duration: .9, stagger: .06, ease: 'power3.out', scrollTrigger: st, delay: vars.delay || 0, clearProps: 'transform,opacity' });
+  };
+
+  g.set('.w', { perspective: 800 });
+  document.querySelectorAll('h1, h2, h3').forEach(h => reveal(h, h.closest('.hero') ? { trigger: false, delay: .25 } : {}));
+
+  // entrada do hero
+  const tl = g.timeline({ defaults: { ease: 'power3.out' } });
+  tl.from('.nav__logo', { y: -16, opacity: 0, duration: .7 })
+    .from('.nav__links a, .nav .btn', { y: -12, opacity: 0, duration: .6, stagger: .06 }, '-=.5')
+    .from('.hero .lead', { y: 24, opacity: 0, duration: .8 }, '-=.35')
+    .from('.hero__cta .btn', { y: 24, opacity: 0, duration: .7, stagger: .1 }, '-=.5')
+    .from('.proof', { y: 16, opacity: 0, duration: .6 }, '-=.4')
+    .from('.phone--hero', { y: 120, rotationX: 18, opacity: 0, duration: 1.1, transformPerspective: 1000, clearProps: 'transform,opacity' }, '-=.9')
+    .from('.hero__draco', { scale: .4, rotation: -18, opacity: 0, duration: .9, ease: 'back.out(1.7)', clearProps: 'transform,opacity' }, '-=.6');
+
+  // blocos que entram ao rolar
+  const rise = (targets, extra = {}) => document.querySelectorAll(targets).forEach(el =>
+    g.from(el, { y: 32, opacity: 0, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, clearProps: 'transform,opacity', ...extra }));
+  rise('.sub, .split__text .btn, .proofsec .btn, .center > .btn, .faqwrap h2 + .faq');
+
+  // cards em 3D, em sequência
+  g.from('.bcard', { rotationX: -28, y: 72, opacity: 0, scale: .94, transformPerspective: 1000, transformOrigin: '50% 100%', duration: 1, stagger: .14, ease: 'power3.out', scrollTrigger: { trigger: '.bento', start: 'top 82%', once: true }, clearProps: 'transform,opacity' });
+  g.from('.strip i', { yPercent: 40, opacity: 0, duration: .8, stagger: .07, ease: 'power3.out', scrollTrigger: { trigger: '.strip', start: 'top 90%', once: true }, clearProps: 'transform,opacity' });
+  g.from('.bcard img', { scale: .5, rotation: -12, opacity: 0, duration: .8, stagger: .12, ease: 'back.out(1.7)', scrollTrigger: { trigger: '.bento', start: 'top 70%', once: true }, clearProps: 'transform,opacity' });
+
+  g.from('.tabs .tab', { y: 32, opacity: 0, duration: .7, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '.tabcard', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
+  g.from('.tabs__peek', { yPercent: 60, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.tabcard', start: 'top 80%', once: true } });
+  g.from('.tabcard__body', { y: 48, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: '.tabcard', start: 'top 80%', once: true }, clearProps: 'transform,opacity' });
+  g.from('.tabcard .phone', { y: 96, rotationX: 14, opacity: 0, transformPerspective: 1000, duration: 1, stagger: .15, ease: 'power3.out', scrollTrigger: { trigger: '.tabcard', start: 'top 70%', once: true }, clearProps: 'transform,opacity' });
+
+  g.from('.split__card', { x: 64, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.split', start: 'top 80%', once: true }, clearProps: 'transform,opacity' });
+  g.from('.dots--lg i', { scale: 0, duration: .5, stagger: .08, ease: 'back.out(2)', scrollTrigger: { trigger: '.proofsec', start: 'top 80%', once: true } });
+  g.from('.faq__item', { y: 24, opacity: 0, duration: .6, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '.faq', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
+  g.from('.box', { y: 56, rotationX: 10, opacity: 0, transformPerspective: 1000, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.box', start: 'top 88%', once: true }, clearProps: 'transform,opacity' });
+  g.from('.footer__in', { opacity: 0, duration: .8, scrollTrigger: { trigger: '.footer', start: 'top 100%', once: true } });
+
+  // parallax leve no Draco do hero e flutuação
+  if (window.ScrollTrigger) g.to('.hero__draco', { yPercent: -18, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  // marquee contínuo, pausa ao passar o mouse
+  const track = document.querySelector('.marquee__track');
+  const mq = g.to(track, { xPercent: -50, duration: 40, ease: 'none', repeat: -1 });
+  track.parentElement.addEventListener('mouseenter', () => g.to(mq, { timeScale: .15, duration: .5 }));
+  track.parentElement.addEventListener('mouseleave', () => g.to(mq, { timeScale: 1, duration: .5 }));
+}
