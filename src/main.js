@@ -25,6 +25,10 @@ const faqs = [
 
 const phone = (inner, cls = '') => `<div class="phone ${cls}" aria-hidden="true"><div class="phone__in">${inner}</div></div>`;
 const IMG = './assets/img/';
+// Telas que ainda faltam aparecem sinalizadas na LP. Quando todas chegarem, mude para false.
+const SHOW_TODO = true;
+const todo = (title, hint, fallback) => SHOW_TODO ? `<div class="todo"><b>FALTA A TELA</b><span>${title}</span><small>${hint}</small></div>` : fallback;
+const flag = (txt) => SHOW_TODO ? `<div class="flag">${txt}</div>` : '';
 const shot = (f, alt) => `<img class="shot" src="${IMG}${f}" alt="${alt}" loading="lazy">`;
 const detalheScreen = shot('app-detalhe.webp', 'Tela de um anime no ANIMAE, com progresso de episódios');
 const listaScreen = shot('app-lista.webp', 'Minha Lista no ANIMAE, com progresso por anime');
@@ -36,7 +40,7 @@ const buscaScreen = shot('app-busca.webp', 'Busca e descoberta no ANIMAE');
 const tabs = [
   { id: 'feed', label: 'Feed social', title: 'A conversa continua depois do episódio', text: 'Veja o que seus amigos acabaram de assistir e avaliar, entre em debates e jogue o quiz do dia com o Draco. Tudo no mesmo lugar, sem pular entre 8 apps.', a: feedScreen, b: comunidadeScreen },
   { id: 'diario', label: 'Seu diário', title: 'Marque cada episódio e veja sua jornada', text: 'Acompanhe o que você assiste, anime por anime. Um toque marca o episódio, o progresso avança e a sua lista fica sempre em dia, do jeito que você quer.', a: listaScreen, b: detalheScreen },
-  { id: 'badges', label: 'Perfil e badges', title: 'Sua jornada vira conquista', text: 'Cada episódio rende XP. Mantenha a sequência, suba de nível, desbloqueie conquistas e mostre quem você é no mundo anime.', a: perfilScreen, b: buscaScreen },
+  { id: 'badges', label: 'Perfil e badges', title: 'Sua jornada vira conquista', text: 'Cada episódio rende XP. Mantenha a sequência, suba de nível, desbloqueie conquistas e mostre quem você é no mundo anime.', a: perfilScreen, b: todo('Conquistas', 'Badges desbloqueados e bloqueados', buscaScreen) },
 ];
 
 document.querySelector('#root').innerHTML = `
@@ -63,7 +67,7 @@ document.querySelector('#root').innerHTML = `
       <div class="hero__stage">
         <div class="bubble">Também tô esperando o app. Entra na lista.</div>
         <img class="hero__draco" src="${IMG}draco-triste.webp" alt="Draco, mascote do ANIMAE, esperando o app com o celular na mão" width="240" height="240">
-        ${phone(detalheScreen, 'phone--hero')}
+        ${phone(todo('Home nova', 'Print da home para ir na mão do Draco', detalheScreen), 'phone--hero')}
       </div>
     </div>
   </section>
@@ -117,7 +121,7 @@ document.querySelector('#root').innerHTML = `
         <p class="sub">O ANIMAE não é um projeto de fim de semana. É construído por quem passou anos em produto: cada decisão tem um porquê e cada feature nasce de uma hipótese. Quem entra na lista acompanha tudo e ajuda a decidir o que vem depois.</p>
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
-      <div class="split__card">${phone(perfilScreen, 'phone--tall')}</div>
+      <div class="split__card">${phone(flag('Trocar: perfil com números reais') + perfilScreen, 'phone--tall')}</div>
     </div>
   </section>
 
