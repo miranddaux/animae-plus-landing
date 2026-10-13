@@ -108,7 +108,6 @@ document.querySelector('#root').innerHTML = `
       <h2 class="center">Tudo que existe ao redor<br>do anime em um lugar</h2>
       <div class="tabcard">
         <div class="tabs" role="tablist">
-          <img class="tabs__peek" src="${SYMBOL}" alt="" width="200" height="172">
           ${tabs.map((t, i) => `<button role="tab" class="tab ${i === 0 ? 'is-on' : ''}" data-tab="${t.id}" aria-selected="${i === 0}"><img src="${SYMBOL}" alt="" width="40" height="34"><span>${t.label}</span></button>`).join('')}
         </div>
         <div class="tabcard__body">
@@ -266,7 +265,6 @@ if (g && !reduce) {
   g.from('.bcard img', { scale: .5, rotation: -12, opacity: 0, duration: .8, stagger: .12, ease: 'back.out(1.7)', scrollTrigger: { trigger: '.bento', start: 'top 70%', once: true }, clearProps: 'transform,opacity' });
 
   g.from('.tabs .tab', { y: 32, opacity: 0, duration: .7, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '.tabcard', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
-  g.from('.tabs__peek', { yPercent: 60, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.tabcard', start: 'top 80%', once: true } });
   g.from('.tabcard__body', { y: 48, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: '.tabcard', start: 'top 80%', once: true }, clearProps: 'transform,opacity' });
   g.from('.tabcard .phone', { y: 96, rotationX: 14, opacity: 0, transformPerspective: 1000, duration: 1, stagger: .15, ease: 'power3.out', scrollTrigger: { trigger: '.tabcard', start: 'top 70%', once: true }, clearProps: 'transform,opacity' });
 
