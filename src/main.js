@@ -71,19 +71,18 @@ document.querySelector('#root').innerHTML = `
       <h2 class="center">Você ama anime<br>mas vive fragmentado em 8 apps</h2>
       <p class="sub center">Tracking no MAL, conversa no Discord, teorias no Reddit. Você orbita o conteúdo sem nunca ter uma base.</p>
       <div class="bento">
-        <article class="bcard bcard--tall">
-          <h3>Descoberta às cegas</h3>
-          <p>Sem contexto sobre o que você sente, os algoritmos empurram qualquer coisa. Você quer o próximo anime que vai te quebrar, não qualquer anime.</p>
-          <div class="strip"><img src="${IMG}banner-naruto.webp" alt="" loading="lazy"><img src="${IMG}banner-dragonball.webp" alt="" loading="lazy"><img src="${IMG}banner-onepiece.webp" alt="" loading="lazy"></div>
+        <article class="bcard bcard--a">
+          <div class="bcard__text"><h3>Descoberta às cegas</h3><p>Sem contexto sobre o que você sente, os algoritmos empurram qualquer coisa. Você quer o próximo anime que vai te quebrar não qualquer anime.</p></div>
+          <img class="bcard__collage" src="${IMG}card-colagem.webp" alt="" width="483" height="334" loading="lazy">
         </article>
-        <article class="bcard">
-          <div><h3>Comunidade pulverizada</h3><p>Sua tribo está espalhada em 10 plataformas. Discord, Twitter, Reddit, MAL. Ninguém sabe onde se reunir de verdade.</p></div>
-          <img class="bcard__draco" src="${IMG}draco-sobrecarga.webp" alt="" width="180" height="209" loading="lazy">
-        </article>
-        <article class="bcard">
-          <div><h3>Social sem sentimento</h3><p>Os apps de anime existentes tratam você como número. Nenhum pergunta o que você sentiu. Nenhum conecta por emoção.</p></div>
-          <img src="${SYMBOL}" alt="" width="120" height="103">
-        </article>
+        <div class="bento__col">
+          <article class="bcard bcard--b" style="background-image:url(${IMG}card-comunidade.webp)">
+            <div class="bcard__text"><h3>Comunidade pulverizada</h3><p>Sua tribo está espalhada em 10 plataformas. Discord, Twitter, Reddit, MAL. Ninguém sabe onde se reunir de verdade.</p></div>
+          </article>
+          <article class="bcard bcard--c" style="background-image:url(${IMG}card-social.webp)">
+            <div class="bcard__text"><h3>Social sem sentimento</h3><p>Os apps de anime existentes tratam você como número. Nenhum pergunta o que você sentiu. Nenhum conecta por emoção.</p></div>
+          </article>
+        </div>
       </div>
       <div class="center"><a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a></div>
     </div>
@@ -247,7 +246,7 @@ if (g && !reduce) {
 
   // cards em 3D, em sequência
   g.from('.bcard', { rotationX: -28, y: 72, opacity: 0, scale: .94, transformPerspective: 1000, transformOrigin: '50% 100%', duration: 1, stagger: .14, ease: 'power3.out', scrollTrigger: { trigger: '.bento', start: 'top 82%', once: true }, clearProps: 'transform,opacity' });
-  g.from('.strip i', { yPercent: 40, opacity: 0, duration: .8, stagger: .07, ease: 'power3.out', scrollTrigger: { trigger: '.strip', start: 'top 90%', once: true }, clearProps: 'transform,opacity' });
+  g.from('.bcard__collage', { yPercent: 12, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: '.bcard--a', start: 'top 90%', once: true }, clearProps: 'transform,opacity' });
   g.from('.bcard img', { scale: .5, rotation: -12, opacity: 0, duration: .8, stagger: .12, ease: 'back.out(1.7)', scrollTrigger: { trigger: '.bento', start: 'top 70%', once: true }, clearProps: 'transform,opacity' });
 
   g.from('.tabs .tab', { y: 32, opacity: 0, duration: .7, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '.tabcard', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
