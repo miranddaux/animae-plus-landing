@@ -29,12 +29,14 @@ const shot = (f, alt) => `<img class="shot" src="${IMG}${f}" alt="${alt}" loadin
 const detalheScreen = shot('app-detalhe.webp', 'Tela de um anime no ANIMAE, com progresso de episódios');
 const listaScreen = shot('app-lista.webp', 'Minha Lista no ANIMAE, com progresso por anime');
 const perfilScreen = shot('app-perfil.webp', 'Perfil no ANIMAE, com XP, sequência e conquistas');
+const feedScreen = shot('app-feed.webp', 'Feed de amigos no ANIMAE, com stories e avaliações');
+const comunidadeScreen = shot('app-comunidade.webp', 'Comunidade no ANIMAE, com o quiz do dia do Draco e debates');
 const buscaScreen = shot('app-busca.webp', 'Busca e descoberta no ANIMAE');
 
 const tabs = [
+  { id: 'feed', label: 'Feed social', title: 'A conversa continua depois do episódio', text: 'Veja o que seus amigos acabaram de assistir e avaliar, entre em debates e jogue o quiz do dia com o Draco. Tudo no mesmo lugar, sem pular entre 8 apps.', a: feedScreen, b: comunidadeScreen },
   { id: 'diario', label: 'Seu diário', title: 'Marque cada episódio e veja sua jornada', text: 'Acompanhe o que você assiste, anime por anime. Um toque marca o episódio, o progresso avança e a sua lista fica sempre em dia, do jeito que você quer.', a: listaScreen, b: detalheScreen },
-  { id: 'descoberta', label: 'Descoberta', title: 'O próximo anime que vai te marcar', text: 'Busque por anime, personagem ou gente. Explore por temporada e por gênero e encontre o próximo favorito a partir do que você já gosta.', a: buscaScreen, b: detalheScreen },
-  { id: 'badges', label: 'Perfil e badges', title: 'Sua jornada vira conquista', text: 'Cada episódio rende XP. Mantenha a sequência, suba de nível, desbloqueie conquistas e mostre quem você é no mundo anime.', a: perfilScreen, b: listaScreen },
+  { id: 'badges', label: 'Perfil e badges', title: 'Sua jornada vira conquista', text: 'Cada episódio rende XP. Mantenha a sequência, suba de nível, desbloqueie conquistas e mostre quem você é no mundo anime.', a: perfilScreen, b: buscaScreen },
 ];
 
 document.querySelector('#root').innerHTML = `

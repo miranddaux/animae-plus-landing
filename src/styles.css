@@ -206,7 +206,7 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 /* telas reais do app */
 .phone__in:has(.shot){padding:0;min-height:0}
 .shot{display:block;width:100%;height:auto}
-.phone--hero .phone__in,.panel__phones .phone__in{max-height:540px}
+.phone--hero .phone__in{max-height:540px}.panel__phones .phone__in{max-height:500px}
 .hero__stage{height:620px}
 .strip{gap:0}.strip img{flex:1;min-width:0;height:100%;width:33.3%;object-fit:cover;align-self:stretch;margin:0}
 .strip img+img{border-left:2px solid var(--bg)}
