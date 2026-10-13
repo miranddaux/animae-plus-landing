@@ -36,7 +36,7 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 
 /* nav fixa */
 .nav{position:fixed;inset:0 0 auto;z-index:30;transition:background .3s,backdrop-filter .3s,box-shadow .3s}
-.nav.is-stuck{background:rgba(20,23,37,.88);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.nav.is-stuck{background:rgba(20,23,37,.88);backdrop-filter:blur(12px)}
 .nav__in{display:flex;align-items:center;justify-content:space-between;padding-block:16px;gap:24px}
 .nav__logo{display:block;height:40px;width:auto}
 .nav__right{display:flex;align-items:center;gap:40px}
