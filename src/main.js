@@ -1,27 +1,26 @@
 // ── Configuração de lançamento ─────────────────────────────────────────
-// Fase "teste": botão leva ao convite do teste fechado do Google Play.
-// Quando o app estiver em produção, troque STAGE para 'live' e PLAY_URL pela página da loja.
-const STAGE = 'teste';
-const TEST_URL = '';   // cole aqui o link de convite do teste fechado
+// Fase 'lista': todos os botões levam ao cadastro de e-mail (entrar na fila).
+// Quando o app estiver no ar, troque STAGE para 'live' e os botões viram "Baixar no Android" (PLAY_URL).
+const STAGE = 'lista';
 const PLAY_URL = 'https://play.google.com/store/apps/details?id=com.animaee.app';
 const WEB_URL = 'https://animae-plus-main.vercel.app';
 // ───────────────────────────────────────────────────────────────────────
 
 const LOGO = './assets/brand/logo-horizontal-dark.svg';
 const SYMBOL = './assets/brand/symbol.svg';
-const MAIN_LABEL = STAGE === 'live' ? 'Baixar no Android' : 'Testar no Android';
-const MAIN_URL = STAGE === 'live' ? PLAY_URL : (TEST_URL || '#baixar');
+const MAIN_LABEL = STAGE === 'live' ? 'Baixar no Android' : 'Entrar na lista';
+const MAIN_URL = STAGE === 'live' ? PLAY_URL : '#lista';
 
 const main = (extra = '') => `<a class="btn ${extra}" href="${MAIN_URL}" ${MAIN_URL.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>${MAIN_LABEL}</a>`;
 const playIcon = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
 
 const faqs = [
-  { q: 'O ANIMAE vai ser pago?', a: 'O acesso inicial é gratuito. No futuro existirá um plano premium com recursos avançados, mas a camada social principal sempre terá versão free. Quem entra agora no teste ajuda a moldar o app.' },
+  { q: 'O ANIMAE vai ser pago?', a: 'O acesso inicial é gratuito. No futuro existirá um plano premium com recursos avançados, mas a camada social principal sempre terá versão free. Quem entra na lista garante condições especiais de fundador.' },
   { q: 'Por que não tem episódio?', a: 'O ANIMAE não é streaming. Você assiste onde preferir e usa o app para marcar, evoluir e conversar com quem sentiu o mesmo que você.' },
-  { q: 'O que é “build in public”?', a: 'O app é construído por uma pessoa, em público. Você acompanha cada decisão e pode influenciar o que entra. Quem testa tem voz.' },
-  { q: 'Quando vai sair?', a: 'O app está em teste fechado no Google Play. Quando a loja liberar o lançamento aberto, o botão desta página passa a ser “Baixar na Google Play”.' },
+  { q: 'O que é “build in public”?', a: 'O app é construído por uma pessoa, em público. Você acompanha cada decisão e pode influenciar o que entra. Quem está na lista tem voz.' },
+  { q: 'Quando vai sair?', a: 'Estamos finalizando o app. Quem entra na lista é avisado primeiro, no dia em que ele chegar ao Google Play.' },
   { q: 'Como funcionam os badges?', a: 'Você ganha badges ao cumprir marcos da sua jornada, como finalizar séries ou explorar gêneros novos. Eles ficam no seu perfil.' },
-  { q: 'Tem Android e iOS?', a: 'Android primeiro. Existe também uma versão web. Para ser avisado do iOS, deixe seu e-mail no final da página.' },
+  { q: 'Tem Android e iOS?', a: 'Android primeiro. Existe também uma versão web. Entre na lista para ser avisado também do iOS.' },
 ];
 
 const phone = (inner, cls = '') => `<div class="phone ${cls}" aria-hidden="true"><div class="phone__in">${inner}</div></div>`;
@@ -71,7 +70,7 @@ document.querySelector('#root').innerHTML = `
         ${main()}
         <a class="btn btn--pink" href="${WEB_URL}" target="_blank" rel="noopener">${playIcon} Ver o app</a>
       </div>
-      <p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Teste fechado</b> no Android · vagas limitadas</span></p>
+      <p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Android primeiro</b> · grátis no acesso antecipado</span></p>
       <div class="hero__stage">
         <img class="hero__draco" src="${SYMBOL}" alt="Draco, mascote do ANIMAE" width="260" height="223">
         ${phone(feedScreen, 'phone--hero')}
@@ -133,7 +132,7 @@ document.querySelector('#root').innerHTML = `
     <div class="wrap center">
       <div class="dots dots--lg"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i><i style="--c:#32d27f"></i></div>
       <p class="big">Android</p>
-      <p class="sub"><b>Primeiro</b> no Google Play, em teste fechado agora</p>
+      <p class="sub"><b>Primeiro</b> no Google Play. Entre na lista e seja avisado no dia do lançamento.</p>
       <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
     </div>
   </section>
@@ -155,12 +154,11 @@ document.querySelector('#root').innerHTML = `
     <div class="wrap">
       <div class="box newsletter" id="lista">
         <h2>O ANIMAE é esse lugar</h2>
-        <p class="sub">Teste agora no Android. Quer ser avisado do iOS e do lançamento? Deixe seu e-mail.</p>
-        <div class="box__cta">${main()}</div>
+        <p class="sub">Entre na lista e seja avisado no dia em que o app chegar ao Android. Também avisamos do iOS.</p>
         <form class="form" novalidate>
           <label class="sr" for="email">Seu e-mail</label>
           <input id="email" type="email" placeholder="Digite seu endereço de e-mail" autocomplete="email" required>
-          <button class="btn btn--pink" type="submit">Avisar-me</button>
+          <button class="btn" type="submit">Entrar na lista</button>
         </form>
         <small>Grátis, sem cartão e sem spam.</small>
       </div>
@@ -189,5 +187,5 @@ document.querySelectorAll('.faq__q').forEach(btn => btn.addEventListener('click'
 document.querySelector('.form').addEventListener('submit', event => {
   event.preventDefault();
   const b = event.currentTarget.querySelector('button');
-  b.textContent = 'Anotado ✓'; b.disabled = true;
+  b.textContent = 'Você está na lista ✓'; b.disabled = true;
 });
