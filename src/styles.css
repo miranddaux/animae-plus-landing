@@ -250,3 +250,9 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 .btn.btn--mini{min-width:0;height:48px;padding:0 32px;font-size:14px;box-shadow:0 6px 12px rgba(255,92,2,.2)}
 .footer__in{font-size:12px}.footer__in a,.footer__in p{font-size:12px}
 @media (max-width:640px){.form--mini{flex:1 1 100%}}
+
+/* hero: mão do Draco segurando a home */
+.hero__stage{height:auto;margin-top:56px;width:min(560px,100%);display:block;overflow:hidden;max-height:640px;-webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent 100%);mask-image:linear-gradient(to bottom,#000 80%,transparent 100%)}
+.hero__hand{display:block;width:100%;height:auto;margin:0 auto;filter:drop-shadow(0 24px 32px rgba(0,0,0,.45))}
+.hero__stage .bubble{top:56px;left:-8px}
+@media (max-width:640px){.hero__stage{max-height:480px;width:min(360px,100%)}.hero__stage .bubble{left:0;top:24px;max-width:168px;font-size:14px}}

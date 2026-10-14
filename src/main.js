@@ -35,12 +35,13 @@ const listaScreen = shot('app-lista.webp', 'Minha Lista no ANIMAE, com progresso
 const perfilScreen = shot('app-perfil.webp', 'Perfil no ANIMAE, com XP, sequência e conquistas');
 const feedScreen = shot('app-feed.webp', 'Feed de amigos no ANIMAE, com stories e avaliações');
 const comunidadeScreen = shot('app-comunidade.webp', 'Comunidade no ANIMAE, com o quiz do dia do Draco e debates');
+const conquistasScreen = shot('app-conquistas.webp', 'Conquistas no ANIMAE, com badges e progresso');
 const buscaScreen = shot('app-busca.webp', 'Busca e descoberta no ANIMAE');
 
 const tabs = [
   { id: 'feed', label: 'Feed social', title: 'A conversa continua depois do episódio', text: 'Veja o que seus amigos acabaram de assistir e avaliar, entre em debates e jogue o quiz do dia com o Draco. Tudo no mesmo lugar, sem pular entre 8 apps.', a: feedScreen, b: comunidadeScreen },
   { id: 'diario', label: 'Seu diário', title: 'Marque cada episódio e veja sua jornada', text: 'Acompanhe o que você assiste, anime por anime. Um toque marca o episódio, o progresso avança e a sua lista fica sempre em dia, do jeito que você quer.', a: listaScreen, b: detalheScreen },
-  { id: 'badges', label: 'Perfil e badges', title: 'Sua jornada vira conquista', text: 'Cada episódio rende XP. Mantenha a sequência, suba de nível, desbloqueie conquistas e mostre quem você é no mundo anime.', a: perfilScreen, b: todo('Conquistas', 'Badges desbloqueados e bloqueados', buscaScreen) },
+  { id: 'badges', label: 'Perfil e badges', title: 'Sua jornada vira conquista', text: 'Cada episódio rende XP. Mantenha a sequência, suba de nível, desbloqueie conquistas e mostre quem você é no mundo anime.', a: perfilScreen, b: conquistasScreen },
 ];
 
 document.querySelector('#root').innerHTML = `
@@ -65,9 +66,8 @@ document.querySelector('#root').innerHTML = `
       </div>
       <p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Android primeiro</b> · grátis no acesso antecipado</span></p>
       <div class="hero__stage">
-        <div class="bubble">Também tô esperando o app. Entra na lista.</div>
-        <img class="hero__draco" src="${IMG}draco-triste.webp" alt="Draco, mascote do ANIMAE, esperando o app com o celular na mão" width="240" height="240">
-        ${phone(todo('Home nova', 'Print da home para ir na mão do Draco', detalheScreen), 'phone--hero')}
+        <div class="bubble">Tá olhando o quê? Entra logo na lista.</div>
+        <img class="hero__hand" src="${IMG}draco-mao-home.webp" alt="A mão do Draco segurando um celular com a home do ANIMAE" width="560" height="743">
       </div>
     </div>
   </section>
@@ -240,8 +240,7 @@ if (g && !reduce) {
     .from('.hero .lead', { y: 24, opacity: 0, duration: .8 }, '-=.35')
     .from('.hero__cta .btn', { y: 24, opacity: 0, duration: .7, stagger: .1 }, '-=.5')
     .from('.proof', { y: 16, opacity: 0, duration: .6 }, '-=.4')
-    .from('.phone--hero', { y: 120, rotationX: 18, opacity: 0, duration: 1.1, transformPerspective: 1000, clearProps: 'transform,opacity' }, '-=.9')
-    .from('.hero__draco', { scale: .4, rotation: -18, opacity: 0, duration: .9, ease: 'back.out(1.7)', clearProps: 'transform,opacity' }, '-=.6');
+    .from('.hero__hand', { y: 140, opacity: 0, duration: 1.1, ease: 'power3.out', clearProps: 'transform,opacity' }, '-=.9');
 
   // blocos que entram ao rolar
   const rise = (targets, extra = {}) => document.querySelectorAll(targets).forEach(el =>
@@ -261,9 +260,6 @@ if (g && !reduce) {
   g.from('.dots--lg i', { scale: 0, duration: .5, stagger: .08, ease: 'back.out(2)', scrollTrigger: { trigger: '.proofsec', start: 'top 80%', once: true } });
   g.from('.faq__item', { y: 24, opacity: 0, duration: .6, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '.faq', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
   g.from('.footer__in', { opacity: 0, duration: .8, scrollTrigger: { trigger: '.footer', start: 'top 100%', once: true } });
-
-  // parallax leve no Draco do hero e flutuação
-  if (window.ScrollTrigger) g.to('.hero__draco', { yPercent: -18, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 
   // marquee contínuo, pausa ao passar o mouse
   const track = document.querySelector('.marquee__track');
