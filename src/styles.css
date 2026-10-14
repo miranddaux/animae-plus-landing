@@ -492,3 +492,8 @@ h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
 @media (min-width:901px){.android__scene .android__bubble{left:79%;top:-3%;width:56%}}
 @media (max-width:900px){.android__scene .android__bubble{left:72%;top:0;width:58%}}
 .bcard--c p{max-width:200px}
+
+/* ===== botões em pill ===== */
+.btn,.nav .btn,.btn--mini,.form .btn{border-radius:999px}
+.form input,.form--hero input{border-radius:999px;padding:0 32px}
+.btn::before{border-radius:inherit}
