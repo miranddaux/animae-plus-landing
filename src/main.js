@@ -88,7 +88,7 @@ document.querySelector('#root').innerHTML = `
   <section class="sec" id="como">
     <div class="wrap">
       <h2 class="center">Você ama anime<br>mas vive fragmentado em 8 apps</h2>
-      <p class="sub center">Tracking no MAL, conversa no Discord, teorias no Reddit. Você orbita o conteúdo sem nunca ter uma base.</p>
+      <p class="sub center">Tracking no MAL, conversa no Discord, teorias no Reddit.<br>Você orbita o conteúdo sem nunca ter uma base.</p>
       <div class="bento">
         <article class="bcard bcard--a">
           <div class="bcard__text"><h3>Descoberta às cegas</h3><p>Sem contexto sobre o que você sente, os algoritmos empurram qualquer coisa. Você quer o próximo anime que vai te quebrar não qualquer anime.</p></div>
@@ -310,12 +310,18 @@ if (g && !reduce) {
   // paralaxe suave no celular do "Feito com cuidado"
   g.fromTo('.split__card .phone', { y: 48 }, { y: -32, ease: 'none', scrollTrigger: { trigger: '.split', start: 'top bottom', end: 'bottom top', scrub: .6 } });
 
-  // marquee inclina conforme a velocidade da rolagem
+  // marquee: inclina e acelera com a rolagem, suavizado a cada frame
   const mqWrap = document.querySelector('.marquee');
   if (mqWrap && window.ScrollTrigger) {
-    const skewTo = g.quickTo(mqWrap, 'skewX', { duration: .6, ease: 'power3.out' });
-    ScrollTrigger.create({ onUpdate: self => skewTo(g.utils.clamp(-7, 7, self.getVelocity() / -350)) });
-    ScrollTrigger.addEventListener('scrollEnd', () => skewTo(0));
+    const st = { skew: 0, target: 0 };
+    g.set(mqWrap, { transformPerspective: 800 });
+    ScrollTrigger.create({ onUpdate: self => { st.target = g.utils.clamp(-18, 18, self.getVelocity() / -120); } });
+    g.ticker.add(() => {
+      st.target *= .92;                                  // volta ao centro sozinho
+      st.skew += (st.target - st.skew) * .14;            // aproximação suave
+      if (Math.abs(st.skew) < .01 && Math.abs(st.target) < .01) { if (st.skew) g.set(mqWrap, { skewX: 0 }); st.skew = st.target = 0; return; }
+      g.set(mqWrap, { skewX: st.skew });
+    });
   }
 
   // interações com mouse (só em telas com mouse)
@@ -333,9 +339,9 @@ if (g && !reduce) {
     const sec = document.querySelector('.android'), stage = document.querySelector('.android__stage');
     if (sec && stage) {
       g.set(stage, { transformPerspective: 900 });
-      const sy = g.quickTo(stage, 'rotationY', { duration: 1, ease: 'power3.out' });
-      const sx = g.quickTo(stage, 'rotationX', { duration: 1, ease: 'power3.out' });
-      sec.addEventListener('pointermove', e => { const r = sec.getBoundingClientRect(); sy(((e.clientX - r.left) / r.width - .5) * 16); sx(((e.clientY - r.top) / r.height - .5) * -8); });
+      const sy = g.quickTo(stage, 'rotationY', { duration: 1.4, ease: 'power2.out' });
+      const sx = g.quickTo(stage, 'rotationX', { duration: 1.4, ease: 'power2.out' });
+      sec.addEventListener('pointermove', e => { const r = sec.getBoundingClientRect(); sy(((e.clientX - r.left) / r.width - .5) * 10); sx(((e.clientY - r.top) / r.height - .5) * -5); });
       sec.addEventListener('pointerleave', () => { sx(0); sy(0); });
     }
     // cards sobem de leve ao passar o mouse
@@ -355,5 +361,6 @@ if (g && !reduce) {
   const track = document.querySelector('.marquee__track');
   const mq = g.to(track, { xPercent: -50, duration: 40, ease: 'none', repeat: -1 });
   track.parentElement.addEventListener('mouseenter', () => g.to(mq, { timeScale: .15, duration: .5 }));
+  if (window.ScrollTrigger) ScrollTrigger.create({ onUpdate: self => { const v = g.utils.clamp(-6, 6, self.getVelocity() / 400); g.to(mq, { timeScale: 1 + Math.abs(v), duration: .3, overwrite: 'auto' }); g.to(mq, { timeScale: 1, duration: 1.2, delay: .3 }); } });
   track.parentElement.addEventListener('mouseleave', () => g.to(mq, { timeScale: 1, duration: .5 }));
 }

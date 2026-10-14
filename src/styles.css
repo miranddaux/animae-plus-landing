@@ -480,3 +480,10 @@ h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
 .bcard img.bcard__draco{margin:0 8px -24px 0}
 .proof--lg .faces img{margin-left:-12px}.proof--lg .faces img:first-child{margin-left:0}
 @media (min-width:901px){.android__scene{transform:translateX(-66%)}.android__scene .android__bubble{left:71%;width:58%}}
+
+.bcard p,.bcard--b p,.bcard--c p{font-size:16px;line-height:1.5}
+.bcard--b p{max-width:208px}.bcard--c p{max-width:232px}
+.marquee{will-change:transform}
+@media (min-width:901px){.android__scene{transform:translateX(-71%)}.android__scene .android__bubble{left:72%}}
+.android__text{position:relative;z-index:2}
+.bcard--c p{max-width:200px}.bcard--c .bcard__social{height:224px;right:8px}
