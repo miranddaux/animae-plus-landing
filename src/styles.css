@@ -456,3 +456,27 @@ h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
 /* ===== progresso ===== */
 .progress{position:fixed;top:0;left:0;right:0;height:3px;background:var(--primary);transform:scaleX(0);transform-origin:0 50%;z-index:100;pointer-events:none}
 .android__stage,.panel__phones,.bcard{will-change:transform}
+
+/* ===== ajustes: cards, abas, Android, rodapé ===== */
+.android__stage,.panel__phones,.bcard{will-change:auto}
+.android__stage,.panel__phones{will-change:transform}
+.bcard--b .bcard__draco,.bcard--b img.bcard__draco{right:16px}
+.bcard--c .bcard__social{right:16px;height:232px}
+.panel{overflow:hidden}
+.panel__text{padding:64px 24px 0}
+.panel__phones{overflow:visible;padding-top:32px;height:clamp(400px,62vh,600px)}
+.android{padding:96px 0 112px}
+.android__stage{height:clamp(560px,80vh,780px)}
+.android__scene{height:96%;transform:translateX(-74%)}
+.android__scene .android__bubble{left:74%;top:-10%;width:60%}
+.proof--lg .faces img{width:40px;height:40px}
+.proof--lg{gap:12px;font-size:16px}
+.footer{border-top:0}
+@media (max-width:900px){
+  .android__stage{height:clamp(480px,66vh,600px)}
+  .android__scene{height:92%;transform:translateX(-78%)}
+  .android__scene .android__bubble{left:70%;top:-8%;width:60%}
+}
+.bcard img.bcard__draco{margin:0 8px -24px 0}
+.proof--lg .faces img{margin-left:-12px}.proof--lg .faces img:first-child{margin-left:0}
+@media (min-width:901px){.android__scene{transform:translateX(-66%)}.android__scene .android__bubble{left:71%;width:58%}}

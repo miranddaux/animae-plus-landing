@@ -323,10 +323,10 @@ if (g && !reduce) {
     // celulares das abas inclinam em 3D
     const body = document.querySelector('.tabcard__body');
     if (body) {
-      body.querySelectorAll('.panel__phones').forEach(ph => g.set(ph, { transformPerspective: 1200 }));
+      body.querySelectorAll('.panel__phones').forEach(ph => g.set(ph, { transformPerspective: 1400, transformOrigin: '50% 0%' }));
       const rx = g.quickTo('.panel__phones', 'rotationX', { duration: .8, ease: 'power3.out' });
       const ry = g.quickTo('.panel__phones', 'rotationY', { duration: .8, ease: 'power3.out' });
-      body.addEventListener('pointermove', e => { const r = body.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 14); rx(((e.clientY - r.top) / r.height - .5) * -8); });
+      body.addEventListener('pointermove', e => { const r = body.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 8); rx(((e.clientY - r.top) / r.height - .5) * -4); });
       body.addEventListener('pointerleave', () => { rx(0); ry(0); });
     }
     // Draco acompanha o mouse
@@ -338,13 +338,10 @@ if (g && !reduce) {
       sec.addEventListener('pointermove', e => { const r = sec.getBoundingClientRect(); sy(((e.clientX - r.left) / r.width - .5) * 16); sx(((e.clientY - r.top) / r.height - .5) * -8); });
       sec.addEventListener('pointerleave', () => { sx(0); sy(0); });
     }
-    // cards inclinam e brilham
+    // cards sobem de leve ao passar o mouse
     document.querySelectorAll('.bcard').forEach(c => {
-      g.set(c, { transformPerspective: 900 });
-      const cx = g.quickTo(c, 'rotationY', { duration: .6, ease: 'power3.out' });
-      const cy = g.quickTo(c, 'rotationX', { duration: .6, ease: 'power3.out' });
-      c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); cx(((e.clientX - r.left) / r.width - .5) * 8); cy(((e.clientY - r.top) / r.height - .5) * -8); });
-      c.addEventListener('pointerleave', () => { cx(0); cy(0); });
+      c.addEventListener('pointerenter', () => g.to(c, { y: -6, duration: .35, ease: 'power3.out', overwrite: 'auto' }));
+      c.addEventListener('pointerleave', () => g.to(c, { y: 0, duration: .45, ease: 'power3.out', overwrite: 'auto' }));
     });
     // botões magnéticos
     document.querySelectorAll('.btn:not(.btn--mini)').forEach(b => {
