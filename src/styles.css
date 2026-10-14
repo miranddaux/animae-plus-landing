@@ -371,3 +371,59 @@ h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
 .android__bubble{width:min(290px,50%);right:-60px;top:6%}
 .android__bubble p{left:9%;right:14%;top:19%;bottom:25%}
 @media (max-width:900px){.android__draco{left:50%;height:80%}.android__bubble{width:min(300px,76%);right:2%;top:0}.android__bubble p{top:17%;bottom:27%}}
+
+/* ===== ajuste geral: grade de 8 pontos e proporção fluida ===== */
+.sec{padding:96px 0}
+@media (max-width:1000px){.sec{padding:80px 0}}
+@media (max-width:640px){.sec{padding:64px 0}}
+
+/* cards do problema */
+.bento{grid-template-columns:minmax(0,480px) minmax(0,440px);gap:16px;margin:64px auto 48px}
+.bento__col{gap:16px}
+.bcard--a{height:512px}.bcard--b,.bcard--c{height:248px;width:100%}
+.bcard__text{padding:32px}
+.bcard--b .bcard__text,.bcard--c .bcard__text{padding:32px 32px 24px}
+@media (max-width:1000px){.bento{grid-template-columns:minmax(0,480px)}.bcard--a{height:512px}}
+
+/* abas + card + botão cabendo em uma tela */
+.tabcard{margin:48px 0 40px}
+.panel{height:clamp(432px,calc(100vh - 344px),640px)}
+.panel__phones{padding-top:40px;gap:clamp(24px,3vw,48px)}
+.panel__phones .phone{width:clamp(208px,19vw,288px)}
+.panel__phones .phone__in{max-height:none}
+.panel__text{bottom:80px}
+.tabcard__body{-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 72px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 72px),transparent)}
+@media (max-width:640px){.panel{height:clamp(480px,calc(100vh - 280px),600px)}.panel__phones .phone{width:224px}.panel__text{bottom:72px}}
+
+/* seção "Feito com cuidado" */
+.split{gap:48px}
+.split__card{padding-top:56px}
+@media (max-width:640px){.split__card{padding-top:48px}}
+
+/* hero */
+.form--hero{width:min(960px,100%)}
+
+/* Android primeiro: cena Draco + balão proporcional, com fade em cima e embaixo */
+.android{padding:112px 0}
+.android__stage{height:clamp(480px,64vh,640px)}
+.android__scene{position:absolute;left:50%;bottom:0;height:100%;aspect-ratio:1485/1901;transform:translateX(-56%)}
+.android__scene .android__draco{position:absolute;left:0;top:0;width:100%;height:100%;transform:none}
+.android__scene .android__bubble{position:absolute;left:66%;right:auto;top:3%;width:68%}
+.android__bg{-webkit-mask-image:linear-gradient(to right,transparent,#000 35%),linear-gradient(to bottom,transparent,#000 24%,#000 76%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 35%),linear-gradient(to bottom,transparent,#000 24%,#000 76%,transparent);mask-composite:intersect}
+.android::before,.android::after{content:"";position:absolute;left:0;right:0;height:96px;z-index:0;pointer-events:none}
+.android::before{top:0;background:linear-gradient(var(--bg),transparent)}
+.android::after{bottom:0;background:linear-gradient(transparent,var(--bg))}
+.android__in{z-index:1}
+@media (max-width:900px){
+  .android__stage{height:clamp(440px,60vh,560px)}
+  .android__scene{transform:translateX(-50%)}
+  .android__scene .android__bubble{left:48%;width:80%;top:0}
+}
+.footer{margin-top:0}
+.tabcard{margin:40px 0 32px}
+.panel{height:clamp(400px,calc(100vh - 360px),640px)}
+@media (max-width:900px){
+  .android__stage{height:clamp(400px,56vh,520px)}
+  .android__scene{height:92%;left:50%;transform:translateX(-58%)}
+  .android__scene .android__bubble{left:58%;width:66%;top:2%}
+}

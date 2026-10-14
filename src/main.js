@@ -168,10 +168,12 @@ document.querySelector('#root').innerHTML = `
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
       <div class="android__stage">
-        <img class="android__draco" src="${IMG}draco-3d.webp" alt="Draco, o mascote do ANIMAE, apontando para você" width="780" height="999" loading="lazy">
-        <div class="android__bubble">
-          <img src="${IMG}balao.webp" alt="" width="416" height="255" loading="lazy">
-          <p><strong>Ei, você aí!</strong><span>Isso foi feito pra você. Entra antes que a fila encha.</span><small>— Draco</small></p>
+        <div class="android__scene">
+          <img class="android__draco" src="${IMG}draco-3d.webp" alt="Draco, o mascote do ANIMAE, apontando para você" width="780" height="999" loading="lazy">
+          <div class="android__bubble">
+            <img src="${IMG}balao.webp" alt="" width="416" height="255" loading="lazy">
+            <p><strong>Ei, você aí!</strong><span>Isso foi feito pra você. Entra antes que a fila encha.</span><small>— Draco</small></p>
+          </div>
         </div>
       </div>
     </div>
@@ -181,14 +183,6 @@ document.querySelector('#root').innerHTML = `
 
 <footer class="footer" id="lista">
   <div class="wrap">
-    <div class="footer__lista">
-      <p>Seja avisado no lançamento. Android primeiro, iOS depois. Grátis, sem spam.</p>
-      <form class="form form--mini" novalidate>
-        <label class="sr" for="email">Seu e-mail</label>
-        <input id="email" type="email" placeholder="Seu e-mail" autocomplete="email" required>
-        <button class="btn btn--mini" type="submit">Entrar na lista</button>
-      </form>
-    </div>
     <div class="footer__in">
       <div class="footer__l"><a href="#">Termos de Privacidade</a></div>
       <p>Criado por Thiago Miranda <i></i> © 2026 Animae <i></i> Todos os direitos reservados</p>
