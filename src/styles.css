@@ -317,3 +317,10 @@ h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
 .marquee__set span{letter-spacing:-.015em}
 .bcard--b p{max-width:200px}
 .bcard--c p{color:#b0b3c6}
+
+/* marquee estilo referência: texto grande, sem fundo, mascote colado no texto */
+.marquee{background:transparent;color:var(--t0);padding:32px 0;margin-top:64px}
+.marquee__set{gap:20px;padding-right:20px}
+.marquee__set span{font:900 clamp(64px,8vw,128px)/1 var(--display);letter-spacing:-.025em;color:var(--t0)}
+.marquee__set img{height:clamp(80px,9vw,140px);width:auto}
+@media (max-width:640px){.marquee__set img{height:72px}.marquee__set{gap:12px;padding-right:12px}}
