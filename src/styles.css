@@ -324,3 +324,8 @@ h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
 .marquee__set span{font:900 clamp(64px,8vw,128px)/1 var(--display);letter-spacing:-.025em;color:var(--t0)}
 .marquee__set img{height:clamp(80px,9vw,140px);width:auto}
 @media (max-width:640px){.marquee__set img{height:72px}.marquee__set{gap:12px;padding-right:12px}}
+
+.nav__brand{display:flex;align-items:center;gap:10px}
+.nav__mark{height:40px;width:auto;display:block}
+.nav__logo{height:26px;width:auto}
+@media (max-width:640px){.nav__mark{height:34px}.nav__logo{height:22px}}

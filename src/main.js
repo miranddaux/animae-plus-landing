@@ -50,7 +50,7 @@ const tabs = [
 document.querySelector('#root').innerHTML = `
 <header class="nav">
   <div class="wrap nav__in">
-    <a href="#top" aria-label="ANIMAE"><img class="nav__logo" src="${LOGO}" alt="ANIMAE" width="190" height="47"></a>
+    <a class="nav__brand" href="#top" aria-label="ANIMAE"><img class="nav__mark" src="${IMG}draco-icon.webp" alt="" width="44" height="40"><img class="nav__logo" src="./assets/brand/wordmark-dark.svg" alt="ANIMAE" width="98" height="24"></a>
     <div class="nav__right">
       <nav class="nav__links" aria-label="Seções"><a href="#app">O app</a><a href="#como">Como funciona</a><a href="#faq">FAQ</a></nav>
       ${main('btn--sm')}
