@@ -141,7 +141,7 @@ document.querySelector('#root').innerHTML = `
 
   <section class="marquee" aria-hidden="true">
     <div class="marquee__track">
-      ${Array.from({ length: 2 }, () => `<div class="marquee__set">${['Entra na lista', 'A conversa continua', 'Seu anime. Sua jornada. Sua gente.', 'O diário social de anime'].map(t => `<span>${t}</span><img src="${SYMBOL}" alt="" width="72" height="62">`).join('')}</div>`).join('')}
+      ${Array.from({ length: 2 }, () => `<div class="marquee__set">${['Entre na lista', 'Seu anime', 'Sua galera', 'Seu diário otaku'].map(t => `<span>${t}</span><img src="${SYMBOL}" alt="" width="72" height="62">`).join('')}</div>`).join('')}
     </div>
   </section>
 
