@@ -171,7 +171,7 @@ document.querySelector('#root').innerHTML = `
         <img class="android__draco" src="${IMG}draco-3d.webp" alt="Draco, o mascote do ANIMAE, apontando para você" width="780" height="999" loading="lazy">
         <div class="android__bubble">
           <img src="${IMG}balao.webp" alt="" width="416" height="255" loading="lazy">
-          <p>Entra logo antes que a fila encha.<small>— Draco</small></p>
+          <p><strong>Ei, você aí!</strong><span>Isso foi feito pra você. Entra antes que a fila encha.</span><small>— Draco</small></p>
         </div>
       </div>
     </div>

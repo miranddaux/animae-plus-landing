@@ -357,3 +357,12 @@ h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
 .android__bubble{right:-8%;top:-4%;width:min(310px,54%)}
 @media (max-width:900px){.android__draco{left:50%}.android__bubble{right:2%;top:0;width:min(270px,62%)}}
 @media (max-width:900px){.android__stage{height:560px}.android__draco{height:80%}.android__bubble{top:0;right:4%}}
+
+.android__bg{opacity:.04}
+.android__bubble{width:min(360px,60%);right:-10%;top:-6%}
+.android__bubble p{left:9%;right:14%;top:12%;bottom:33%;align-items:center;justify-content:center;text-align:center;gap:4px;font-size:15px;line-height:1.3}
+.android__bubble strong{display:block;font-size:20px;font-weight:900;letter-spacing:-.02em;color:#ff5c02}
+.android__bubble span{display:block;font-weight:700;max-width:21ch}
+.android__bubble small{margin-top:4px}
+@media (max-width:900px){.android__bubble{width:min(300px,76%);right:2%;top:0}.android__bubble p{font-size:14px}.android__bubble strong{font-size:18px}}
+.android__bubble span{max-width:none;text-wrap:balance}
