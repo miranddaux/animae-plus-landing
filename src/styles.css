@@ -316,3 +316,4 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
 .marquee__set span{letter-spacing:-.015em}
 .bcard--b p{max-width:200px}
+.bcard--c p{color:#b0b3c6}
