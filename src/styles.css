@@ -269,8 +269,22 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 /* prova social com rostos */
 .proof--fans{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
 .faces{display:flex}
-.faces img{width:40px;height:40px;border-radius:50%;margin-left:-12px;box-shadow:0 0 0 2px var(--bg);background:var(--surface)}
+.faces img{width:40px;height:40px;border-radius:50%;margin-left:-12px;box-shadow:none;border:0;background:transparent}
 .faces img:first-child{margin-left:0}
 .proof--fans b{font-size:18px;color:var(--t0)}
 .proof--fans > span:last-of-type{font-size:18px;color:var(--t2)}
 .flag-inline{font-style:normal;font-size:11px;font-weight:800;padding:3px 8px;border-radius:var(--r-md);background:var(--primary);color:#141725}
+
+.hero__stage{translate:12.5% 0}
+.hero{overflow-x:clip}
+.split__card{padding-top:128px}
+.proof--lg{margin-bottom:28px}.proof--lg .faces img{width:56px;height:56px;margin-left:-16px}.proof--lg .faces img:first-child{margin-left:0}
+.proof--lg span:last-child{font-size:22px}
+.big{font-size:clamp(40px,5.2vw,88px);line-height:1.02}
+.panel__phones .phone,.panel__text{backface-visibility:hidden}
+@media (max-width:640px){.split__card{padding-top:88px}}
+
+.form--hero{width:min(620px,100%);margin:0;gap:12px}
+.form--hero input{height:64px;font-size:16px;background:rgba(255,255,255,.08)}
+.form--hero .btn{min-width:0;padding:0 40px;flex:none}
+@media (max-width:640px){.form--hero{flex-direction:column}.form--hero input{flex:none;width:100%;height:56px}.form--hero .btn{width:100%}}

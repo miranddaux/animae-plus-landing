@@ -10,7 +10,7 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const LOGO = './assets/brand/logo-horizontal-dark.svg';
 const SYMBOL = './assets/brand/symbol.svg';
 const MAIN_LABEL = STAGE === 'live' ? 'Baixar no Android' : 'Entrar na lista';
-const MAIN_URL = STAGE === 'live' ? PLAY_URL : '#lista';
+const MAIN_URL = STAGE === 'live' ? PLAY_URL : '#hero-lista';
 
 const main = (extra = '') => `<a class="btn ${extra}" href="${MAIN_URL}" ${MAIN_URL.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>${MAIN_LABEL}</a>`;
 const playIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -28,11 +28,11 @@ const IMG = './assets/img/';
 // Telas que ainda faltam aparecem sinalizadas na LP. Quando todas chegarem, mude para false.
 const SHOW_TODO = true;
 // Prova social: preencha com o número REAL de inscritos na lista. Enquanto for null, a LP mostra o texto neutro.
-const WAITLIST_COUNT = null;
+const WAITLIST_COUNT = 847;
 const EXAMPLE_COUNT = 847; // só aparece sinalizado como exemplo enquanto SHOW_TODO = true
 const todo = (title, hint, fallback) => SHOW_TODO ? `<div class="todo"><b>FALTA A TELA</b><span>${title}</span><small>${hint}</small></div>` : fallback;
 const flag = (txt) => SHOW_TODO ? `<div class="flag">${txt}</div>` : '';
-const shot = (f, alt) => `<img class="shot" src="${IMG}${f}" alt="${alt}" loading="lazy">`;
+const shot = (f, alt) => `<img class="shot" src="${IMG}${f}" alt="${alt}" decoding="async">`;
 const detalheScreen = shot('app-detalhe.webp', 'Tela de um anime no ANIMAE, com progresso de episódios');
 const listaScreen = shot('app-lista.webp', 'Minha Lista no ANIMAE, com progresso por anime');
 const perfilScreen = shot('app-perfil.webp', 'Perfil no ANIMAE, com XP, sequência e conquistas');
@@ -64,14 +64,17 @@ document.querySelector('#root').innerHTML = `
       <h1>O lugar onde a conversa<br>continua depois do episódio</h1>
       <p class="lead">O ANIMAE não é streaming. É o diário social de anime: marque o que você assiste, ganhe XP e badges e fale com quem sentiu o mesmo depois de um final que destroça.</p>
       <div class="hero__cta">
-        ${main()}
-        <a class="btn btn--pink" href="${WEB_URL}" target="_blank" rel="noopener">Ver o app na web ${playIcon}</a>
+        ${STAGE === 'lista' ? `<form class="form form--hero" id="hero-lista" novalidate>
+          <label class="sr" for="email-hero">Seu e-mail</label>
+          <input id="email-hero" type="email" placeholder="Seu melhor e-mail" autocomplete="email" required>
+          <button class="btn" type="submit">${MAIN_LABEL}</button>
+        </form>` : main()}
       </div>
       ${(() => {
         const faces = [1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="40" height="40">`).join('');
         const n = WAITLIST_COUNT ?? (SHOW_TODO ? EXAMPLE_COUNT : null);
         if (n === null) return `<p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Android primeiro</b> · grátis no acesso antecipado</span></p>`;
-        return `<p class="proof proof--fans"><span class="faces">${faces}</span><span><b>${n}+</b> fãs já na fila</span>${WAITLIST_COUNT === null ? '<em class="flag-inline">exemplo: ligar ao número real</em>' : ''}</p>`;
+        return `<p class="proof proof--fans"><span class="faces">${faces}</span><span><b>${n}+</b> fãs já na fila</span></p>`;
       })()}
       <div class="hero__stage">
         <picture>
@@ -156,8 +159,8 @@ document.querySelector('#root').innerHTML = `
 
   <section class="sec proofsec" id="baixar">
     <div class="wrap center">
-      <div class="dots dots--lg"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i><i style="--c:#32d27f"></i></div>
-      <p class="big">Android primeiro</p>
+      ${WAITLIST_COUNT ? `<p class="proof proof--fans proof--lg"><span class="faces">${[1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="56" height="56">`).join('')}</span><span><b>${WAITLIST_COUNT}+</b> fãs já na fila</span></p>` : ''}
+      <p class="big">Feito para o<br>Android Primeiro</p>
       <p class="sub">O app chega primeiro ao Google Play. Entre na lista e seja avisado no dia do lançamento.</p>
       <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       <p class="dracoquote"><img src="${SYMBOL}" alt="" width="48" height="41"><span>“A fila não anda sozinha. Entra logo.” <b>— Draco</b></span></p>
@@ -188,7 +191,11 @@ document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', (
   document.querySelectorAll('.tab').forEach(t => { t.classList.toggle('is-on', t === tab); t.setAttribute('aria-selected', String(t === tab)); });
   const next = document.querySelector(`.panel[data-panel="${tab.dataset.tab}"]`);
   document.querySelectorAll('.panel').forEach(p => { p.hidden = p !== next; });
-  if (window.gsap && !reduce) gsap.fromTo(next.children, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: .6, stagger: .08, ease: 'power3.out', clearProps: 'transform,opacity' });
+  if (window.gsap && !reduce) {
+    gsap.killTweensOf(next.querySelectorAll('.phone, .panel__text'));
+    gsap.fromTo(next.querySelectorAll('.phone'), { y: 32, opacity: 0 }, { y: 0, opacity: 1, duration: .55, stagger: .08, ease: 'power2.out', overwrite: true, clearProps: 'transform,opacity' });
+    gsap.fromTo(next.querySelector('.panel__text'), { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: .5, delay: .12, ease: 'power2.out', overwrite: true, clearProps: 'transform,opacity' });
+  }
 }));
 
 document.querySelectorAll('.faq__q').forEach(btn => btn.addEventListener('click', () => {
@@ -197,13 +204,18 @@ document.querySelectorAll('.faq__q').forEach(btn => btn.addEventListener('click'
   document.getElementById(btn.getAttribute('aria-controls')).hidden = !open;
 }));
 
-document.querySelectorAll('a[href="#lista"]').forEach(a => a.addEventListener('click', () => setTimeout(() => document.getElementById('email')?.focus({ preventScroll: true }), 700)));
+// todos os botões "Entrar na lista" levam ao campo de e-mail do topo
+document.querySelectorAll('a[href="#hero-lista"]').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector('.hero__cta').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+  setTimeout(() => document.getElementById('email-hero')?.focus({ preventScroll: true }), 600);
+}));
 
-document.querySelector('.form').addEventListener('submit', event => {
+document.querySelectorAll('.form').forEach(f => f.addEventListener('submit', event => {
   event.preventDefault();
   const b = event.currentTarget.querySelector('button');
   b.textContent = 'Você está na lista ✓'; b.disabled = true;
-});
+}));
 
 
 /* ── Animações (GSAP). Sem GSAP ou com movimento reduzido, a página fica estática. ── */
@@ -248,7 +260,7 @@ if (g && !reduce) {
   tl.from('.nav__logo', { y: -16, opacity: 0, duration: .7 })
     .from('.nav__links a, .nav .btn', { y: -12, opacity: 0, duration: .6, stagger: .06 }, '-=.5')
     .from('.hero .lead', { y: 24, opacity: 0, duration: .8 }, '-=.35')
-    .from('.hero__cta .btn', { y: 24, opacity: 0, duration: .7, stagger: .1 }, '-=.5')
+    .from('.hero__cta .form > *, .hero__cta .btn', { y: 24, opacity: 0, duration: .7, stagger: .1 }, '-=.5')
     .from('.proof', { y: 16, opacity: 0, duration: .6 }, '-=.4')
     .from('.hero__hand', { y: 110, scale: .92, opacity: 0, filter: 'blur(18px)', duration: 2, ease: 'power3.out', clearProps: 'transform,opacity,filter' }, '-=.8');
 
@@ -262,9 +274,11 @@ if (g && !reduce) {
   g.from('.bcard__collage', { yPercent: 12, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: '.bcard--a', start: 'top 90%', once: true }, clearProps: 'transform,opacity' });
   g.from('.bcard img', { scale: .5, rotation: -12, opacity: 0, duration: .8, stagger: .12, ease: 'back.out(1.7)', scrollTrigger: { trigger: '.bento', start: 'top 70%', once: true }, clearProps: 'transform,opacity' });
 
-  g.from('.tabs .tab', { y: 32, opacity: 0, duration: .7, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '.tabcard', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
-  g.from('.tabcard__body', { y: 48, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: '.tabcard', start: 'top 80%', once: true }, clearProps: 'transform,opacity' });
-  g.from('.tabcard .phone', { y: 96, rotationX: 14, opacity: 0, transformPerspective: 1000, duration: 1, stagger: .15, ease: 'power3.out', scrollTrigger: { trigger: '.tabcard', start: 'top 70%', once: true }, clearProps: 'transform,opacity' });
+  g.from('.tabs .tab', { y: 24, opacity: 0, duration: .6, stagger: .08, ease: 'power2.out', scrollTrigger: { trigger: '.tabcard', start: 'top 88%', once: true }, clearProps: 'transform,opacity' });
+  gsap.set('.tabcard .phone', { willChange: 'transform,opacity' });
+  g.timeline({ scrollTrigger: { trigger: '.tabcard', start: 'top 82%', once: true }, defaults: { ease: 'power3.out' } })
+    .from('.panel:not([hidden]) .phone', { y: 56, opacity: 0, duration: .9, stagger: .12, clearProps: 'transform,opacity,willChange' })
+    .from('.panel:not([hidden]) .panel__text', { y: 20, opacity: 0, duration: .7, clearProps: 'transform,opacity' }, '-=.55');
 
   g.from('.split__card', { x: 64, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.split', start: 'top 80%', once: true }, clearProps: 'transform,opacity' });
   g.from('.dots--lg i', { scale: 0, duration: .5, stagger: .08, ease: 'back.out(2)', scrollTrigger: { trigger: '.proofsec', start: 'top 80%', once: true } });
