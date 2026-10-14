@@ -487,3 +487,8 @@ h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
 @media (min-width:901px){.android__scene{transform:translateX(-71%)}.android__scene .android__bubble{left:72%}}
 .android__text{position:relative;z-index:2}
 .bcard--c p{max-width:200px}.bcard--c .bcard__social{height:224px;right:8px}
+.bcard--a{height:560px}.bcard--b,.bcard--c{height:272px}
+.bcard--c p{max-width:216px}.bcard--c .bcard__social{height:248px}
+@media (min-width:901px){.android__scene .android__bubble{left:79%;top:-3%;width:56%}}
+@media (max-width:900px){.android__scene .android__bubble{left:72%;top:0;width:58%}}
+.bcard--c p{max-width:200px}
