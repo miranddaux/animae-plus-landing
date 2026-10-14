@@ -311,3 +311,8 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 .bcard--c .bcard__text{position:relative;z-index:1}
 .big{line-height:1.2}
 @media (max-width:640px){.bcard--c .bcard__social{height:200px}}
+
+/* headings padronizados: entrelinha 1.12 e tracking -.02em */
+h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
+.marquee__set span{letter-spacing:-.015em}
+.bcard--b p{max-width:200px}

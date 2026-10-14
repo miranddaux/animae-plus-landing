@@ -131,7 +131,7 @@ document.querySelector('#root').innerHTML = `
   <section class="sec">
     <div class="wrap split">
       <div class="split__text">
-        <h2>Feito com cuidado, em público</h2>
+        <h2>Feito com cuidado,<br>em público</h2>
         <p class="sub">O ANIMAE não é um projeto de fim de semana. É construído por quem passou anos em produto: cada decisão tem um porquê e cada feature nasce de uma hipótese. Quem entra na lista acompanha tudo e ajuda a decidir o que vem depois.</p>
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
