@@ -288,3 +288,17 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 .form--hero input{height:64px;font-size:16px;background:rgba(255,255,255,.08)}
 .form--hero .btn{min-width:0;padding:0 40px;flex:none}
 @media (max-width:640px){.form--hero{flex-direction:column}.form--hero input{flex:none;width:100%;height:56px}.form--hero .btn{width:100%}}
+
+/* tons do branding: superfície #1f2333, borda #3a3f5a, laranja #ff5c02 */
+.form--hero{width:min(780px,100%)}
+.form--hero input{flex:1;background:var(--surface);border:1.5px solid #3a3f5a;height:64px;padding:0 28px}
+.form--hero input:focus{border-color:var(--primary)}
+.form--hero input.is-bad{border-color:var(--pink)}
+.form--hero .btn{min-width:260px;padding:0 56px;background:#ff5c02}
+.form--mini input{background:var(--surface);border:1.5px solid #3a3f5a}
+.bcard--c{background:var(--surface)!important}
+/* feedback de sucesso: fundo da superfície, texto e ícone verdes (contraste ~7:1) */
+.btn:disabled,.btn.is-done{background:var(--surface);color:var(--ok);box-shadow:inset 0 0 0 1.5px var(--ok);opacity:1;cursor:default}
+.btn.is-done svg{flex:none}
+.form input:disabled{opacity:.5}
+@media (max-width:640px){.form--hero .btn{min-width:0}}

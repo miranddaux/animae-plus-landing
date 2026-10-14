@@ -98,7 +98,7 @@ document.querySelector('#root').innerHTML = `
           <article class="bcard bcard--b" style="background-image:url(${IMG}card-comunidade.webp)">
             <div class="bcard__text"><h3>Comunidade pulverizada</h3><p>Sua tribo está espalhada em 10 plataformas. Discord, Twitter, Reddit, MAL. Ninguém sabe onde se reunir de verdade.</p></div>
           </article>
-          <article class="bcard bcard--c" style="background-image:url(${IMG}card-social.webp)">
+          <article class="bcard bcard--c">
             <div class="bcard__text"><h3>Social sem sentimento</h3><p>Os apps de anime existentes tratam você como número. Nenhum pergunta o que você sentiu. Nenhum conecta por emoção.</p></div>
           </article>
         </div>
@@ -161,7 +161,7 @@ document.querySelector('#root').innerHTML = `
     <div class="wrap center">
       ${WAITLIST_COUNT ? `<p class="proof proof--fans proof--lg"><span class="faces">${[1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="56" height="56">`).join('')}</span><span><b>${WAITLIST_COUNT}+</b> fãs já na fila</span></p>` : ''}
       <p class="big">Feito para o<br>Android Primeiro</p>
-      <p class="sub">O app chega primeiro ao Google Play. Entre na lista e seja avisado no dia do lançamento.</p>
+      <p class="sub">O app chega primeiro ao Google Play. Entre na lista e seja<br>avisado no dia do lançamento.</p>
       <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       <p class="dracoquote"><img src="${SYMBOL}" alt="" width="48" height="41"><span>“A fila não anda sozinha. Entra logo.” <b>— Draco</b></span></p>
     </div>
@@ -214,7 +214,15 @@ document.querySelectorAll('a[href="#hero-lista"]').forEach(a => a.addEventListen
 document.querySelectorAll('.form').forEach(f => f.addEventListener('submit', event => {
   event.preventDefault();
   const b = event.currentTarget.querySelector('button');
-  b.textContent = 'Você está na lista ✓'; b.disabled = true;
+  const input = event.currentTarget.querySelector('input');
+  if (!input.value.trim() || !input.checkValidity()) { input.focus(); input.classList.add('is-bad'); if (window.gsap && !reduce) gsap.fromTo(input, { x: -6 }, { x: 0, duration: .5, ease: 'elastic.out(1,.3)', clearProps: 'transform' }); return; }
+  input.classList.remove('is-bad'); input.disabled = true;
+  b.disabled = true; b.classList.add('is-done');
+  b.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Você está na lista</span>';
+  if (window.gsap && !reduce) {
+    gsap.from(b, { scale: .94, duration: .5, ease: 'back.out(2.2)', clearProps: 'transform' });
+    gsap.fromTo(b.querySelector('path'), { strokeDasharray: 24, strokeDashoffset: 24 }, { strokeDashoffset: 0, duration: .45, delay: .1, ease: 'power2.out' });
+  }
 }));
 
 
