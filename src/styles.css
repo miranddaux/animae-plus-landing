@@ -427,3 +427,32 @@ h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
   .android__scene{height:92%;left:50%;transform:translateX(-58%)}
   .android__scene .android__bubble{left:58%;width:66%;top:2%}
 }
+
+/* ===== abas: container completo, sem fade, prints maiores ===== */
+.tabcard__body{-webkit-mask-image:none;mask-image:none}
+.panel__fade{display:none}
+.panel{height:auto;overflow:hidden}
+.panel:not([hidden]){display:flex;flex-direction:column;align-items:center}
+.panel__text{position:static;order:-1;padding:48px 24px 0;inset:auto}
+.panel__text p{margin-top:16px}
+.panel__phones{padding-top:48px;gap:clamp(24px,4vw,64px);height:clamp(440px,68vh,640px);overflow:hidden;align-items:flex-start;width:100%;justify-content:center}
+.panel__phones .phone{width:clamp(264px,25vw,360px)}
+.panel__phones .phone__in{max-height:none}
+@media (max-width:900px){.panel__phones .phone{width:min(320px,78vw)}.panel__phones{height:clamp(440px,64vh,560px)}}
+@media (max-width:640px){.panel__text{padding:40px 16px 0}.panel__phones{padding-top:32px}}
+
+/* ===== balão: cresce com o Draco, ponta na boca ===== */
+.android__bubble{container-type:inline-size}
+.android__scene .android__bubble{left:69%;top:1.5%;width:62%}
+.android__bubble p{font-size:5.4cqw}
+.android__bubble strong{font-size:7.2cqw}
+.android__bubble small{font-size:4.2cqw}
+@media (max-width:900px){
+  .android__scene{height:90%;transform:translateX(-68%)}
+  .android__scene .android__bubble{left:69%;top:1.5%;width:62%}
+  .android__bubble p{font-size:5.4cqw}
+}
+
+/* ===== progresso ===== */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;background:var(--primary);transform:scaleX(0);transform-origin:0 50%;z-index:100;pointer-events:none}
+.android__stage,.panel__phones,.bcard{will-change:transform}

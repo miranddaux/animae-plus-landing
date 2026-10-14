@@ -197,7 +197,7 @@ document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', (
   document.querySelectorAll('.panel').forEach(p => { p.hidden = p !== next; });
   if (window.gsap && !reduce) {
     gsap.killTweensOf(next.querySelectorAll('.phone, .panel__text'));
-    gsap.fromTo(next.querySelectorAll('.phone'), { y: 32, opacity: 0 }, { y: 0, opacity: 1, duration: .55, stagger: .08, ease: 'power2.out', overwrite: true, clearProps: 'transform,opacity' });
+    gsap.fromTo(next.querySelectorAll('.phone'), { y: 48, rotationY: (i) => i ? 22 : -22, rotationX: 8, opacity: 0, transformPerspective: 1100 }, { y: 0, rotationY: 0, rotationX: 0, opacity: 1, duration: .8, stagger: .1, ease: 'power3.out', overwrite: true, clearProps: 'transform,opacity' });
     gsap.fromTo(next.querySelector('.panel__text'), { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: .5, delay: .12, ease: 'power2.out', overwrite: true, clearProps: 'transform,opacity' });
   }
 }));
@@ -288,15 +288,71 @@ if (g && !reduce) {
   g.from('.tabs .tab', { y: 24, opacity: 0, duration: .6, stagger: .08, ease: 'power2.out', scrollTrigger: { trigger: '.tabcard', start: 'top 88%', once: true }, clearProps: 'transform,opacity' });
   gsap.set('.tabcard .phone', { willChange: 'transform,opacity' });
   g.timeline({ scrollTrigger: { trigger: '.tabcard', start: 'top 82%', once: true }, defaults: { ease: 'power3.out' } })
-    .from('.panel:not([hidden]) .phone', { y: 56, opacity: 0, duration: .9, stagger: .12, clearProps: 'transform,opacity,willChange' })
+    .from('.panel:not([hidden]) .phone', { y: 90, rotationX: 30, opacity: 0, transformOrigin: '50% 100%', transformPerspective: 1200, duration: 1.1, stagger: .14, clearProps: 'transform,opacity,willChange' })
     .from('.panel:not([hidden]) .panel__text', { y: 20, opacity: 0, duration: .7, clearProps: 'transform,opacity' }, '-=.55');
 
   g.from('.split__card', { x: 64, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.split', start: 'top 80%', once: true }, clearProps: 'transform,opacity' });
-  g.timeline({ scrollTrigger: { trigger: '.android', start: 'top 70%', once: true }, defaults: { ease: 'power3.out' } })
-    .from('.android__draco', { y: 60, opacity: 0, duration: 1, clearProps: 'transform,opacity' })
-    .from('.android__bubble', { scale: .85, y: 16, opacity: 0, transformOrigin: '10% 100%', duration: .7, ease: 'back.out(1.8)', clearProps: 'transform,opacity' }, '-=.45');
+  g.timeline({ scrollTrigger: { trigger: '.android', start: 'top 70%', once: true }, defaults: { ease: 'power3.out' },
+      onComplete: () => {
+        g.to('.android__draco', { y: -10, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+        g.to('.android__bubble', { rotation: 1.6, y: -4, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1, transformOrigin: '10% 100%' });
+      } })
+    .from('.android__draco', { y: 90, rotationY: -28, opacity: 0, transformPerspective: 1000, duration: 1.2, clearProps: 'transform,opacity' })
+    .from('.android__bubble', { scale: .6, rotation: -8, y: 20, opacity: 0, transformOrigin: '10% 100%', duration: .8, ease: 'back.out(2)', clearProps: 'transform,opacity' }, '-=.5')
+    .from('.android__text > *', { y: 24, opacity: 0, duration: .7, stagger: .08, clearProps: 'transform,opacity' }, 0);
   g.from('.faq__item', { y: 24, opacity: 0, duration: .6, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '.faq', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
   g.from('.footer__in', { opacity: 0, duration: .8, scrollTrigger: { trigger: '.footer', start: 'top 100%', once: true } });
+
+  // barra de progresso de leitura
+  const bar = document.createElement('div'); bar.className = 'progress'; bar.setAttribute('aria-hidden', 'true'); document.body.append(bar);
+  g.to(bar, { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: .3 } });
+
+  // paralaxe suave no celular do "Feito com cuidado"
+  g.fromTo('.split__card .phone', { y: 48 }, { y: -32, ease: 'none', scrollTrigger: { trigger: '.split', start: 'top bottom', end: 'bottom top', scrub: .6 } });
+
+  // marquee inclina conforme a velocidade da rolagem
+  const mqWrap = document.querySelector('.marquee');
+  if (mqWrap && window.ScrollTrigger) {
+    const skewTo = g.quickTo(mqWrap, 'skewX', { duration: .6, ease: 'power3.out' });
+    ScrollTrigger.create({ onUpdate: self => skewTo(g.utils.clamp(-7, 7, self.getVelocity() / -350)) });
+    ScrollTrigger.addEventListener('scrollEnd', () => skewTo(0));
+  }
+
+  // interações com mouse (só em telas com mouse)
+  if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    // celulares das abas inclinam em 3D
+    const body = document.querySelector('.tabcard__body');
+    if (body) {
+      body.querySelectorAll('.panel__phones').forEach(ph => g.set(ph, { transformPerspective: 1200 }));
+      const rx = g.quickTo('.panel__phones', 'rotationX', { duration: .8, ease: 'power3.out' });
+      const ry = g.quickTo('.panel__phones', 'rotationY', { duration: .8, ease: 'power3.out' });
+      body.addEventListener('pointermove', e => { const r = body.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 14); rx(((e.clientY - r.top) / r.height - .5) * -8); });
+      body.addEventListener('pointerleave', () => { rx(0); ry(0); });
+    }
+    // Draco acompanha o mouse
+    const sec = document.querySelector('.android'), stage = document.querySelector('.android__stage');
+    if (sec && stage) {
+      g.set(stage, { transformPerspective: 900 });
+      const sy = g.quickTo(stage, 'rotationY', { duration: 1, ease: 'power3.out' });
+      const sx = g.quickTo(stage, 'rotationX', { duration: 1, ease: 'power3.out' });
+      sec.addEventListener('pointermove', e => { const r = sec.getBoundingClientRect(); sy(((e.clientX - r.left) / r.width - .5) * 16); sx(((e.clientY - r.top) / r.height - .5) * -8); });
+      sec.addEventListener('pointerleave', () => { sx(0); sy(0); });
+    }
+    // cards inclinam e brilham
+    document.querySelectorAll('.bcard').forEach(c => {
+      g.set(c, { transformPerspective: 900 });
+      const cx = g.quickTo(c, 'rotationY', { duration: .6, ease: 'power3.out' });
+      const cy = g.quickTo(c, 'rotationX', { duration: .6, ease: 'power3.out' });
+      c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); cx(((e.clientX - r.left) / r.width - .5) * 8); cy(((e.clientY - r.top) / r.height - .5) * -8); });
+      c.addEventListener('pointerleave', () => { cx(0); cy(0); });
+    });
+    // botões magnéticos
+    document.querySelectorAll('.btn:not(.btn--mini)').forEach(b => {
+      const bx = g.quickTo(b, 'x', { duration: .5, ease: 'power3.out' }), by = g.quickTo(b, 'y', { duration: .5, ease: 'power3.out' });
+      b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); bx((e.clientX - r.left - r.width / 2) * .14); by((e.clientY - r.top - r.height / 2) * .22); });
+      b.addEventListener('pointerleave', () => { bx(0); by(0); });
+    });
+  }
 
   // marquee contínuo, pausa ao passar o mouse
   const track = document.querySelector('.marquee__track');
