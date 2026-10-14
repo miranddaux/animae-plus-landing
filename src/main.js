@@ -27,6 +27,9 @@ const phone = (inner, cls = '') => `<div class="phone ${cls}" aria-hidden="true"
 const IMG = './assets/img/';
 // Telas que ainda faltam aparecem sinalizadas na LP. Quando todas chegarem, mude para false.
 const SHOW_TODO = true;
+// Prova social: preencha com o número REAL de inscritos na lista. Enquanto for null, a LP mostra o texto neutro.
+const WAITLIST_COUNT = null;
+const EXAMPLE_COUNT = 847; // só aparece sinalizado como exemplo enquanto SHOW_TODO = true
 const todo = (title, hint, fallback) => SHOW_TODO ? `<div class="todo"><b>FALTA A TELA</b><span>${title}</span><small>${hint}</small></div>` : fallback;
 const flag = (txt) => SHOW_TODO ? `<div class="flag">${txt}</div>` : '';
 const shot = (f, alt) => `<img class="shot" src="${IMG}${f}" alt="${alt}" loading="lazy">`;
@@ -64,7 +67,12 @@ document.querySelector('#root').innerHTML = `
         ${main()}
         <a class="btn btn--pink" href="${WEB_URL}" target="_blank" rel="noopener">Ver o app na web ${playIcon}</a>
       </div>
-      <p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Android primeiro</b> · grátis no acesso antecipado</span></p>
+      ${(() => {
+        const faces = [1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="40" height="40">`).join('');
+        const n = WAITLIST_COUNT ?? (SHOW_TODO ? EXAMPLE_COUNT : null);
+        if (n === null) return `<p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Android primeiro</b> · grátis no acesso antecipado</span></p>`;
+        return `<p class="proof proof--fans"><span class="faces">${faces}</span><span><b>${n}+</b> fãs já na fila</span>${WAITLIST_COUNT === null ? '<em class="flag-inline">exemplo: ligar ao número real</em>' : ''}</p>`;
+      })()}
       <div class="hero__stage">
         <picture>
           <source type="image/webp" srcset="${IMG}hero-mao.webp">
@@ -242,7 +250,7 @@ if (g && !reduce) {
     .from('.hero .lead', { y: 24, opacity: 0, duration: .8 }, '-=.35')
     .from('.hero__cta .btn', { y: 24, opacity: 0, duration: .7, stagger: .1 }, '-=.5')
     .from('.proof', { y: 16, opacity: 0, duration: .6 }, '-=.4')
-    .from('.hero__hand', { y: 72, scale: .965, opacity: 0, duration: 1.5, ease: 'power3.out', clearProps: 'transform,opacity' }, '-=.8');
+    .from('.hero__hand', { y: 110, scale: .92, opacity: 0, filter: 'blur(18px)', duration: 2, ease: 'power3.out', clearProps: 'transform,opacity,filter' }, '-=.8');
 
   // blocos que entram ao rolar
   const rise = (targets, extra = {}) => document.querySelectorAll(targets).forEach(el =>
