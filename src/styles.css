@@ -331,3 +331,29 @@ h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
 @media (max-width:640px){.nav__mark{height:34px}.nav__logo{height:22px}}
 .tab img{width:40px;height:auto}@media (max-width:640px){.tab img{width:34px}}
 .tab.is-on img{filter:none}
+
+/* Android primeiro (layout do Figma 154:441) */
+.android{position:relative;overflow:hidden;padding:96px 0}
+.android__bg{position:absolute;inset:0 0 0 46%;background:url(./assets/img/manga-bg.webp) center/cover no-repeat;opacity:.07;-webkit-mask-image:linear-gradient(to right,transparent,#000 35%);mask-image:linear-gradient(to right,transparent,#000 35%);pointer-events:none}
+.android__in{position:relative;display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:40px;min-height:560px}
+.android__text{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:0}
+.android__text .proof--fans{justify-content:flex-start;margin-bottom:24px}
+.android__text .big{margin-bottom:20px}
+.android__text .sub{margin:0 0 32px;max-width:none;font-size:18px;line-height:1.8}
+.android__stage{position:relative;height:620px}
+.android__draco{position:absolute;left:50%;bottom:0;height:100%;width:auto;transform:translateX(-50%);filter:drop-shadow(0 30px 40px rgba(0,0,0,.45))}
+.android__bubble{position:absolute;right:-2%;top:2%;width:min(330px,56%)}
+.android__bubble img{display:block;width:100%;height:auto}
+.android__bubble p{position:absolute;left:8%;right:15%;top:15%;bottom:34%;display:flex;flex-direction:column;justify-content:center;margin:0;color:#141725;font:700 16px/1.3 var(--display)}
+.android__bubble small{display:block;margin-top:6px;font-size:12px;font-weight:600;opacity:.65}
+@media (max-width:900px){
+  .android__in{grid-template-columns:1fr;min-height:0}
+  .android__stage{height:480px}
+  .android__bg{inset:0;opacity:.05}
+  .android__text .big{font-size:clamp(40px,11vw,64px)}
+}
+.android__bg{opacity:.05}
+.android__draco{left:38%}
+.android__bubble{right:-8%;top:-4%;width:min(310px,54%)}
+@media (max-width:900px){.android__draco{left:50%}.android__bubble{right:2%;top:0;width:min(270px,62%)}}
+@media (max-width:900px){.android__stage{height:560px}.android__draco{height:80%}.android__bubble{top:0;right:4%}}

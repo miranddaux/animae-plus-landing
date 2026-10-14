@@ -158,13 +158,22 @@ document.querySelector('#root').innerHTML = `
     </div>
   </section>
 
-  <section class="sec proofsec" id="baixar">
-    <div class="wrap center">
-      ${WAITLIST_COUNT ? `<p class="proof proof--fans proof--lg"><span class="faces">${[1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="56" height="56">`).join('')}</span><span><b>${WAITLIST_COUNT}+</b> fãs já na fila</span></p>` : ''}
-      <p class="big">Feito para o<br>Android primeiro</p>
-      <p class="sub">O app chega primeiro ao Google Play. Entre na lista e seja<br>avisado no dia do lançamento.</p>
-      <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
-      <p class="dracoquote"><img src="${SYMBOL}" alt="" width="48" height="41"><span>“A fila não anda sozinha. Entra logo.” <b>— Draco</b></span></p>
+  <section class="sec android" id="baixar">
+    <div class="android__bg" aria-hidden="true"></div>
+    <div class="wrap android__in">
+      <div class="android__text">
+        ${WAITLIST_COUNT ? `<p class="proof proof--fans proof--lg"><span class="faces">${[1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="56" height="56">`).join('')}</span><span><b>${WAITLIST_COUNT}+</b> fãs já na fila</span></p>` : ''}
+        <p class="big">Feito para o<br>Android primeiro</p>
+        <p class="sub">O app chega primeiro ao Google Play.<br>Entre na lista e seja avisado no dia do lançamento.</p>
+        <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
+      </div>
+      <div class="android__stage">
+        <img class="android__draco" src="${IMG}draco-3d.webp" alt="Draco, o mascote do ANIMAE, apontando para você" width="780" height="999" loading="lazy">
+        <div class="android__bubble">
+          <img src="${IMG}balao.webp" alt="" width="416" height="255" loading="lazy">
+          <p>Entra logo antes que a fila encha.<small>— Draco</small></p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -276,7 +285,7 @@ if (g && !reduce) {
   // blocos que entram ao rolar
   const rise = (targets, extra = {}) => document.querySelectorAll(targets).forEach(el =>
     g.from(el, { y: 32, opacity: 0, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, clearProps: 'transform,opacity', ...extra }));
-  rise('.sub, .split__text .btn, .proofsec .btn, .center > .btn, .faqwrap h2 + .faq');
+  rise('.sub, .split__text .btn, .android .btn, .center > .btn, .faqwrap h2 + .faq');
 
   // cards: entrada suave, um depois do outro
   g.from('.bcard', { y: 40, opacity: 0, duration: .9, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '.bento', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
@@ -289,7 +298,9 @@ if (g && !reduce) {
     .from('.panel:not([hidden]) .panel__text', { y: 20, opacity: 0, duration: .7, clearProps: 'transform,opacity' }, '-=.55');
 
   g.from('.split__card', { x: 64, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.split', start: 'top 80%', once: true }, clearProps: 'transform,opacity' });
-  g.from('.dots--lg i', { scale: 0, duration: .5, stagger: .08, ease: 'back.out(2)', scrollTrigger: { trigger: '.proofsec', start: 'top 80%', once: true } });
+  g.timeline({ scrollTrigger: { trigger: '.android', start: 'top 70%', once: true }, defaults: { ease: 'power3.out' } })
+    .from('.android__draco', { y: 60, opacity: 0, duration: 1, clearProps: 'transform,opacity' })
+    .from('.android__bubble', { scale: .85, y: 16, opacity: 0, transformOrigin: '10% 100%', duration: .7, ease: 'back.out(1.8)', clearProps: 'transform,opacity' }, '-=.45');
   g.from('.faq__item', { y: 24, opacity: 0, duration: .6, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '.faq', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
   g.from('.footer__in', { opacity: 0, duration: .8, scrollTrigger: { trigger: '.footer', start: 'top 100%', once: true } });
 
