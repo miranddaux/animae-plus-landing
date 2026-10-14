@@ -113,7 +113,7 @@ document.querySelector('#root').innerHTML = `
       <h2 class="center">Tudo que existe ao redor<br>do anime em um lugar</h2>
       <div class="tabcard">
         <div class="tabs" role="tablist">
-          ${tabs.map((t, i) => `<button role="tab" class="tab ${i === 0 ? 'is-on' : ''}" data-tab="${t.id}" aria-selected="${i === 0}"><img src="${SYMBOL}" alt="" width="40" height="34"><span>${t.label}</span></button>`).join('')}
+          ${tabs.map((t, i) => `<button role="tab" class="tab ${i === 0 ? 'is-on' : ''}" data-tab="${t.id}" aria-selected="${i === 0}"><img src="${IMG}draco-icon.webp" alt="" width="44" height="40"><span>${t.label}</span></button>`).join('')}
         </div>
         <div class="tabcard__body">
           ${tabs.map((t, i) => `
