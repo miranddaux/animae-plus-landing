@@ -99,6 +99,7 @@ document.querySelector('#root').innerHTML = `
             <div class="bcard__text"><h3>Comunidade pulverizada</h3><p>Sua tribo está espalhada em 10 plataformas. Discord, Twitter, Reddit, MAL. Ninguém sabe onde se reunir de verdade.</p></div>
           </article>
           <article class="bcard bcard--c">
+            <img class="bcard__social" src="${IMG}card-social-draco.webp" alt="" width="395" height="481" loading="lazy">
             <div class="bcard__text"><h3>Social sem sentimento</h3><p>Os apps de anime existentes tratam você como número. Nenhum pergunta o que você sentiu. Nenhum conecta por emoção.</p></div>
           </article>
         </div>
@@ -160,7 +161,7 @@ document.querySelector('#root').innerHTML = `
   <section class="sec proofsec" id="baixar">
     <div class="wrap center">
       ${WAITLIST_COUNT ? `<p class="proof proof--fans proof--lg"><span class="faces">${[1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="56" height="56">`).join('')}</span><span><b>${WAITLIST_COUNT}+</b> fãs já na fila</span></p>` : ''}
-      <p class="big">Feito para o<br>Android Primeiro</p>
+      <p class="big">Feito para o<br>Android primeiro</p>
       <p class="sub">O app chega primeiro ao Google Play. Entre na lista e seja<br>avisado no dia do lançamento.</p>
       <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       <p class="dracoquote"><img src="${SYMBOL}" alt="" width="48" height="41"><span>“A fila não anda sozinha. Entra logo.” <b>— Draco</b></span></p>
@@ -277,10 +278,9 @@ if (g && !reduce) {
     g.from(el, { y: 32, opacity: 0, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, clearProps: 'transform,opacity', ...extra }));
   rise('.sub, .split__text .btn, .proofsec .btn, .center > .btn, .faqwrap h2 + .faq');
 
-  // cards em 3D, em sequência
-  g.from('.bcard', { rotationX: -28, y: 72, opacity: 0, scale: .94, transformPerspective: 1000, transformOrigin: '50% 100%', duration: 1, stagger: .14, ease: 'power3.out', scrollTrigger: { trigger: '.bento', start: 'top 82%', once: true }, clearProps: 'transform,opacity' });
-  g.from('.bcard__collage', { yPercent: 12, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: '.bcard--a', start: 'top 90%', once: true }, clearProps: 'transform,opacity' });
-  g.from('.bcard img', { scale: .5, rotation: -12, opacity: 0, duration: .8, stagger: .12, ease: 'back.out(1.7)', scrollTrigger: { trigger: '.bento', start: 'top 70%', once: true }, clearProps: 'transform,opacity' });
+  // cards: entrada suave, um depois do outro
+  g.from('.bcard', { y: 40, opacity: 0, duration: .9, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '.bento', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
+  g.from('.bcard__collage, .bcard__social, .bcard__draco', { y: 24, opacity: 0, duration: .9, delay: .25, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '.bento', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
 
   g.from('.tabs .tab', { y: 24, opacity: 0, duration: .6, stagger: .08, ease: 'power2.out', scrollTrigger: { trigger: '.tabcard', start: 'top 88%', once: true }, clearProps: 'transform,opacity' });
   gsap.set('.tabcard .phone', { willChange: 'transform,opacity' });
