@@ -302,3 +302,6 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 .btn.is-done svg{flex:none}
 .form input:disabled{opacity:.5}
 @media (max-width:640px){.form--hero .btn{min-width:0}}
+.form--hero{width:min(860px,100%)}
+.form--hero .btn{min-width:200px;padding:0 36px}
+@media (max-width:640px){.form--hero .btn{min-width:0;padding:0 24px}}
