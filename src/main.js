@@ -1,20 +1,366 @@
-const btn=(label,ghost=false)=>`<button class="btn${ghost?' ghost':''}">${ghost?'▶ &nbsp;':''}${label}</button>`;
-const avatars=()=>`<div class="avatars">${['N','K','L','S','R'].map((x,i)=>`<span style="--i:${i}">${x}</span>`).join('')}</div>`;
-const phone=(compact=false)=>`<div class="phone ${compact?'phone-compact':''}"><div class="speaker"></div><div class="appbar"><b>ANIMAE<span>+</span></b><div>⌕　☻</div></div>${compact?'':`<div class="hero-card"><div class="burst">新</div><div><small>EPISÓDIO EM ALTA</small><h3>SHINOBI<br>REBORN</h3><button>VER AGORA</button></div></div>`}<div class="phone-title">${compact?'Feed':'Chegando esta semana'}</div><div class="story-row">${['Ninja Legacy','Mecha Nova','Spirit Crown','Sky Pirates'].map((s,i)=>`<div class="story"><i style="--i:${i}">${s[0]}</i><small>${s.split(' ')[0]}</small></div>`).join('')}</div><div class="post"><div class="post-head"><i>MO</i><span><b>Marina curtiu AOT</b><small>há 12 minutos</small></span><em>•••</em></div><div class="post-art"><span>ATAQUE<br>FINAL</span></div><div class="post-actions">♡　◯　↗ <span>168 curtidas</span></div></div></div>`;
-const fox=`<div class="fox" aria-label="Mascote raposa"><div class="ear left"></div><div class="ear right"></div><div class="face"><i></i><i></i><b>ᴗ</b></div><div class="tail"></div></div>`;
-const faqs=['O ANIMAE+ vai ser pago?','Por que não tem episódio?','O que é o build in public?','Quando vai sair?','Como funcionam os badges?','Tem Android e iOS?'];
-document.querySelector('#root').innerHTML=`<main>
-<nav><a class="logo">ANIMAE<span>+</span></a><div class="links"><a href="#como">O APP</a><a href="#recursos">COMO FUNCIONA</a><a href="#faq">FAQ</a></div>${btn('ENTRAR NA LISTA')}</nav>
-<section class="hero"><div class="eyebrow">✦ &nbsp; O SEU UNIVERSO ANIME</div><h1>O LUGAR ONDE A CONVERSA<br><span>CONTINUA DEPOIS DO EPISÓDIO</span></h1><p>ANIMAE+ é a streaming de comunidade feita por fãs, para fãs. Um novo jeito de viver cada história.</p><div class="actions">${btn('ENTRAR NA LISTA')}${btn('VER O APP',true)}</div><div class="proof">${avatars()}<span><b>847 fãs</b> já chegaram</span></div><div class="hero-device"><div class="orb o1"></div><div class="orb o2"></div>${phone()}</div></section>
-<section class="problem" id="como"><div class="section-head"><small>O PROBLEMA QUE NINGUÉM RESOLVEU</small><h2>VOCÊ AMA ANIME, MAS VIVE<br>FRAGMENTADO EM 8 APPS</h2><p>Streaming em um, conversa no Discord, teoria no Reddit.<br>Você pertence a todos e a lugar nenhum.</p></div><div class="feature-grid"><article class="collage"><div><h3>DESCUBRA AS CENAS</h3><p>Seu coração acelera e o feed entende. Explore universos, estreias e histórias escolhidas para o seu momento.</p></div><div class="poster-wall">${['魂','火','月','龍','空','影'].map((x,j)=>`<i style="--j:${j}">${x}</i>`).join('')}</div></article><article><div><h3>COMUNIDADE PULVERIZADA</h3><p>Uma única casa para quem vibra com cada frame. Converse, descubra e faça parte.</p></div><div class="iconbubble">♟</div>${fox}</article><article><div><h3>SOCIAL SEM SENTIMENTO</h3><p>Troque o ruído por conversas reais. Aqui, cada comentário tem contexto e paixão.</p></div><div class="iconbubble">◌</div></article></div>${btn('ENTRAR NA LISTA')}</section>
-<section class="ecosystem" id="recursos"><div class="section-head"><small>FEITO PARA FÃS DE VERDADE</small><h2>TUDO QUE EXISTE AO REDOR DO<br>ANIME EM UM LUGAR</h2></div><div class="tabs"><button class="active" data-tab="0">♟ &nbsp; FEED SOCIAL</button><button data-tab="1">✦ &nbsp; DESCOBERTA</button><button data-tab="2">♜ &nbsp; BADGES</button></div><div class="showcase"><div class="mini-ui"><div class="mini-icons">${['火','雷','水','風','光'].map(x=>`<i>${x}</i>`).join('')}</div><div class="mini-banner">★ &nbsp; UMA COMUNIDADE QUE ENTENDE SEU MOMENTO</div></div>${phone(true)}<div class="show-copy"><h3>UM FEED QUE ENTENDE O QUE VOCÊ SENTIU</h3><p>Não é algoritmo. É paixão compartilhada. Publique teorias, reações e encontre gente que sentiu exatamente o mesmo.</p></div></div>${btn('ENTRAR NA LISTA')}</section>
-<section class="split"><div><small>SEM RUÍDO. SÓ O QUE IMPORTA.</small><h2>TUDO QUE EXISTE AO REDOR<br>DO ANIME EM UM LUGAR</h2><p>ANIMAE+ não é um app genérico de mídia social. É construído com a disciplina de quem passou anos em produto e com obsessão de quem nunca pulou uma opening.</p>${btn('ENTRAR NA LISTA')}</div><div class="crop-phone">${phone(true)}</div></section>
-<section class="social-proof">${avatars()}<strong>847<span>+</span></strong><p>Fãs já na lista de espera</p>${btn('ENTRAR NA LISTA')}</section>
-<section class="faq" id="faq"><small>TRANSPARÊNCIA TOTAL</small><h2>PERGUNTAS FREQUENTES</h2><div>${faqs.map((q,i)=>`<article class="${i===0?'open':''}"><header><b>${q}</b><span>⌄</span></header><p>${i===0?'O acesso antecipado começa gratuito. No futuro, teremos um plano premium com recursos extras, mas a comunidade e as conversas essenciais continuarão abertas.':'Estamos construindo tudo junto com a comunidade. Entre na lista para acompanhar as novidades e participar das decisões.'}</p></article>`).join('')}</div></section>
-<section class="newsletter"><div><small>SEU PRÓXIMO EPISÓDIO COMEÇA AQUI</small><h2>O ANIMAE+ É ESSE LUGAR</h2><p>ANIMAE+ não é streaming. É onde a conversa continua.</p><form><input type="email" placeholder="seuemail@exemplo.com" required>${btn('ENTRAR NA LISTA')}</form><em>Sem spam. Só o que importa.</em></div></section><footer><span>Termos de Privacidade</span><div>◎ &nbsp; ✉</div><span>Criado por fãs para fãs · © 2026 Animae+</span></footer></main>`;
+// ── Configuração de lançamento ─────────────────────────────────────────
+// Fase 'lista': todos os botões levam ao cadastro de e-mail (entrar na fila).
+// Quando o app estiver no ar, troque STAGE para 'live' e os botões viram "Baixar no Android" (PLAY_URL).
+const STAGE = 'lista';
+const PLAY_URL = 'https://play.google.com/store/apps/details?id=com.animaee.app';
+const WEB_URL = 'https://animae-plus-main.vercel.app';
+// ───────────────────────────────────────────────────────────────────────
 
-const titles=['UM FEED QUE ENTENDE O QUE VOCÊ SENTIU','DESCUBRA SUA PRÓXIMA OBSESSÃO','CONQUISTAS QUE CONTAM SUA HISTÓRIA'];
-document.querySelectorAll('.tabs button').forEach((tab,i)=>tab.addEventListener('click',()=>{document.querySelector('.tabs .active').classList.remove('active');tab.classList.add('active');document.querySelector('.show-copy h3').textContent=titles[i]}));
-document.querySelectorAll('.faq article').forEach(item=>item.addEventListener('click',()=>{const was=item.classList.contains('open');document.querySelectorAll('.faq article').forEach(x=>x.classList.remove('open'));if(!was)item.classList.add('open')}));
-document.querySelectorAll('.btn').forEach(button=>button.addEventListener('click',()=>document.querySelector('.newsletter').scrollIntoView({behavior:'smooth'})));
-document.querySelector('form').addEventListener('submit',e=>{e.preventDefault();const button=e.currentTarget.querySelector('button');button.textContent='VOCÊ ESTÁ NA LISTA ✓';button.disabled=true});
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LOGO = './assets/brand/logo-horizontal-dark.svg';
+const SYMBOL = './assets/brand/symbol.svg';
+const MAIN_LABEL = STAGE === 'live' ? 'Baixar no Android' : 'Entrar na lista';
+const MAIN_URL = STAGE === 'live' ? PLAY_URL : '#hero-lista';
+
+const main = (extra = '') => `<a class="btn ${extra}" href="${MAIN_URL}" ${MAIN_URL.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>${MAIN_LABEL}</a>`;
+const playIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+const faqs = [
+  { q: 'O ANIMAE vai ser pago?', a: 'O acesso inicial é gratuito. No futuro existirá um plano premium com recursos avançados, mas a camada social principal sempre terá versão free. Quem entra na lista garante condições especiais de fundador.' },
+  { q: 'Por que não tem episódio?', a: 'O ANIMAE não é streaming. Você assiste onde preferir e usa o app para marcar, evoluir e conversar com quem sentiu o mesmo que você.' },
+  { q: 'Quando vai sair?', a: 'Estamos finalizando o app. Quem entra na lista é avisado primeiro, no dia em que ele chegar ao Google Play.' },
+  { q: 'Como funcionam os badges?', a: 'Você ganha badges ao cumprir marcos da sua jornada, como finalizar séries ou explorar gêneros novos. Eles ficam no seu perfil.' },
+  { q: 'Tem Android e iOS?', a: 'Android primeiro. Existe também uma versão web. Entre na lista para ser avisado também do iOS.' },
+];
+
+const phone = (inner, cls = '') => `<div class="phone ${cls}" aria-hidden="true"><div class="phone__in">${inner}</div></div>`;
+const IMG = './assets/img/';
+// Telas que ainda faltam aparecem sinalizadas na LP. Quando todas chegarem, mude para false.
+const SHOW_TODO = true;
+// Prova social: preencha com o número REAL de inscritos na lista. Enquanto for null, a LP mostra o texto neutro.
+const WAITLIST_COUNT = 847;
+const EXAMPLE_COUNT = 847; // só aparece sinalizado como exemplo enquanto SHOW_TODO = true
+const todo = (title, hint, fallback) => SHOW_TODO ? `<div class="todo"><b>FALTA A TELA</b><span>${title}</span><small>${hint}</small></div>` : fallback;
+const flag = (txt) => SHOW_TODO ? `<div class="flag">${txt}</div>` : '';
+const shot = (f, alt) => `<img class="shot" src="${IMG}${f}" alt="${alt}" decoding="async">`;
+const detalheScreen = shot('app-detalhe.webp', 'Tela de um anime no ANIMAE, com progresso de episódios');
+const listaScreen = shot('app-lista.webp', 'Minha Lista no ANIMAE, com progresso por anime');
+const perfilScreen = shot('app-perfil.webp', 'Perfil no ANIMAE, com XP, sequência e conquistas');
+const feedScreen = shot('app-feed.webp', 'Feed de amigos no ANIMAE, com stories e avaliações');
+const comunidadeScreen = shot('app-comunidade.webp', 'Comunidade no ANIMAE, com o quiz do dia do Draco e debates');
+const conquistasScreen = shot('app-conquistas.webp', 'Conquistas no ANIMAE, com badges e progresso');
+const buscaScreen = shot('app-busca.webp', 'Busca e descoberta no ANIMAE');
+
+const tabs = [
+  { id: 'feed', label: 'Feed social', title: 'A conversa continua depois do episódio', text: 'Veja o que seus amigos acabaram de assistir e avaliar, entre em debates e jogue o quiz do dia com o Draco.', a: feedScreen, b: comunidadeScreen },
+  { id: 'diario', label: 'Seu diário', title: 'Marque cada episódio e veja sua jornada', text: 'Acompanhe o que você assiste, anime por anime. Um toque marca o episódio, o progresso avança e a sua lista fica sempre em dia, do jeito que você quer.', a: listaScreen, b: detalheScreen },
+  { id: 'badges', label: 'Perfil e badges', title: 'Sua jornada vira conquista', text: 'Cada episódio rende XP. Mantenha a sequência, suba de nível, desbloqueie conquistas e mostre quem você é no mundo anime.', a: perfilScreen, b: conquistasScreen },
+];
+
+document.querySelector('#root').innerHTML = `
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="nav__brand" href="#top" aria-label="ANIMAE"><img class="nav__mark" src="${IMG}draco-icon.webp" alt="" width="44" height="40"><img class="nav__logo" src="./assets/brand/wordmark-dark.svg" alt="ANIMAE" width="98" height="24"></a>
+    <div class="nav__right">
+      <nav class="nav__links" aria-label="Seções"><a href="#app">O app</a><a href="#como">Como funciona</a><a href="#faq">FAQ</a></nav>
+      ${main('btn--sm')}
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero__in">
+      <h1>O lugar onde a conversa<br>continua depois do episódio</h1>
+      <p class="lead">O ANIMAE não é streaming. É o diário social de anime: marque o que você assiste, ganhe XP e badges e fale com quem sentiu o mesmo depois de um final que destroça.</p>
+      <div class="hero__cta">
+        ${STAGE === 'lista' ? `<form class="form form--hero" id="hero-lista" novalidate>
+          <label class="sr" for="email-hero">Seu e-mail</label>
+          <input id="email-hero" type="email" placeholder="Seu melhor e-mail" autocomplete="email" required>
+          <button class="btn" type="submit">${MAIN_LABEL}</button>
+        </form>` : main()}
+      </div>
+      ${(() => {
+        const faces = [1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="40" height="40">`).join('');
+        const n = WAITLIST_COUNT ?? (SHOW_TODO ? EXAMPLE_COUNT : null);
+        if (n === null) return `<p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Android primeiro</b> · grátis no acesso antecipado</span></p>`;
+        return `<p class="proof proof--fans"><span class="faces">${faces}</span><span><b>${n}+</b> fãs já na fila</span></p>`;
+      })()}
+      <div class="hero__stage">
+        <picture>
+          <source type="image/webp" srcset="${IMG}hero-mao.webp">
+          <img class="hero__hand" src="${IMG}hero-mao.png" alt="A mão do Draco segurando um celular com a home do ANIMAE" width="1089" height="1445" fetchpriority="high">
+        </picture>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="como">
+    <div class="wrap">
+      <h2 class="center">Você ama anime<br>mas vive fragmentado em 8 apps</h2>
+      <p class="sub center">Tracking no MAL, conversa no Discord, teorias no Reddit.<br>Você orbita o conteúdo sem nunca ter uma base.</p>
+      <div class="bento">
+        <article class="bcard bcard--a">
+          <div class="bcard__text"><h3>Descoberta às cegas</h3><p>Sem contexto sobre o que você sente, os algoritmos empurram qualquer coisa. Você quer o próximo anime que vai te quebrar não qualquer anime.</p></div>
+          <img class="bcard__collage" src="${IMG}card-colagem.webp" alt="" width="483" height="334" loading="lazy">
+        </article>
+        <div class="bento__col">
+          <article class="bcard bcard--b" style="background-image:url(${IMG}card-comunidade.webp)">
+            <div class="bcard__text"><h3>Comunidade pulverizada</h3><p>Sua tribo está espalhada em 10 plataformas. Discord, Twitter, Reddit, MAL. Ninguém sabe onde se reunir de verdade.</p></div>
+          </article>
+          <article class="bcard bcard--c">
+            <img class="bcard__social" src="${IMG}card-social-draco.webp" alt="" width="395" height="481" loading="lazy">
+            <div class="bcard__text"><h3>Social sem sentimento</h3><p>Os apps de anime existentes tratam você como número. Nenhum pergunta o que você sentiu. Nenhum conecta por emoção.</p></div>
+          </article>
+        </div>
+      </div>
+      <div class="center"><a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a></div>
+    </div>
+  </section>
+
+  <section class="sec" id="app">
+    <div class="wrap">
+      <h2 class="center">Tudo que existe ao redor<br>do anime em um lugar</h2>
+      <div class="tabcard">
+        <div class="tabs" role="tablist">
+          ${tabs.map((t, i) => `<button role="tab" class="tab ${i === 0 ? 'is-on' : ''}" data-tab="${t.id}" aria-selected="${i === 0}"><img src="${IMG}draco-icon.webp" alt="" width="44" height="40"><span>${t.label}</span></button>`).join('')}
+        </div>
+        <div class="tabcard__body">
+          ${tabs.map((t, i) => `
+          <div class="panel" data-panel="${t.id}" ${i ? 'hidden' : ''} role="tabpanel">
+            <div class="panel__phones">${phone(t.a)}${phone(t.b, 'phone--low')}</div>
+            <div class="panel__fade"></div>
+            <div class="panel__text"><h3>${t.title}</h3><p>${t.text}</p></div>
+          </div>`).join('')}
+        </div>
+      </div>
+      <div class="center"><a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap split">
+      <div class="split__text">
+        <h2>Feito com cuidado,<br>em público</h2>
+        <p class="sub">O ANIMAE não é um projeto de fim de semana. É construído por quem passou anos em produto: cada decisão tem um porquê e cada feature nasce de uma hipótese. Quem entra na lista acompanha tudo e ajuda a decidir o que vem depois.</p>
+        <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
+      </div>
+      <div class="split__card">${phone(perfilScreen, 'phone--tall')}</div>
+    </div>
+  </section>
+
+  <section class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      ${Array.from({ length: 2 }, () => `<div class="marquee__set">${['Entre na lista', 'Seu anime', 'Sua galera', 'Seu diário otaku'].map(t => `<span>${t}</span><img src="${IMG}draco-icon.webp" alt="" width="150" height="135">`).join('')}</div>`).join('')}
+    </div>
+  </section>
+
+  <section class="sec" id="faq">
+    <div class="wrap faqwrap">
+      <h2>Perguntas frequentes</h2>
+      <div class="faq">
+        ${faqs.map((f, i) => `
+        <div class="faq__item ${i === 0 ? 'is-open' : ''}">
+          <button class="faq__q" aria-expanded="${i === 0}" aria-controls="fa-${i}">${f.q}<span class="faq__ic" aria-hidden="true"></span></button>
+          <div class="faq__a" id="fa-${i}" ${i ? 'hidden' : ''}>${f.a}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec android" id="baixar">
+    <div class="android__bg" aria-hidden="true"></div>
+    <div class="wrap android__in">
+      <div class="android__text">
+        ${WAITLIST_COUNT ? `<p class="proof proof--fans proof--lg"><span class="faces">${[1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="56" height="56">`).join('')}</span><span><b>${WAITLIST_COUNT}+</b> fãs já na fila</span></p>` : ''}
+        <p class="big">Feito para o<br>Android primeiro</p>
+        <p class="sub">O app chega primeiro ao Google Play.<br>Entre na lista e seja avisado no dia do lançamento.</p>
+        <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
+      </div>
+      <div class="android__stage">
+        <div class="android__scene">
+          <img class="android__draco" src="${IMG}draco-3d.webp" alt="Draco, o mascote do ANIMAE, apontando para você" width="780" height="999" loading="lazy">
+          <div class="android__bubble">
+            <img src="${IMG}balao.webp" alt="" width="416" height="255" loading="lazy">
+            <p><strong>Ei, você aí!</strong><span>Isso foi feito pra você. Entra antes que a fila encha.</span><small>— Draco</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="lista">
+  <div class="wrap">
+    <div class="footer__in">
+      <div class="footer__l"><a href="#">Termos de Privacidade</a></div>
+      <p>Criado por Thiago Miranda <i></i> © 2026 Animae <i></i> Todos os direitos reservados</p>
+    </div>
+  </div>
+</footer>`;
+
+document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => {
+  if (tab.classList.contains('is-on')) return;
+  document.querySelectorAll('.tab').forEach(t => { t.classList.toggle('is-on', t === tab); t.setAttribute('aria-selected', String(t === tab)); });
+  const next = document.querySelector(`.panel[data-panel="${tab.dataset.tab}"]`);
+  document.querySelectorAll('.panel').forEach(p => { p.hidden = p !== next; });
+  if (window.gsap && !reduce) {
+    gsap.killTweensOf(next.querySelectorAll('.phone, .panel__text'));
+    gsap.fromTo(next.querySelectorAll('.phone'), { y: 48, rotationY: (i) => i ? 22 : -22, rotationX: 8, opacity: 0, transformPerspective: 1100 }, { y: 0, rotationY: 0, rotationX: 0, opacity: 1, duration: .8, stagger: .1, ease: 'power3.out', overwrite: true, clearProps: 'transform,opacity' });
+    gsap.fromTo(next.querySelector('.panel__text'), { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: .5, delay: .12, ease: 'power2.out', overwrite: true, clearProps: 'transform,opacity' });
+  }
+}));
+
+document.querySelectorAll('.faq__q').forEach(btn => btn.addEventListener('click', () => {
+  const item = btn.parentElement, open = item.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded', String(open));
+  document.getElementById(btn.getAttribute('aria-controls')).hidden = !open;
+}));
+
+// todos os botões "Entrar na lista" levam ao campo de e-mail do topo
+document.querySelectorAll('a[href="#hero-lista"]').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector('.hero__cta').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+  setTimeout(() => document.getElementById('email-hero')?.focus({ preventScroll: true }), 600);
+}));
+
+document.querySelectorAll('.form').forEach(f => f.addEventListener('submit', event => {
+  event.preventDefault();
+  const b = event.currentTarget.querySelector('button');
+  const input = event.currentTarget.querySelector('input');
+  if (!input.value.trim() || !input.checkValidity()) { input.focus(); input.classList.add('is-bad'); if (window.gsap && !reduce) gsap.fromTo(input, { x: -6 }, { x: 0, duration: .5, ease: 'elastic.out(1,.3)', clearProps: 'transform' }); return; }
+  input.classList.remove('is-bad'); input.disabled = true;
+  b.disabled = true; b.classList.add('is-done');
+  b.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Você está na lista</span>';
+  if (window.gsap && !reduce) {
+    gsap.from(b, { scale: .94, duration: .5, ease: 'back.out(2.2)', clearProps: 'transform' });
+    gsap.fromTo(b.querySelector('path'), { strokeDasharray: 24, strokeDashoffset: 24 }, { strokeDashoffset: 0, duration: .45, delay: .1, ease: 'power2.out' });
+  }
+}));
+
+
+/* ── Animações (GSAP). Sem GSAP ou com movimento reduzido, a página fica estática. ── */
+const g = window.gsap;
+const nav = document.querySelector('.nav');
+const onScroll = () => nav.classList.toggle('is-stuck', scrollY > 24);
+addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+if (g && !reduce) {
+  if (window.ScrollTrigger) g.registerPlugin(ScrollTrigger);
+
+  // divide o título em palavras para o efeito 3D de impressão
+  const split = el => {
+    const walk = node => [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(w => {
+          if (!w) return;
+          if (/^\s+$/.test(w)) { frag.append(' '); return; }
+          const o = document.createElement('span'); o.className = 'w';
+          const i = document.createElement('span'); i.className = 'wi'; i.textContent = w;
+          o.append(i); frag.append(o);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1 && n.tagName !== 'BR') walk(n);
+    });
+    walk(el);
+    return el.querySelectorAll('.wi');
+  };
+
+  const reveal = (el, vars = {}) => {
+    const words = split(el);
+    const st = vars.trigger === false ? undefined : { trigger: el, start: 'top 88%', once: true };
+    g.from(words, { rotationX: -95, yPercent: 60, opacity: 0, transformOrigin: '50% 100% -24', duration: .9, stagger: .06, ease: 'power3.out', scrollTrigger: st, delay: vars.delay || 0, clearProps: 'transform,opacity' });
+  };
+
+  g.set('.w', { perspective: 800 });
+  document.querySelectorAll('h1, h2, h3').forEach(h => reveal(h, h.closest('.hero') ? { trigger: false, delay: .25 } : {}));
+
+  // entrada do hero
+  const tl = g.timeline({ defaults: { ease: 'power3.out' } });
+  tl.from('.nav__logo', { y: -16, opacity: 0, duration: .7 })
+    .from('.nav__links a, .nav .btn', { y: -12, opacity: 0, duration: .6, stagger: .06 }, '-=.5')
+    .from('.hero .lead', { y: 24, opacity: 0, duration: .8 }, '-=.35')
+    .from('.hero__cta .form > *, .hero__cta .btn', { y: 24, opacity: 0, duration: .7, stagger: .1 }, '-=.5')
+    .from('.proof', { y: 16, opacity: 0, duration: .6 }, '-=.4')
+    .from('.hero__hand', { y: 110, scale: .92, opacity: 0, filter: 'blur(18px)', duration: 2, ease: 'power3.out', clearProps: 'transform,opacity,filter' }, '-=.8');
+
+  // blocos que entram ao rolar
+  const rise = (targets, extra = {}) => document.querySelectorAll(targets).forEach(el =>
+    g.from(el, { y: 32, opacity: 0, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, clearProps: 'transform,opacity', ...extra }));
+  rise('.sub, .split__text .btn, .android .btn, .center > .btn, .faqwrap h2 + .faq');
+
+  // cards: entrada suave, um depois do outro
+  g.from('.bcard', { y: 40, opacity: 0, duration: .9, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '.bento', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
+  g.from('.bcard__collage, .bcard__social, .bcard__draco', { y: 24, opacity: 0, duration: .9, delay: .25, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '.bento', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
+
+  g.from('.tabs .tab', { y: 24, opacity: 0, duration: .6, stagger: .08, ease: 'power2.out', scrollTrigger: { trigger: '.tabcard', start: 'top 88%', once: true }, clearProps: 'transform,opacity' });
+  gsap.set('.tabcard .phone', { willChange: 'transform,opacity' });
+  g.timeline({ scrollTrigger: { trigger: '.tabcard', start: 'top 82%', once: true }, defaults: { ease: 'power3.out' } })
+    .from('.panel:not([hidden]) .phone', { y: 90, rotationX: 30, opacity: 0, transformOrigin: '50% 100%', transformPerspective: 1200, duration: 1.1, stagger: .14, clearProps: 'transform,opacity,willChange' })
+    .from('.panel:not([hidden]) .panel__text', { y: 20, opacity: 0, duration: .7, clearProps: 'transform,opacity' }, '-=.55');
+
+  g.from('.split__card', { x: 64, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.split', start: 'top 80%', once: true }, clearProps: 'transform,opacity' });
+  g.timeline({ scrollTrigger: { trigger: '.android', start: 'top 70%', once: true }, defaults: { ease: 'power3.out' },
+      onComplete: () => {
+        g.to('.android__draco', { y: -10, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+        g.to('.android__bubble', { rotation: 1.6, y: -4, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1, transformOrigin: '10% 100%' });
+      } })
+    .from('.android__draco', { y: 90, rotationY: -28, opacity: 0, transformPerspective: 1000, duration: 1.2, clearProps: 'transform,opacity' })
+    .from('.android__bubble', { scale: .6, rotation: -8, y: 20, opacity: 0, transformOrigin: '10% 100%', duration: .8, ease: 'back.out(2)', clearProps: 'transform,opacity' }, '-=.5')
+    .from('.android__text > *', { y: 24, opacity: 0, duration: .7, stagger: .08, clearProps: 'transform,opacity' }, 0);
+  g.from('.faq__item', { y: 24, opacity: 0, duration: .6, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '.faq', start: 'top 85%', once: true }, clearProps: 'transform,opacity' });
+  g.from('.footer__in', { opacity: 0, duration: .8, scrollTrigger: { trigger: '.footer', start: 'top 100%', once: true } });
+
+  // barra de progresso de leitura
+  const bar = document.createElement('div'); bar.className = 'progress'; bar.setAttribute('aria-hidden', 'true'); document.body.append(bar);
+  g.to(bar, { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: .3 } });
+
+  // paralaxe suave no celular do "Feito com cuidado"
+  g.fromTo('.split__card .phone', { y: 48 }, { y: -32, ease: 'none', scrollTrigger: { trigger: '.split', start: 'top bottom', end: 'bottom top', scrub: .6 } });
+
+  // marquee: inclina e acelera com a rolagem, suavizado a cada frame
+  const mqWrap = document.querySelector('.marquee');
+  if (mqWrap && window.ScrollTrigger) {
+    const st = { skew: 0, target: 0 };
+    g.set(mqWrap, { transformPerspective: 800 });
+    ScrollTrigger.create({ onUpdate: self => { st.target = g.utils.clamp(-18, 18, self.getVelocity() / -120); } });
+    g.ticker.add(() => {
+      st.target *= .92;                                  // volta ao centro sozinho
+      st.skew += (st.target - st.skew) * .14;            // aproximação suave
+      if (Math.abs(st.skew) < .01 && Math.abs(st.target) < .01) { if (st.skew) g.set(mqWrap, { skewX: 0 }); st.skew = st.target = 0; return; }
+      g.set(mqWrap, { skewX: st.skew });
+    });
+  }
+
+  // interações com mouse (só em telas com mouse)
+  if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    // celulares das abas inclinam em 3D
+    const body = document.querySelector('.tabcard__body');
+    if (body) {
+      body.querySelectorAll('.panel__phones').forEach(ph => g.set(ph, { transformPerspective: 1400, transformOrigin: '50% 0%' }));
+      const rx = g.quickTo('.panel__phones', 'rotationX', { duration: .8, ease: 'power3.out' });
+      const ry = g.quickTo('.panel__phones', 'rotationY', { duration: .8, ease: 'power3.out' });
+      body.addEventListener('pointermove', e => { const r = body.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 8); rx(((e.clientY - r.top) / r.height - .5) * -4); });
+      body.addEventListener('pointerleave', () => { rx(0); ry(0); });
+    }
+    // Draco acompanha o mouse
+    const sec = document.querySelector('.android'), stage = document.querySelector('.android__stage');
+    if (sec && stage) {
+      g.set(stage, { transformPerspective: 900 });
+      const sy = g.quickTo(stage, 'rotationY', { duration: 1.4, ease: 'power2.out' });
+      const sx = g.quickTo(stage, 'rotationX', { duration: 1.4, ease: 'power2.out' });
+      sec.addEventListener('pointermove', e => { const r = sec.getBoundingClientRect(); sy(((e.clientX - r.left) / r.width - .5) * 10); sx(((e.clientY - r.top) / r.height - .5) * -5); });
+      sec.addEventListener('pointerleave', () => { sx(0); sy(0); });
+    }
+    // cards sobem de leve ao passar o mouse
+    document.querySelectorAll('.bcard').forEach(c => {
+      c.addEventListener('pointerenter', () => g.to(c, { y: -6, duration: .35, ease: 'power3.out', overwrite: 'auto' }));
+      c.addEventListener('pointerleave', () => g.to(c, { y: 0, duration: .45, ease: 'power3.out', overwrite: 'auto' }));
+    });
+    // botões magnéticos
+    document.querySelectorAll('.btn:not(.btn--mini)').forEach(b => {
+      const bx = g.quickTo(b, 'x', { duration: .5, ease: 'power3.out' }), by = g.quickTo(b, 'y', { duration: .5, ease: 'power3.out' });
+      b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); bx((e.clientX - r.left - r.width / 2) * .14); by((e.clientY - r.top - r.height / 2) * .22); });
+      b.addEventListener('pointerleave', () => { bx(0); by(0); });
+    });
+  }
+
+  // marquee contínuo, pausa ao passar o mouse
+  const track = document.querySelector('.marquee__track');
+  const mq = g.to(track, { xPercent: -50, duration: 40, ease: 'none', repeat: -1 });
+  track.parentElement.addEventListener('mouseenter', () => g.to(mq, { timeScale: .15, duration: .5 }));
+  if (window.ScrollTrigger) ScrollTrigger.create({ onUpdate: self => { const v = g.utils.clamp(-6, 6, self.getVelocity() / 400); g.to(mq, { timeScale: 1 + Math.abs(v), duration: .3, overwrite: 'auto' }); g.to(mq, { timeScale: 1, duration: 1.2, delay: .3 }); } });
+  track.parentElement.addEventListener('mouseleave', () => g.to(mq, { timeScale: 1, duration: .5 }));
+}
