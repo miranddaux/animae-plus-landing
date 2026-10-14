@@ -39,7 +39,7 @@ const conquistasScreen = shot('app-conquistas.webp', 'Conquistas no ANIMAE, com 
 const buscaScreen = shot('app-busca.webp', 'Busca e descoberta no ANIMAE');
 
 const tabs = [
-  { id: 'feed', label: 'Feed social', title: 'A conversa continua depois do episódio', text: 'Veja o que seus amigos acabaram de assistir e avaliar, entre em debates e jogue o quiz do dia com o Draco. Tudo no mesmo lugar, sem pular entre 8 apps.', a: feedScreen, b: comunidadeScreen },
+  { id: 'feed', label: 'Feed social', title: 'A conversa continua depois do episódio', text: 'Veja o que seus amigos acabaram de assistir e avaliar, entre em debates e jogue o quiz do dia com o Draco.', a: feedScreen, b: comunidadeScreen },
   { id: 'diario', label: 'Seu diário', title: 'Marque cada episódio e veja sua jornada', text: 'Acompanhe o que você assiste, anime por anime. Um toque marca o episódio, o progresso avança e a sua lista fica sempre em dia, do jeito que você quer.', a: listaScreen, b: detalheScreen },
   { id: 'badges', label: 'Perfil e badges', title: 'Sua jornada vira conquista', text: 'Cada episódio rende XP. Mantenha a sequência, suba de nível, desbloqueie conquistas e mostre quem você é no mundo anime.', a: perfilScreen, b: conquistasScreen },
 ];
@@ -66,8 +66,10 @@ document.querySelector('#root').innerHTML = `
       </div>
       <p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Android primeiro</b> · grátis no acesso antecipado</span></p>
       <div class="hero__stage">
-        <div class="bubble">Tá olhando o quê? Entra logo na lista.</div>
-        <img class="hero__hand" src="${IMG}draco-mao-home.webp" alt="A mão do Draco segurando um celular com a home do ANIMAE" width="560" height="743">
+        <picture>
+          <source type="image/webp" srcset="${IMG}hero-mao.webp">
+          <img class="hero__hand" src="${IMG}hero-mao.png" alt="A mão do Draco segurando um celular com a home do ANIMAE" width="1089" height="1445" fetchpriority="high">
+        </picture>
       </div>
     </div>
   </section>
@@ -121,7 +123,7 @@ document.querySelector('#root').innerHTML = `
         <p class="sub">O ANIMAE não é um projeto de fim de semana. É construído por quem passou anos em produto: cada decisão tem um porquê e cada feature nasce de uma hipótese. Quem entra na lista acompanha tudo e ajuda a decidir o que vem depois.</p>
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
-      <div class="split__card">${phone(flag('Trocar: perfil com números reais') + perfilScreen, 'phone--tall')}</div>
+      <div class="split__card">${phone(perfilScreen, 'phone--tall')}</div>
     </div>
   </section>
 
@@ -240,7 +242,7 @@ if (g && !reduce) {
     .from('.hero .lead', { y: 24, opacity: 0, duration: .8 }, '-=.35')
     .from('.hero__cta .btn', { y: 24, opacity: 0, duration: .7, stagger: .1 }, '-=.5')
     .from('.proof', { y: 16, opacity: 0, duration: .6 }, '-=.4')
-    .from('.hero__hand', { y: 140, opacity: 0, duration: 1.1, ease: 'power3.out', clearProps: 'transform,opacity' }, '-=.9');
+    .from('.hero__hand', { y: 72, scale: .965, opacity: 0, duration: 1.5, ease: 'power3.out', clearProps: 'transform,opacity' }, '-=.8');
 
   // blocos que entram ao rolar
   const rise = (targets, extra = {}) => document.querySelectorAll(targets).forEach(el =>
