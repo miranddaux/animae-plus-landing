@@ -330,3 +330,4 @@ h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
 .nav__logo{height:26px;width:auto}
 @media (max-width:640px){.nav__mark{height:34px}.nav__logo{height:22px}}
 .tab img{width:40px;height:auto}@media (max-width:640px){.tab img{width:34px}}
+.tab.is-on img{filter:none}
