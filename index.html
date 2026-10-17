@@ -292,25 +292,26 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 /* MailerLite: só campo de e-mail + botão. Título e subtítulo são da própria página. */
 .hero__form .ml-form-embedContent,.hero__form .ml-form-embedPermissions,.hero__form .ml-form-recaptcha{display:none!important}
 .hero__form .ml-form-embedContainer,.hero__form .ml-form-embedWrapper,.hero__form .ml-form-embedBody{background:transparent!important;box-shadow:none!important;border:0!important;padding:0!important;margin:0!important;max-width:none!important;width:100%!important}
-.hero__form{width:min(780px,100%)}
-.hero__form form{display:flex!important;flex-flow:row wrap;align-items:center;justify-content:center;gap:12px 16px}
-.hero__form .ml-form-formContent,.hero__form .ml-form-formContent>div{display:contents!important}
-.hero__form .ml-form-fieldRow{order:1;flex:0 1 480px;margin:0!important;min-width:0}
-.hero__form .ml-form-embedSubmit{order:2;flex:none;margin:0!important;padding:0!important;float:none!important;width:auto!important}
-.hero__form .ml-form-checkboxRow{order:3;flex:1 0 100%;margin:0!important;text-align:center}
-.hero__form input[type=email]{width:100%!important;height:64px!important;padding:0 32px!important;border-radius:999px!important;border:1.5px solid #3a3f5a!important;background:var(--surface)!important;color:var(--t0)!important;font:400 16px var(--font)!important;box-sizing:border-box}
-.hero__form input[type=email]:focus{border-color:var(--primary)!important;outline:0}
-.hero__form .ml-form-embedSubmit button.primary{height:64px!important;min-width:240px;padding:0 44px!important;border-radius:999px!important;background:var(--primary)!important;color:var(--t0)!important;font:800 18px/1 var(--display)!important;border:0!important;margin:0!important;cursor:pointer}
-.hero__form .ml-form-embedSubmit button.primary:hover{background:#b8460f!important}
-@media (max-width:640px){.hero__form .ml-form-fieldRow{flex:1 1 100%}.hero__form .ml-form-embedSubmit{flex:1 0 100%}.hero__form .ml-form-embedSubmit button.primary{width:100%!important}.hero__form input[type=email]{height:56px!important}}
-.perks{list-style:none;margin:28px 0 36px;padding:0;display:grid}
-.perks li{display:flex;gap:20px;align-items:flex-start;padding:20px 0;border-top:1px solid #3a3f5a}
-.perks li:last-child{border-bottom:1px solid #3a3f5a}
-.perks__ic{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:14px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 35%,transparent)}
-.perks div{display:grid;gap:4px;min-width:0}
-.perks b{font-size:20px;line-height:1.2;color:var(--t0);font-weight:800}
-.perks div>span{color:var(--t2);font-size:16px;line-height:1.5;max-width:44ch}
-.hero__consent{margin:12px 0 0;font-size:13px;color:var(--t2);text-align:center}
+#hero-lista.hero__form{width:min(880px,100%);margin:0 auto}
+#hero-lista .ml-form-embedContainer form{display:flex!important;flex-flow:row wrap;align-items:center;justify-content:center;gap:12px 16px;margin:0!important}
+#hero-lista .ml-form-embedContainer .ml-form-formContent,#hero-lista .ml-form-embedContainer .ml-form-formContent>div{display:contents!important}
+#hero-lista .ml-form-embedContainer .ml-form-fieldRow,#hero-lista .ml-form-embedContainer .ml-field-group{order:1;flex:0 1 560px!important;width:560px!important;max-width:100%!important;margin:0!important;min-width:0}
+#hero-lista .ml-form-embedContainer .ml-form-embedSubmit{order:2;flex:none!important;margin:0!important;padding:0!important;float:none!important;width:auto!important}
+#hero-lista .ml-form-embedContainer .ml-form-checkboxRow{order:3;flex:1 0 100%!important;margin:0!important;display:flex!important;justify-content:center;text-align:center}
+#hero-lista .ml-form-embedContainer input[type=email]{width:100%!important;height:64px!important;padding:0 32px!important;border-radius:999px!important;border:1.5px solid #3a3f5a!important;background:var(--surface)!important;color:var(--t0)!important;font:400 16px var(--font)!important;box-sizing:border-box!important}
+#hero-lista .ml-form-embedContainer input[type=email]:focus{border-color:var(--primary)!important;outline:0}
+#hero-lista .ml-form-embedContainer .ml-form-embedSubmit button{height:64px!important;min-width:240px!important;padding:0 48px!important;border-radius:999px!important;background:var(--primary)!important;color:var(--t0)!important;font:800 18px/1 var(--display)!important;border:0!important;margin:0!important;cursor:pointer}
+#hero-lista .ml-form-embedContainer .ml-form-embedSubmit button:hover{background:#b8460f!important}
+@media (max-width:700px){#hero-lista .ml-form-embedContainer .ml-form-fieldRow,#hero-lista .ml-form-embedContainer .ml-field-group{flex:1 1 100%!important;width:100%!important}#hero-lista .ml-form-embedContainer .ml-form-embedSubmit{flex:1 0 100%!important}#hero-lista .ml-form-embedContainer .ml-form-embedSubmit button{width:100%!important}#hero-lista .ml-form-embedContainer input[type=email]{height:56px!important}}
+.perks{list-style:none;margin:28px 0 36px;padding:0;display:grid;gap:20px}
+.perks li{display:flex;gap:18px;align-items:center}
+.perks__ic{flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:999px;color:var(--c);background:var(--surface);border:1px solid #3a3f5a}
+.perks__ic svg{width:24px;height:24px}
+.perks div{display:grid;gap:2px;min-width:0}
+.perks b{font-size:18px;line-height:1.25;color:var(--t0);font-weight:800}
+.perks div>span{color:var(--t2);font-size:15px;line-height:1.45;max-width:42ch}
+.hero .proof--fans>span:last-of-type{font-size:14px}.hero .proof--fans b{font-size:14px}
+.hero__consent{margin:10px 0 0;font-size:13px;color:var(--t2);text-align:center}
 .hero__consent a{color:var(--t1)}
 .form--hero{width:min(620px,100%);margin:0;gap:12px}
 .form--hero input{height:64px;font-size:16px;background:rgba(255,255,255,.08)}
@@ -599,7 +600,7 @@ document.querySelector('#root').innerHTML = `
       ${(() => {
         const faces = [1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="40" height="40">`).join('');
         const n = WAITLIST_COUNT ?? (SHOW_TODO ? EXAMPLE_COUNT : null);
-        if (n === null) return `<p class="proof proof--fans"><span class="faces">${faces}</span><span><b>Fundadores</b> ganham badge, teste antecipado e voto nas funções</span></p>`;
+        if (n === null) return `<p class="proof proof--fans"><span class="faces">${faces}</span><span><b>Fundadores</b> ganham badge, teste e voto</span></p>`;
         return `<p class="proof proof--fans"><span class="faces">${faces}</span><span><b>${n}+</b> fãs já na fila</span></p>`;
       })()}
       <div class="hero__stage">
