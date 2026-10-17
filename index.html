@@ -292,23 +292,24 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 /* MailerLite: só campo de e-mail + botão. Título e subtítulo são da própria página. */
 .hero__form .ml-form-embedContent,.hero__form .ml-form-embedPermissions,.hero__form .ml-form-recaptcha{display:none!important}
 .hero__form .ml-form-embedContainer,.hero__form .ml-form-embedWrapper,.hero__form .ml-form-embedBody{background:transparent!important;box-shadow:none!important;border:0!important;padding:0!important;margin:0!important;max-width:none!important;width:100%!important}
-.hero__form{width:min(960px,100%)}
-.hero__form form{display:flex!important;flex-flow:row wrap;align-items:center;gap:12px 16px}
+.hero__form{width:min(780px,100%)}
+.hero__form form{display:flex!important;flex-flow:row wrap;align-items:center;justify-content:center;gap:12px 16px}
 .hero__form .ml-form-formContent,.hero__form .ml-form-formContent>div{display:contents!important}
-.hero__form .ml-form-fieldRow{order:1;flex:1 1 280px;margin:0!important;min-width:0}
+.hero__form .ml-form-fieldRow{order:1;flex:0 1 480px;margin:0!important;min-width:0}
 .hero__form .ml-form-embedSubmit{order:2;flex:none;margin:0!important;padding:0!important;float:none!important;width:auto!important}
-.hero__form .ml-form-checkboxRow{order:3;flex:1 0 100%;margin:0!important;text-align:left}
+.hero__form .ml-form-checkboxRow{order:3;flex:1 0 100%;margin:0!important;text-align:center}
 .hero__form input[type=email]{width:100%!important;height:64px!important;padding:0 32px!important;border-radius:999px!important;border:1.5px solid #3a3f5a!important;background:var(--surface)!important;color:var(--t0)!important;font:400 16px var(--font)!important;box-sizing:border-box}
 .hero__form input[type=email]:focus{border-color:var(--primary)!important;outline:0}
-.hero__form .ml-form-embedSubmit button.primary{height:64px!important;min-width:200px;padding:0 36px!important;border-radius:999px!important;background:var(--primary)!important;color:var(--t0)!important;font:800 18px/1 var(--display)!important;border:0!important;margin:0!important;cursor:pointer}
+.hero__form .ml-form-embedSubmit button.primary{height:64px!important;min-width:240px;padding:0 44px!important;border-radius:999px!important;background:var(--primary)!important;color:var(--t0)!important;font:800 18px/1 var(--display)!important;border:0!important;margin:0!important;cursor:pointer}
 .hero__form .ml-form-embedSubmit button.primary:hover{background:#b8460f!important}
-@media (max-width:640px){.hero__form .ml-form-embedSubmit{flex:1 0 100%}.hero__form .ml-form-embedSubmit button.primary{width:100%!important}.hero__form input[type=email]{height:56px!important}}
-.perks{list-style:none;margin:24px 0 32px;padding:0;display:grid;gap:12px}
-.perks li{display:grid;gap:2px;padding:16px 20px 16px 24px;border-radius:var(--r-md);background:var(--surface);border:1px solid #3a3f5a;border-left:4px solid var(--primary)}
-.perks li:nth-child(2){border-left-color:var(--blue)}
-.perks li:nth-child(3){border-left-color:var(--pink)}
-.perks b{font-size:18px;color:var(--t0)}
-.perks span{color:var(--t2);font-size:16px;line-height:1.5}
+@media (max-width:640px){.hero__form .ml-form-fieldRow{flex:1 1 100%}.hero__form .ml-form-embedSubmit{flex:1 0 100%}.hero__form .ml-form-embedSubmit button.primary{width:100%!important}.hero__form input[type=email]{height:56px!important}}
+.perks{list-style:none;margin:28px 0 36px;padding:0;display:grid}
+.perks li{display:flex;gap:20px;align-items:flex-start;padding:20px 0;border-top:1px solid #3a3f5a}
+.perks li:last-child{border-bottom:1px solid #3a3f5a}
+.perks__ic{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:14px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 35%,transparent)}
+.perks div{display:grid;gap:4px;min-width:0}
+.perks b{font-size:20px;line-height:1.2;color:var(--t0);font-weight:800}
+.perks div>span{color:var(--t2);font-size:16px;line-height:1.5;max-width:44ch}
 .hero__consent{margin:12px 0 0;font-size:13px;color:var(--t2);text-align:center}
 .hero__consent a{color:var(--t1)}
 .form--hero{width:min(620px,100%);margin:0;gap:12px}
@@ -598,7 +599,7 @@ document.querySelector('#root').innerHTML = `
       ${(() => {
         const faces = [1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="40" height="40">`).join('');
         const n = WAITLIST_COUNT ?? (SHOW_TODO ? EXAMPLE_COUNT : null);
-        if (n === null) return `<p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Fundadores</b> ganham badge, teste antecipado e voto nas funções</span></p>`;
+        if (n === null) return `<p class="proof proof--fans"><span class="faces">${faces}</span><span><b>Fundadores</b> ganham badge, teste antecipado e voto nas funções</span></p>`;
         return `<p class="proof proof--fans"><span class="faces">${faces}</span><span><b>${n}+</b> fãs já na fila</span></p>`;
       })()}
       <div class="hero__stage">
@@ -658,9 +659,9 @@ document.querySelector('#root').innerHTML = `
         <h2>Quem chega primeiro<br>vira fundador</h2>
         <p class="sub">O ANIMAE está sendo construído em público. Quem entra na lista agora ganha lugar na história do app:</p>
         <ul class="perks">
-          <li><b>Badge Fundador</b><span>Fica no seu perfil para sempre, mostrando que você estava aqui desde o começo.</span></li>
-          <li><b>Acesso antecipado</b><span>Você é chamado para o teste fechado antes da abertura ao público, no Android.</span></li>
-          <li><b>Voto nas próximas funções</b><span>Você ajuda a decidir o que o ANIMAE constrói depois.</span></li>
+          <li style="--c:var(--primary)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.7 13.6 7 21l5-2.8 5 2.8-1.7-7.4"/><path d="m12 6.6.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 8.7l2-.3z" fill="currentColor" stroke="none"/></svg></span><div><b>Badge Fundador</b><span>Fica no seu perfil para sempre. Prova de que você estava aqui desde o começo.</span></div></li>
+          <li style="--c:var(--blue)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 4 14h7l-1 7 9-11h-7z"/></svg></span><div><b>Acesso antecipado</b><span>Você entra no teste fechado, no Android, antes de todo mundo.</span></div></li>
+          <li style="--c:var(--pink)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 4v-4h0A2.5 2.5 0 0 1 4 13.5z"/><path d="m8.5 10 2.2 2.2L15.5 7.8"/></svg></span><div><b>Voto nas próximas funções</b><span>Você ajuda a decidir o que o ANIMAE constrói depois.</span></div></li>
         </ul>
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
