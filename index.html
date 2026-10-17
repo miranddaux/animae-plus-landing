@@ -526,6 +526,58 @@ h1,h2,h3,.big,.bcard h3,.panel__text h3{line-height:1.12;letter-spacing:-.02em}
 .btn,.nav .btn,.btn--mini,.form .btn{border-radius:999px}
 .form input,.form--hero input{border-radius:999px;padding:0 32px}
 .btn::before{border-radius:inherit}
+
+/* ===== refino responsivo (final, vence os ajustes anteriores) ===== */
+h1,h2,.big{text-wrap:balance}
+.sub,.lead,.panel__text p{text-wrap:pretty}
+@media (max-width:900px){
+  h2 br,.big br{display:none}
+  .hero{padding-top:112px}
+}
+@media (max-width:640px){
+  :root{--gutter:20px}
+  .sec{padding:56px 0}
+  h1{font-size:clamp(36px,10.5vw,44px);line-height:1.06}
+  h2{font-size:clamp(30px,8.6vw,36px);line-height:1.1}
+  .sub,.hero .lead{font-size:16px;line-height:1.55;margin-top:16px}
+  .hero{padding-top:120px}
+  .hero__cta{margin-top:24px}
+  .hero__stage{margin-top:24px}
+  .proof--fans{gap:10px;margin-top:16px}
+  .proof--fans .faces img{width:32px;height:32px}
+  .hero__consent{padding:0 8px;line-height:1.45}
+  /* CTAs de seção ocupam a largura e ficam todos iguais */
+  .sec .btn{width:100%;min-width:0;height:56px;font-size:17px}
+  .center .btn{max-width:420px}
+  .nav .btn{width:auto;height:40px}
+  /* cartões do problema: texto em cima, Draco embaixo, sem sobreposição */
+  .bcard--b,.bcard--c{height:auto;display:flex;flex-direction:column}
+  .bcard--c{flex-direction:column-reverse}
+  .bcard--b .bcard__text,.bcard--c .bcard__text{padding:24px 24px 8px}
+  .bcard--b p,.bcard--c p,.bcard p{max-width:none;font-size:15px}
+  .bcard h3{font-size:24px}
+  .bcard--b{min-height:0;background-size:auto 190px;background-position:right bottom;background-repeat:no-repeat;padding-bottom:190px}
+  .bcard--c .bcard__social{position:static;height:208px;align-self:flex-end;margin:0 -4px 0 auto}
+  .bcard--a{height:auto;padding-bottom:0}
+  .bcard--a .bcard__text{padding:24px 24px 16px}
+  .bcard--a img.bcard__collage{position:static;width:100%}
+  /* vantagens de fundador */
+  .perks{margin:20px 0 28px;gap:16px}
+  .perks__ic{width:48px;height:48px}
+  .perks__ic svg{width:22px;height:22px}
+  .perks b{font-size:17px}
+  .perks div>span{font-size:14.5px}
+  /* FAQ */
+  .faq__item{padding:18px 20px}
+  .faq__q{font-size:16px;line-height:1.35}
+  /* rodapé */
+  .footer__in{gap:12px}
+}
+@media (max-width:380px){
+  :root{--gutter:16px}
+  h1{font-size:34px}
+  .perks li{gap:14px}
+}
 </style></head><body><div id="root"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -613,7 +665,7 @@ document.querySelector('#root').innerHTML = `
 
   <section class="sec" id="como">
     <div class="wrap">
-      <h2 class="center">Você ama anime<br>mas vive fragmentado em 8 apps</h2>
+      <h2 class="center">Você ama anime <br>mas vive fragmentado em 8 apps</h2>
       <p class="sub center">Tracking no MAL, conversa no Discord, teorias no Reddit.<br>Você orbita o conteúdo sem nunca ter uma base.</p>
       <div class="bento">
         <article class="bcard bcard--a">
@@ -636,7 +688,7 @@ document.querySelector('#root').innerHTML = `
 
   <section class="sec" id="app">
     <div class="wrap">
-      <h2 class="center">Tudo que existe ao redor<br>do anime em um lugar</h2>
+      <h2 class="center">Tudo que existe ao redor <br>do anime em um lugar</h2>
       <div class="tabcard">
         <div class="tabs" role="tablist">
           ${tabs.map((t, i) => `<button role="tab" class="tab ${i === 0 ? 'is-on' : ''}" data-tab="${t.id}" aria-selected="${i === 0}"><img src="${IMG}draco-icon.webp" alt="" width="44" height="40"><span>${t.label}</span></button>`).join('')}
@@ -657,7 +709,7 @@ document.querySelector('#root').innerHTML = `
   <section class="sec" id="fundador">
     <div class="wrap split">
       <div class="split__text">
-        <h2>Quem chega primeiro<br>vira fundador</h2>
+        <h2>Quem chega primeiro <br>vira fundador</h2>
         <p class="sub">O ANIMAE está sendo construído em público. Quem entra na lista agora ganha lugar na história do app:</p>
         <ul class="perks">
           <li style="--c:var(--primary)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.7 13.6 7 21l5-2.8 5 2.8-1.7-7.4"/><path d="m12 6.6.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 8.7l2-.3z" fill="currentColor" stroke="none"/></svg></span><div><b>Badge Fundador</b><span>Fica no seu perfil para sempre. Prova de que você estava aqui desde o começo.</span></div></li>
@@ -694,7 +746,7 @@ document.querySelector('#root').innerHTML = `
     <div class="wrap android__in">
       <div class="android__text">
         ${WAITLIST_COUNT ? `<p class="proof proof--fans proof--lg"><span class="faces">${[1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="56" height="56">`).join('')}</span><span><b>${WAITLIST_COUNT}+</b> fãs já na fila</span></p>` : ''}
-        <p class="big">Feito para o<br>Android primeiro</p>
+        <p class="big">Feito para o <br>Android primeiro</p>
         <p class="sub">O app chega primeiro ao Google Play.<br>Entre na lista e seja avisado no dia do lançamento.</p>
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
