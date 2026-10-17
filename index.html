@@ -292,10 +292,10 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 /* MailerLite: só campo de e-mail + botão. Título e subtítulo são da própria página. */
 .hero__form .ml-form-embedContent,.hero__form .ml-form-embedPermissions,.hero__form .ml-form-recaptcha{display:none!important}
 .hero__form .ml-form-embedContainer,.hero__form .ml-form-embedWrapper,.hero__form .ml-form-embedBody{background:transparent!important;box-shadow:none!important;border:0!important;padding:0!important;margin:0!important;max-width:none!important;width:100%!important}
-#hero-lista.hero__form{width:min(780px,100%);margin:0 auto}
+#hero-lista.hero__form{width:min(740px,100%);margin:0 auto}
 #hero-lista .ml-form-embedContainer form{display:flex!important;flex-flow:row wrap;align-items:center;justify-content:center;gap:12px 16px;margin:0!important}
 #hero-lista .ml-form-embedContainer .ml-form-formContent,#hero-lista .ml-form-embedContainer .ml-form-formContent>div{display:contents!important}
-#hero-lista .ml-form-embedContainer .ml-form-fieldRow,#hero-lista .ml-form-embedContainer .ml-field-group{order:1;flex:0 1 480px!important;width:480px!important;max-width:100%!important;margin:0!important;min-width:0}
+#hero-lista .ml-form-embedContainer .ml-form-fieldRow,#hero-lista .ml-form-embedContainer .ml-field-group{order:1;flex:0 1 424px!important;width:424px!important;max-width:100%!important;margin:0!important;min-width:0}
 #hero-lista .ml-form-embedContainer .ml-form-embedSubmit{order:2;flex:none!important;margin:0!important;padding:0!important;float:none!important;width:auto!important}
 #hero-lista .ml-form-embedContainer .ml-form-checkboxRow{order:3;flex:1 0 100%!important;margin:0!important;display:flex!important;justify-content:center;text-align:center}
 #hero-lista .ml-form-embedContainer input[type=email]{width:100%!important;height:64px!important;padding:0 32px!important;border-radius:999px!important;border:1.5px solid #3a3f5a!important;background:var(--surface)!important;color:var(--t0)!important;font:400 16px var(--font)!important;box-sizing:border-box!important}
@@ -305,11 +305,11 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 @media (max-width:700px){#hero-lista .ml-form-embedContainer .ml-form-fieldRow,#hero-lista .ml-form-embedContainer .ml-field-group{flex:1 1 100%!important;width:100%!important}#hero-lista .ml-form-embedContainer .ml-form-embedSubmit{flex:1 0 100%!important}#hero-lista .ml-form-embedContainer .ml-form-embedSubmit button{width:100%!important}#hero-lista .ml-form-embedContainer input[type=email]{height:56px!important}}
 .perks{list-style:none;margin:28px 0 36px;padding:0;display:grid;gap:20px}
 .perks li{display:flex;gap:18px;align-items:center}
-.perks__ic{flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:999px;color:var(--c);background:var(--surface);border:1px solid #3a3f5a}
+.perks__ic{flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:999px;color:var(--c);background:var(--surface);border:0}
 .perks__ic svg{width:24px;height:24px}
-.perks div{display:grid;gap:2px;min-width:0}
+.perks div{display:grid;gap:2px;min-width:0;max-width:320px}
 .perks b{font-size:18px;line-height:1.25;color:var(--t0);font-weight:800}
-.perks div>span{color:var(--t2);font-size:15px;line-height:1.45;max-width:42ch}
+.perks div>span{color:var(--t2);font-size:15px;line-height:1.45;text-wrap:balance}
 .hero .proof--fans>span:last-of-type{font-size:14px}.hero .proof--fans b{font-size:14px}
 .hero__consent{margin:10px 0 0;font-size:13px;color:var(--t2);text-align:center}
 .hero__consent a{color:var(--t1)}
@@ -712,8 +712,8 @@ document.querySelector('#root').innerHTML = `
         <h2>Quem chega primeiro <br>vira fundador</h2>
         <p class="sub">O ANIMAE está sendo construído em público. Quem entra na lista agora ganha lugar na história do app:</p>
         <ul class="perks">
-          <li style="--c:var(--primary)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.7 13.6 7 21l5-2.8 5 2.8-1.7-7.4"/><path d="m12 6.6.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 8.7l2-.3z" fill="currentColor" stroke="none"/></svg></span><div><b>Badge Fundador</b><span>Fica no seu perfil para sempre. Prova de que você estava aqui desde o começo.</span></div></li>
-          <li style="--c:var(--blue)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 4 14h7l-1 7 9-11h-7z"/></svg></span><div><b>Acesso antecipado</b><span>Você entra no teste fechado, no Android, antes de todo mundo.</span></div></li>
+          <li style="--c:var(--primary)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.7 13.6 7 21l5-2.8 5 2.8-1.7-7.4"/><path d="m12 6.6.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 8.7l2-.3z" fill="currentColor" stroke="none"/></svg></span><div><b>Badge Fundador</b><span>Fica no seu perfil para sempre, desde o primeiro dia.</span></div></li>
+          <li style="--c:var(--blue)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 4 14h7l-1 7 9-11h-7z"/></svg></span><div><b>Acesso antecipado</b><span>Você entra no teste fechado do Android antes de todo mundo.</span></div></li>
           <li style="--c:var(--pink)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 4v-4h0A2.5 2.5 0 0 1 4 13.5z"/><path d="m8.5 10 2.2 2.2L15.5 7.8"/></svg></span><div><b>Voto nas próximas funções</b><span>Você ajuda a decidir o que o ANIMAE constrói depois.</span></div></li>
         </ul>
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
