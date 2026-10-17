@@ -289,6 +289,17 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 @media (max-width:640px){.split__card{padding-top:88px}}
 
 .hero__form{width:min(620px,100%);margin:0 auto}
+/* MailerLite: só campo de e-mail + botão. Título e subtítulo são da própria página. */
+.hero__form .ml-form-embedContent,.hero__form .ml-form-embedPermissions,.hero__form .ml-form-recaptcha{display:none!important}
+.hero__form .ml-form-embedContainer,.hero__form .ml-form-embedWrapper,.hero__form .ml-form-embedBody{background:transparent!important;box-shadow:none!important;border:0!important;padding:0!important;margin:0!important;max-width:none!important;width:100%!important}
+.hero__form form{display:flex!important;gap:12px;flex-wrap:wrap;align-items:stretch}
+.hero__form .ml-form-formContent{flex:1 1 260px;margin:0!important;padding:0!important}
+.hero__form .ml-form-fieldRow,.hero__form .ml-field-group{margin:0!important}
+.hero__form .ml-form-embedSubmit{flex:none;margin:0!important;padding:0!important}
+.hero__form .ml-form-embedSubmit button{height:100%;min-height:56px}
+@media (max-width:640px){.hero__form .ml-form-embedSubmit{width:100%}.hero__form .ml-form-embedSubmit button{width:100%}}
+.hero__consent{margin:12px 0 0;font-size:13px;color:var(--t2);text-align:center}
+.hero__consent a{color:var(--t1)}
 .form--hero{width:min(620px,100%);margin:0;gap:12px}
 .form--hero input{height:64px;font-size:16px;background:rgba(255,255,255,.08)}
 .form--hero .btn{min-width:0;padding:0 40px;flex:none}
@@ -571,7 +582,7 @@ document.querySelector('#root').innerHTML = `
       <h1>O lugar onde a conversa<br>continua depois do episódio</h1>
       <p class="lead">O ANIMAE não é streaming. É o diário social de anime: marque o que você assiste, ganhe XP e badges e fale com quem sentiu o mesmo depois de um final que destroça.</p>
       <div class="hero__cta">
-        ${STAGE === 'lista' ? `<div class="hero__form" id="hero-lista"><div class="ml-embedded" data-form="QNQ0AH"></div></div>` : main()}
+        ${STAGE === 'lista' ? `<div class="hero__form" id="hero-lista"><div class="ml-embedded" data-form="QNQ0AH"></div><p class="hero__consent">Ao entrar, você aceita receber e-mails do Animae sobre o lançamento. <a href="privacidade.html">Privacidade</a></p></div>` : main()}
       </div>
       ${(() => {
         const faces = [1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="40" height="40">`).join('');
