@@ -292,12 +292,17 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 /* MailerLite: só campo de e-mail + botão. Título e subtítulo são da própria página. */
 .hero__form .ml-form-embedContent,.hero__form .ml-form-embedPermissions,.hero__form .ml-form-recaptcha{display:none!important}
 .hero__form .ml-form-embedContainer,.hero__form .ml-form-embedWrapper,.hero__form .ml-form-embedBody{background:transparent!important;box-shadow:none!important;border:0!important;padding:0!important;margin:0!important;max-width:none!important;width:100%!important}
-.hero__form form{display:flex!important;gap:12px;flex-wrap:wrap;align-items:stretch}
-.hero__form .ml-form-formContent{flex:1 1 260px;margin:0!important;padding:0!important}
-.hero__form .ml-form-fieldRow,.hero__form .ml-field-group{margin:0!important}
-.hero__form .ml-form-embedSubmit{flex:none;margin:0!important;padding:0!important}
-.hero__form .ml-form-embedSubmit button{height:100%;min-height:56px}
-@media (max-width:640px){.hero__form .ml-form-embedSubmit{width:100%}.hero__form .ml-form-embedSubmit button{width:100%}}
+.hero__form{width:min(960px,100%)}
+.hero__form form{display:flex!important;flex-flow:row wrap;align-items:center;gap:12px 16px}
+.hero__form .ml-form-formContent,.hero__form .ml-form-formContent>div{display:contents!important}
+.hero__form .ml-form-fieldRow{order:1;flex:1 1 280px;margin:0!important;min-width:0}
+.hero__form .ml-form-embedSubmit{order:2;flex:none;margin:0!important;padding:0!important;float:none!important;width:auto!important}
+.hero__form .ml-form-checkboxRow{order:3;flex:1 0 100%;margin:0!important;text-align:left}
+.hero__form input[type=email]{width:100%!important;height:64px!important;padding:0 32px!important;border-radius:999px!important;border:1.5px solid #3a3f5a!important;background:var(--surface)!important;color:var(--t0)!important;font:400 16px var(--font)!important;box-sizing:border-box}
+.hero__form input[type=email]:focus{border-color:var(--primary)!important;outline:0}
+.hero__form .ml-form-embedSubmit button.primary{height:64px!important;min-width:200px;padding:0 36px!important;border-radius:999px!important;background:var(--primary)!important;color:var(--t0)!important;font:800 18px/1 var(--display)!important;border:0!important;margin:0!important;cursor:pointer}
+.hero__form .ml-form-embedSubmit button.primary:hover{background:#b8460f!important}
+@media (max-width:640px){.hero__form .ml-form-embedSubmit{flex:1 0 100%}.hero__form .ml-form-embedSubmit button.primary{width:100%!important}.hero__form input[type=email]{height:56px!important}}
 .hero__consent{margin:12px 0 0;font-size:13px;color:var(--t2);text-align:center}
 .hero__consent a{color:var(--t1)}
 .form--hero{width:min(620px,100%);margin:0;gap:12px}
