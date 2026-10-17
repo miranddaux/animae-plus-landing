@@ -292,12 +292,23 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 /* MailerLite: só campo de e-mail + botão. Título e subtítulo são da própria página. */
 .hero__form .ml-form-embedContent,.hero__form .ml-form-embedPermissions,.hero__form .ml-form-recaptcha{display:none!important}
 .hero__form .ml-form-embedContainer,.hero__form .ml-form-embedWrapper,.hero__form .ml-form-embedBody{background:transparent!important;box-shadow:none!important;border:0!important;padding:0!important;margin:0!important;max-width:none!important;width:100%!important}
-.hero__form form{display:flex!important;gap:12px;flex-wrap:wrap;align-items:stretch}
-.hero__form .ml-form-formContent{flex:1 1 260px;margin:0!important;padding:0!important}
-.hero__form .ml-form-fieldRow,.hero__form .ml-field-group{margin:0!important}
-.hero__form .ml-form-embedSubmit{flex:none;margin:0!important;padding:0!important}
-.hero__form .ml-form-embedSubmit button{height:100%;min-height:56px}
-@media (max-width:640px){.hero__form .ml-form-embedSubmit{width:100%}.hero__form .ml-form-embedSubmit button{width:100%}}
+.hero__form{width:min(960px,100%)}
+.hero__form form{display:flex!important;flex-flow:row wrap;align-items:center;gap:12px 16px}
+.hero__form .ml-form-formContent,.hero__form .ml-form-formContent>div{display:contents!important}
+.hero__form .ml-form-fieldRow{order:1;flex:1 1 280px;margin:0!important;min-width:0}
+.hero__form .ml-form-embedSubmit{order:2;flex:none;margin:0!important;padding:0!important;float:none!important;width:auto!important}
+.hero__form .ml-form-checkboxRow{order:3;flex:1 0 100%;margin:0!important;text-align:left}
+.hero__form input[type=email]{width:100%!important;height:64px!important;padding:0 32px!important;border-radius:999px!important;border:1.5px solid #3a3f5a!important;background:var(--surface)!important;color:var(--t0)!important;font:400 16px var(--font)!important;box-sizing:border-box}
+.hero__form input[type=email]:focus{border-color:var(--primary)!important;outline:0}
+.hero__form .ml-form-embedSubmit button.primary{height:64px!important;min-width:200px;padding:0 36px!important;border-radius:999px!important;background:var(--primary)!important;color:var(--t0)!important;font:800 18px/1 var(--display)!important;border:0!important;margin:0!important;cursor:pointer}
+.hero__form .ml-form-embedSubmit button.primary:hover{background:#b8460f!important}
+@media (max-width:640px){.hero__form .ml-form-embedSubmit{flex:1 0 100%}.hero__form .ml-form-embedSubmit button.primary{width:100%!important}.hero__form input[type=email]{height:56px!important}}
+.perks{list-style:none;margin:24px 0 32px;padding:0;display:grid;gap:12px}
+.perks li{display:grid;gap:2px;padding:16px 20px 16px 24px;border-radius:var(--r-md);background:var(--surface);border:1px solid #3a3f5a;border-left:4px solid var(--primary)}
+.perks li:nth-child(2){border-left-color:var(--blue)}
+.perks li:nth-child(3){border-left-color:var(--pink)}
+.perks b{font-size:18px;color:var(--t0)}
+.perks span{color:var(--t2);font-size:16px;line-height:1.5}
 .hero__consent{margin:12px 0 0;font-size:13px;color:var(--t2);text-align:center}
 .hero__consent a{color:var(--t1)}
 .form--hero{width:min(620px,100%);margin:0;gap:12px}
@@ -527,7 +538,7 @@ const WEB_URL = 'https://animae-plus-main.vercel.app';
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const LOGO = './assets/brand/logo-horizontal-dark.svg';
 const SYMBOL = './assets/brand/symbol.svg';
-const MAIN_LABEL = STAGE === 'live' ? 'Baixar no Android' : 'Entrar na lista';
+const MAIN_LABEL = STAGE === 'live' ? 'Baixar no Android' : 'Quero ser fundador';
 const MAIN_URL = STAGE === 'live' ? PLAY_URL : '#hero-lista';
 
 const main = (extra = '') => `<a class="btn ${extra}" href="${MAIN_URL}" ${MAIN_URL.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>${MAIN_LABEL}</a>`;
@@ -570,7 +581,7 @@ document.querySelector('#root').innerHTML = `
   <div class="wrap nav__in">
     <a class="nav__brand" href="#top" aria-label="ANIMAE"><img class="nav__mark" src="${IMG}draco-icon.webp" alt="" width="44" height="40"><img class="nav__logo" src="./assets/brand/wordmark-dark.svg" alt="ANIMAE" width="98" height="24"></a>
     <div class="nav__right">
-      <nav class="nav__links" aria-label="Seções"><a href="#app">O app</a><a href="#como">Como funciona</a><a href="#faq">FAQ</a></nav>
+      <nav class="nav__links" aria-label="Seções"><a href="#como">Por quê</a><a href="#app">O app</a><a href="#fundador">Fundador</a><a href="#faq">FAQ</a></nav>
       ${main('btn--sm')}
     </div>
   </div>
@@ -587,7 +598,7 @@ document.querySelector('#root').innerHTML = `
       ${(() => {
         const faces = [1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="40" height="40">`).join('');
         const n = WAITLIST_COUNT ?? (SHOW_TODO ? EXAMPLE_COUNT : null);
-        if (n === null) return `<p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Android primeiro</b> · grátis no acesso antecipado</span></p>`;
+        if (n === null) return `<p class="proof"><span class="dots"><i style="--c:#ff5c02"></i><i style="--c:#3c7bff"></i><i style="--c:#ff2e8a"></i><i style="--c:#ff9f2a"></i></span><span><b>Fundadores</b> ganham badge, teste antecipado e voto nas funções</span></p>`;
         return `<p class="proof proof--fans"><span class="faces">${faces}</span><span><b>${n}+</b> fãs já na fila</span></p>`;
       })()}
       <div class="hero__stage">
@@ -641,11 +652,16 @@ document.querySelector('#root').innerHTML = `
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec" id="fundador">
     <div class="wrap split">
       <div class="split__text">
-        <h2>Feito com cuidado,<br>em público</h2>
-        <p class="sub">O ANIMAE não é um projeto de fim de semana. É construído por quem passou anos em produto: cada decisão tem um porquê e cada feature nasce de uma hipótese. Quem entra na lista acompanha tudo e ajuda a decidir o que vem depois.</p>
+        <h2>Quem chega primeiro<br>vira fundador</h2>
+        <p class="sub">O ANIMAE está sendo construído em público. Quem entra na lista agora ganha lugar na história do app:</p>
+        <ul class="perks">
+          <li><b>Badge Fundador</b><span>Fica no seu perfil para sempre, mostrando que você estava aqui desde o começo.</span></li>
+          <li><b>Acesso antecipado</b><span>Você é chamado para o teste fechado antes da abertura ao público, no Android.</span></li>
+          <li><b>Voto nas próximas funções</b><span>Você ajuda a decidir o que o ANIMAE constrói depois.</span></li>
+        </ul>
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
       <div class="split__card">${phone(perfilScreen, 'phone--tall')}</div>
@@ -654,7 +670,7 @@ document.querySelector('#root').innerHTML = `
 
   <section class="marquee" aria-hidden="true">
     <div class="marquee__track">
-      ${Array.from({ length: 2 }, () => `<div class="marquee__set">${['Entre na lista', 'Seu anime', 'Sua galera', 'Seu diário otaku'].map(t => `<span>${t}</span><img src="${IMG}draco-icon.webp" alt="" width="150" height="135">`).join('')}</div>`).join('')}
+      ${Array.from({ length: 2 }, () => `<div class="marquee__set">${['Seja fundador', 'Seu anime', 'Sua galera', 'Seu diário otaku'].map(t => `<span>${t}</span><img src="${IMG}draco-icon.webp" alt="" width="150" height="135">`).join('')}</div>`).join('')}
     </div>
   </section>
 
