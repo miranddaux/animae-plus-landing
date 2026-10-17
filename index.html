@@ -307,7 +307,7 @@ h3{font-size:clamp(24px,1.7vw,32px);line-height:1.15}
 .perks li{display:flex;gap:18px;align-items:center}
 .perks__ic{flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:999px;color:var(--c);background:var(--surface);border:0}
 .perks__ic svg{width:24px;height:24px}
-.perks div{display:grid;gap:2px;min-width:0;max-width:320px}
+.perks div{display:grid;gap:6px;min-width:0;max-width:320px}
 .perks b{font-size:18px;line-height:1.25;color:var(--t0);font-weight:800}
 .perks div>span{color:var(--t2);font-size:15px;line-height:1.45;text-wrap:balance}
 .hero .proof--fans>span:last-of-type{font-size:14px}.hero .proof--fans b{font-size:14px}
@@ -669,7 +669,7 @@ document.querySelector('#root').innerHTML = `
       <p class="sub center">Tracking no MAL, conversa no Discord, teorias no Reddit.<br>Você orbita o conteúdo sem nunca ter uma base.</p>
       <div class="bento">
         <article class="bcard bcard--a">
-          <div class="bcard__text"><h3>Descoberta às cegas</h3><p>Sem contexto sobre o que você sente, os algoritmos empurram qualquer coisa. Você quer o próximo anime que vai te quebrar não qualquer anime.</p></div>
+          <div class="bcard__text"><h3>Descoberta às cegas</h3><p>Os algoritmos não sabem o que você sente e empurram qualquer coisa. Você quer o próximo anime que vai te fazer surtar.</p></div>
           <img class="bcard__collage" src="${IMG}card-colagem.webp" alt="" width="483" height="334" loading="lazy">
         </article>
         <div class="bento__col">
@@ -712,9 +712,9 @@ document.querySelector('#root').innerHTML = `
         <h2>Quem chega primeiro <br>vira fundador</h2>
         <p class="sub">O ANIMAE está sendo construído em público. Quem entra na lista agora ganha lugar na história do app:</p>
         <ul class="perks">
-          <li style="--c:var(--primary)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.7 13.6 7 21l5-2.8 5 2.8-1.7-7.4"/><path d="m12 6.6.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 8.7l2-.3z" fill="currentColor" stroke="none"/></svg></span><div><b>Badge Fundador</b><span>Fica no seu perfil para sempre, desde o primeiro dia.</span></div></li>
-          <li style="--c:var(--blue)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 4 14h7l-1 7 9-11h-7z"/></svg></span><div><b>Acesso antecipado</b><span>Você entra no teste fechado do Android antes de todo mundo.</span></div></li>
-          <li style="--c:var(--pink)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 4v-4h0A2.5 2.5 0 0 1 4 13.5z"/><path d="m8.5 10 2.2 2.2L15.5 7.8"/></svg></span><div><b>Voto nas próximas funções</b><span>Você ajuda a decidir o que o ANIMAE constrói depois.</span></div></li>
+          <li style="--c:var(--primary)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.7 13.6 7 21l5-2.8 5 2.8-1.7-7.4"/><path d="m12 6.6.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 8.7l2-.3z" fill="currentColor" stroke="none"/></svg></span><div><b>Badge Fundador</b><span>Fica no seu perfil para sempre.</span></div></li>
+          <li style="--c:var(--blue)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 4 14h7l-1 7 9-11h-7z"/></svg></span><div><b>Acesso antecipado</b><span>Teste fechado no Android antes de todo mundo.</span></div></li>
+          <li style="--c:var(--pink)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 4v-4h0A2.5 2.5 0 0 1 4 13.5z"/><path d="m8.5 10 2.2 2.2L15.5 7.8"/></svg></span><div><b>Voto nas próximas funções</b><span>Você ajuda a decidir o que vem depois.</span></div></li>
         </ul>
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
