@@ -695,6 +695,34 @@ br.d{display:inline}
   .android__scene{height:82%;left:50%;transform:translateX(-50%)}
   .android__scene .android__bubble{left:42%;top:-15%;width:56%}
 }
+
+/* ===== refino 3 ===== */
+br.m{display:none}
+.footer{padding:64px 0 32px}
+.footer__top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;padding-bottom:40px;margin-bottom:24px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer__brand p{margin-top:16px;max-width:36ch;font-size:14px;line-height:1.6;color:var(--t2)}
+.footer__col{display:flex;flex-direction:column;gap:12px;font-size:14px}
+.footer__col b{font-size:14px;color:var(--t0);margin-bottom:4px}
+.footer__col a{color:var(--t2)}
+.footer__l{color:var(--t2)}
+@media (max-width:640px){
+  br.m{display:inline}
+  h1 br:not(.m){display:none}
+  /* mão do Draco: sobe e aparece mais antes do fade */
+  .hero__stage{margin-top:8px;-webkit-mask-image:linear-gradient(to bottom,#000 72%,rgba(0,0,0,.5) 88%,transparent 100%);mask-image:linear-gradient(to bottom,#000 72%,rgba(0,0,0,.5) 88%,transparent 100%)}
+  .proof--fans{margin-top:16px}
+  /* vantagens: carrossel horizontal com dots */
+  .perks{display:flex;flex-direction:row;max-height:none;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-left:20px;gap:12px;margin:24px -20px 16px;padding:0 20px;scrollbar-width:none}
+  .perks__ic{background:#2a2f45}
+  .perks li{flex:0 0 78%;scroll-snap-align:start;flex-direction:column;align-items:flex-start;gap:12px;padding:20px;border-radius:20px;background:var(--surface);border:1px solid rgba(255,255,255,.08);min-height:0}
+  .perks div{max-width:none}
+  /* Draco 3D mais perto da seção de cima */
+  .android__stage{margin-top:-24px;height:540px}
+  .footer{padding:48px 0 32px}
+  .footer__top{grid-template-columns:1fr 1fr;gap:32px 24px;text-align:left}
+  .footer__brand{grid-column:1/-1}
+  .footer__in{flex-direction:column;align-items:center;gap:8px}
+}
 </style></head><body><div id="root"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -761,7 +789,7 @@ document.querySelector('#root').innerHTML = `
 <main id="top">
   <section class="hero">
     <div class="wrap hero__in">
-      <h1>O lugar onde a conversa<br>continua depois do&nbsp;episódio</h1>
+      <h1>O lugar onde a conversa <br>continua depois <br class="m">do&nbsp;episódio</h1>
       <p class="lead">O ANIMAE é um diário social de animes onde você marca o que assiste, acompanha novidades e tendências, ganha XP por fazer o que mais ama e conversa com gente que vive no mesmo universo que você.</p>
       <div class="hero__cta">
         ${STAGE === 'lista' ? `<div class="hero__form" id="hero-lista"><div class="ml-embedded" data-form="QNQ0AH"></div><p class="hero__consent">Ao entrar, você aceita receber e-mails do Animae sobre o lançamento. <a href="privacidade.html">Privacidade</a></p></div>` : main()}
@@ -885,8 +913,16 @@ document.querySelector('#root').innerHTML = `
 
 <footer class="footer" id="lista">
   <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="nav__brand" href="#top" aria-label="ANIMAE"><img class="nav__mark" src="${IMG}draco-icon.webp" alt="" width="44" height="40"><img class="nav__logo" src="./assets/brand/wordmark-dark.svg" alt="ANIMAE" width="98" height="24"></a>
+        <p>O diário social dos animes. Marque episódios, veja sua galera e jogue o quiz do Draco.</p>
+      </div>
+      <nav class="footer__col" aria-label="Navegação"><b>Navegação</b><a href="#como">Por quê</a><a href="#app">O app</a><a href="#fundador">Fundador</a><a href="#faq">FAQ</a></nav>
+      <div class="footer__col"><b>Contato</b><a href="mailto:animae.suporte@outlook.com">animae.suporte@outlook.com</a><a href="privacidade.html">Política de Privacidade</a></div>
+    </div>
     <div class="footer__in">
-      <div class="footer__l"><a href="privacidade.html">Política de Privacidade</a></div>
+      <div class="footer__l">Feito no Brasil 🇧🇷</div>
       <p>Criado por Thiago Miranda <i></i> © 2026 Animae <i></i> Todos os direitos reservados</p>
     </div>
   </div>
@@ -920,7 +956,7 @@ document.querySelectorAll('a[href="#hero-lista"]').forEach(a => a.addEventListen
 
 // carrossel vertical das vantagens (mobile)
 (() => { const ul = document.querySelector('.perks'), dots = [...document.querySelectorAll('.perks__dots i')]; if (!ul || !dots.length) return;
-  ul.addEventListener('scroll', () => { const items = [...ul.children]; let k = 0; items.forEach((li, i) => { if (li.offsetTop - ul.offsetTop <= ul.scrollTop + 8) k = i; }); if (ul.scrollTop + ul.clientHeight >= ul.scrollHeight - 4) k = items.length - 1; dots.forEach((d, i) => d.classList.toggle('is-on', i === k)); }, { passive: true }); })();
+  ul.addEventListener('scroll', () => { const items = [...ul.children]; let k = 0; items.forEach((li, i) => { if (li.offsetLeft - ul.offsetLeft - 20 <= ul.scrollLeft + 8) k = i; }); if (ul.scrollLeft + ul.clientWidth >= ul.scrollWidth - 4) k = items.length - 1; dots.forEach((d, i) => d.classList.toggle('is-on', i === k)); }, { passive: true }); })();
 
 /* MailerLite: carrega depois que a página foi montada, para achar o formulário */
 (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
