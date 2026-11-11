@@ -583,6 +583,71 @@ h1,h2,.big{text-wrap:balance}
   h1{font-size:34px}
   .perks li{gap:14px}
 }
+
+/* ===== refino 10/11: cards, moldura, FAQ, Android, mobile (vence os blocos anteriores) ===== */
+.progress{display:none}
+.hero__cta{margin-top:40px}
+/* moldura dos celulares */
+.phone{border:8px solid #232738;border-radius:40px;padding:0;background:#0f1018;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 32px 64px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08)}
+.phone__in,.phone__in:has(.shot){border-radius:32px;overflow:hidden}
+.shot{width:calc(100% + 12px);max-width:none}
+/* cards do problema */
+.bcard{border-radius:24px;border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 16px 40px rgba(0,0,0,.28)}
+@media (min-width:641px){
+  .bcard .bcard__pose--a{height:60%;bottom:56px;left:50%;transform:translateX(-50%)}
+  .bcard .bcard__pose--b{height:80%;top:50%;bottom:auto;right:24px;transform:translateY(-50%)}
+  .bcard .bcard__pose--c{height:58%;top:56%;bottom:auto;right:12px;transform:translateY(-50%)}
+  .bcard--a{height:608px}.bcard--b,.bcard--c{height:296px}
+  .bcard--b p,.bcard--c p{max-width:192px;font-size:15px}
+  .bcard--b h3,.bcard--c h3{max-width:200px}
+}
+/* FAQ aberto em tom neutro */
+.faq__item.is-open{background:#262b40;border-color:rgba(255,255,255,.14)}
+/* Android: fundo de mangá um pouco mais visível */
+.android__bg{opacity:.14;mix-blend-mode:normal}
+/* espaçamento entre seções (8 pt) */
+.sec{padding:96px 0}
+.android{padding:96px 0}
+.bento{margin:48px auto}
+.tabcard{margin:48px 0 40px}
+
+@media (max-width:640px){
+  .sec,.android{padding:64px 0}
+  .hero{padding-top:112px}
+  h1{font-size:36px;line-height:1.08}
+  .hero .lead{margin-top:16px}
+  .hero__cta{margin-top:32px}
+  /* mockup da mão maior e centralizado */
+  .hero__stage{width:132%;max-width:none;max-height:600px;margin:24px 0 0;translate:9% 0}
+  /* subtítulo em 3 linhas sem quebra forçada */
+  .sub br{display:none}
+  .sub{max-width:34ch}
+  /* abas coladas no container */
+  .tabcard{margin:32px 0}
+  .tabcard__body{border-top-left-radius:0;border-top-right-radius:0;border-radius:0 0 24px 24px}
+  .tab:first-child{border-top-left-radius:16px}.tab:last-child{border-top-right-radius:16px}
+  .panel__text{padding:32px 16px 0}
+  .panel__text h3{font-size:24px}
+  .panel__text p{font-size:14px;line-height:1.5;margin-top:8px}
+  .panel__phones{height:360px;padding-top:24px}
+  .panel__phones .phone{width:232px}
+  /* vantagens em carrossel vertical: 2 itens + metade do terceiro */
+  .perks{max-height:200px;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;margin:24px 0 16px;gap:16px;padding-right:4px}
+  .perks::-webkit-scrollbar{display:none}
+  .perks li{scroll-snap-align:start;min-height:64px}
+  .perks__dots{display:flex;gap:8px;margin:0 0 24px}
+  .perks__dots i{width:8px;height:8px;border-radius:50%;background:#3a3f5a;transition:background .3s,width .3s}
+  .perks__dots i.is-on{background:var(--primary);width:24px;border-radius:8px}
+  /* Draco centralizado e balão acima */
+  .android__stage{height:520px;margin-top:40px}
+  .android__scene{height:76%;left:50%;transform:translateX(-50%)}
+  .android__scene .android__bubble{left:34%;top:-30%;width:76%}
+  /* rodapé centralizado */
+  .footer{padding:32px 0 40px}
+  .footer__in{flex-direction:column;align-items:center;text-align:center;gap:8px}
+  .footer__in p{justify-content:center;gap:8px;color:var(--t2)}
+}
+@media (min-width:641px){.perks__dots{display:none}}
 </style></head><body><div id="root"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -649,7 +714,7 @@ document.querySelector('#root').innerHTML = `
 <main id="top">
   <section class="hero">
     <div class="wrap hero__in">
-      <h1>O lugar onde a conversa<br>continua depois do episódio</h1>
+      <h1>O lugar onde a conversa<br>continua depois do&nbsp;episódio</h1>
       <p class="lead">O ANIMAE é um diário social de animes onde você marca o que assiste, acompanha novidades e tendências, ganha XP por fazer o que mais ama e conversa com gente que vive no mesmo universo que você.</p>
       <div class="hero__cta">
         ${STAGE === 'lista' ? `<div class="hero__form" id="hero-lista"><div class="ml-embedded" data-form="QNQ0AH"></div><p class="hero__consent">Ao entrar, você aceita receber e-mails do Animae sobre o lançamento. <a href="privacidade.html">Privacidade</a></p></div>` : main()}
@@ -671,20 +736,20 @@ document.querySelector('#root').innerHTML = `
   <section class="sec" id="como">
     <div class="wrap">
       <h2 class="center">Você ama anime <br>mas vive fragmentado em 8 apps</h2>
-      <p class="sub center">Tracking no MAL, conversa no Discord, teorias no Reddit.<br>Você orbita o conteúdo sem nunca ter uma base.</p>
+      <p class="sub center">Tracking no MAL, conversa no Discord, teorias no Reddit. <br>Você orbita o conteúdo sem nunca ter uma base.</p>
       <div class="bento">
         <article class="bcard bcard--a">
-          <div class="bcard__text"><h3>Descoberta às cegas</h3><p>Os algoritmos não sabem o que você sente e empurram qualquer coisa. Você quer o próximo anime que vai te fazer surtar.</p></div>
+          <div class="bcard__text"><h3>Descoberta às cegas</h3><p>Os algoritmos não sabem o que você realmente gosta e te empurram qualquer coisa.</p></div>
           <img class="bcard__pose bcard__pose--a" src="${IMG}pose-descoberta.webp?v=3" alt="Draco de cara fechada, escolhendo entre vários pôsteres de anime aleatórios" width="900" height="988" loading="lazy">
         </article>
         <div class="bento__col">
           <article class="bcard bcard--b">
             <img class="bcard__pose bcard__pose--b" src="${IMG}pose-comunidade.webp?v=3" alt="Draco irritado abraçado a vários celulares, cercado de balões de conversa de várias cores" width="900" height="1052" loading="lazy">
-            <div class="bcard__text"><h3>Comunidade pulverizada</h3><p>Sua tribo está espalhada em 10 plataformas. Discord, Twitter, Reddit, MAL. Ninguém sabe onde se reunir de verdade.</p></div>
+            <div class="bcard__text"><h3>Comunidade pulverizada</h3><p>Sua tribo está espalhada em 10 plataformas. Discord, Twitter e Reddit. Ninguém sabe onde pode se reunir de verdade.</p></div>
           </article>
           <article class="bcard bcard--c">
             <img class="bcard__pose bcard__pose--c" src="${IMG}pose-social.webp?v=3" alt="Draco de braços cruzados com um número de fila na barriga, ignorando um celular cheio de curtidas" width="900" height="671" loading="lazy">
-            <div class="bcard__text"><h3>Social sem sentimento</h3><p>Os apps de anime existentes tratam você como número. Nenhum pergunta o que você sentiu. Nenhum conecta por emoção.</p></div>
+            <div class="bcard__text"><h3>Social sem sentimento</h3><p>Os apps de anime existentes tratam você apenas como um número. Nenhum pergunta o que você sentiu e nem te conecta com outros fãs.</p></div>
           </article>
         </div>
       </div>
@@ -716,15 +781,16 @@ document.querySelector('#root').innerHTML = `
     <div class="wrap split">
       <div class="split__text">
         <h2>Quem chega primeiro <br>vira fundador</h2>
-        <p class="sub">O ANIMAE está sendo construído em público. Quem entra na lista agora ganha lugar na história do app:</p>
+        <p class="sub">Entre na lista agora e ganhe lugar na história do app.</p>
         <ul class="perks">
           <li style="--c:var(--primary)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.7 13.6 7 21l5-2.8 5 2.8-1.7-7.4"/><path d="m12 6.6.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2L9.1 8.7l2-.3z" fill="currentColor" stroke="none"/></svg></span><div><b>Badge Fundador</b><span>Fica no seu perfil para sempre.</span></div></li>
           <li style="--c:var(--blue)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 4 14h7l-1 7 9-11h-7z"/></svg></span><div><b>Acesso antecipado</b><span>Teste fechado no Android antes de todo mundo.</span></div></li>
           <li style="--c:var(--pink)"><span class="perks__ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 4v-4h0A2.5 2.5 0 0 1 4 13.5z"/><path d="m8.5 10 2.2 2.2L15.5 7.8"/></svg></span><div><b>Voto nas próximas funções</b><span>Você ajuda a decidir o que vem depois.</span></div></li>
         </ul>
+        <div class="perks__dots" aria-hidden="true"><i class="is-on"></i><i></i><i></i></div>
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
-      <div class="split__card">${phone(perfilScreen, 'phone--tall')}</div>
+      <div class="split__card">${phone(conquistasScreen, 'phone--tall')}</div>
     </div>
   </section>
 
@@ -753,7 +819,7 @@ document.querySelector('#root').innerHTML = `
       <div class="android__text">
         ${WAITLIST_COUNT ? `<p class="proof proof--fans proof--lg"><span class="faces">${[1, 2, 3, 4].map(n => `<img src="${IMG}fan-${n}.png" alt="" width="56" height="56">`).join('')}</span><span><b>${WAITLIST_COUNT}+</b> fãs já na fila</span></p>` : ''}
         <p class="big">Feito para o <br>Android primeiro</p>
-        <p class="sub">O app chega primeiro ao Google Play.<br>Entre na lista e seja avisado no dia do lançamento.</p>
+        <p class="sub">O app chega primeiro ao Google Play. <br>Garanta seu lugar entre os primeiros fundadores.</p>
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
       <div class="android__stage">
@@ -761,7 +827,7 @@ document.querySelector('#root').innerHTML = `
           <img class="android__draco" src="${IMG}draco-3d.webp" alt="Draco, o mascote do ANIMAE, apontando para você" width="780" height="999" loading="lazy">
           <div class="android__bubble">
             <img src="${IMG}balao.webp" alt="" width="416" height="255" loading="lazy">
-            <p><strong>Ei, você aí!</strong><span>Isso foi feito pra você. Entra na lista e seja avisado primeiro.</span><small>— Draco</small></p>
+            <p><strong>Ei, você aí!</strong><span>Feito de otaku pra otaku. Entra logo na lista e não fica de fora dessa. Osu!</span><small>— Draco</small></p>
           </div>
         </div>
       </div>
@@ -803,6 +869,10 @@ document.querySelectorAll('a[href="#hero-lista"]').forEach(a => a.addEventListen
   document.querySelector('.hero__cta').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
 }));
 
+
+// carrossel vertical das vantagens (mobile)
+(() => { const ul = document.querySelector('.perks'), dots = [...document.querySelectorAll('.perks__dots i')]; if (!ul || !dots.length) return;
+  ul.addEventListener('scroll', () => { const items = [...ul.children]; let k = 0; items.forEach((li, i) => { if (li.offsetTop - ul.offsetTop <= ul.scrollTop + 8) k = i; }); if (ul.scrollTop + ul.clientHeight >= ul.scrollHeight - 4) k = items.length - 1; dots.forEach((d, i) => d.classList.toggle('is-on', i === k)); }, { passive: true }); })();
 
 /* MailerLite: carrega depois que a página foi montada, para achar o formulário */
 (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
