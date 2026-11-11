@@ -785,6 +785,31 @@ br.m{display:none}
   .marquee{margin-top:0;padding:24px 0}
   .faqwrap,.sec#faq{padding-top:40px}
 }
+
+/* ===== pente fino responsivo ===== */
+/* tablet: cards do problema centralizados, não esticados */
+@media (min-width:641px) and (max-width:1000px){
+  .bento.bento--row{max-width:560px}
+  .bento--row .bcard__pose{height:260px!important}
+}
+/* Draco 3D: não vaza a tela entre 641 e 1280 */
+@media (min-width:901px) and (max-width:1280px){
+  .android__in{grid-template-columns:1fr 1fr;gap:32px}
+  .android__stage{height:540px}
+  .android__scene{height:84%;left:50%;transform:translateX(-50%)}
+  .android__scene .android__bubble{right:auto;left:52%;top:-6%;width:min(280px,52%)}
+}
+@media (min-width:641px) and (max-width:900px){
+  .android__stage{height:520px;max-width:560px;margin:32px auto 0}
+  .android__scene .android__bubble{right:auto;left:50%;top:-4%;width:min(280px,52%)}
+}
+/* telas grandes: conteúdo não espalha demais */
+@media (min-width:1600px){.wrap{max-width:1280px}}
+/* tipografia fluida dos títulos de seção */
+h2{font-size:clamp(28px,3.4vw,48px)}
+/* foco visível para teclado */
+a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:8px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body><div id="root"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
