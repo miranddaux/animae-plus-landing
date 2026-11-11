@@ -842,6 +842,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-of
 #fundador h2{background:linear-gradient(180deg,#ffd9a0 0%,#ff9f2a 55%,#ff5c02 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-transform:uppercase;letter-spacing:-.01em}
 #fundador .sub{color:#d9dcea}
 #fundador .perks p,#fundador .perks span{color:#c4c8e0}
+
+/* correção do vídeo do fundador */
+#fundador h2{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--t0,#f9faff);text-transform:none}
+.split__card--video{background:#141a32!important;border-color:rgba(255,255,255,.06)}
+.split__card--video::after{display:none}
+.fundador-video{-webkit-mask-image:none;mask-image:none;object-fit:contain;border-radius:inherit}
 </style></head><body><div id="root"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -972,7 +978,6 @@ document.querySelector('#root').innerHTML = `
   <section class="sec" id="fundador">
     <div class="wrap split">
       <div class="split__text">
-        <span class="eyebrow">Conquista rara</span>
         <h2>Quem chega primeiro <br>vira fundador</h2>
         <p class="sub">Entre na lista agora e ganhe lugar na história do app.</p>
         <ul class="perks">
@@ -984,7 +989,7 @@ document.querySelector('#root').innerHTML = `
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
       <div class="split__card split__card--video">
-        <video class="fundador-video" muted loop playsinline preload="metadata" poster="./assets/videos/fundador-poster.jpg" width="720" height="672" aria-label="Badge de Fundador animado do ANIMAE" data-src="./assets/videos/fundador-loop.mp4"></video>
+        <video class="fundador-video" autoplay muted loop playsinline preload="metadata" poster="./assets/videos/fundador-poster.jpg?v=2" width="1080" height="1008" aria-label="Badge de Fundador animado do ANIMAE"><source src="./assets/videos/fundador-loop.mp4?v=2" type="video/mp4"></video>
       </div>
     </div>
   </section>
@@ -1072,9 +1077,9 @@ document.querySelectorAll('a[href="#hero-lista"]').forEach(a => a.addEventListen
 
 // vídeo do badge de fundador: só toca quando aparece e se o usuário aceita movimento
 (() => { const v = document.querySelector('.fundador-video'); if (!v) return;
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); return; }
   const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { if (!v.src) v.src = v.dataset.src; v.play().catch(() => {}); } else v.pause();
+    if (e.isIntersecting) { v.muted = true; v.play().catch(() => {}); } else v.pause();
   }), { threshold: .25 });
   io.observe(v); })();
 
