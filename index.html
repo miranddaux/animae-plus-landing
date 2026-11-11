@@ -848,6 +848,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-of
 .split__card--video{background:#141a32!important;border-color:rgba(255,255,255,.06)}
 .split__card--video::after{display:none}
 .fundador-video{-webkit-mask-image:none;mask-image:none;object-fit:contain;border-radius:inherit}
+
+/* fundador: vídeo ocupa o container + texto da conquista */
+.split__card--video{flex-direction:column;justify-content:flex-start;background:linear-gradient(180deg,#141a32 0%,#121830 60%,#0f1428 100%)!important;box-shadow:none!important;border-radius:var(--r-xl,32px)}
+.split__card--video .fundador-video{width:100%;max-width:none;object-fit:cover;border-radius:0;margin-bottom:-12%}
+.fundador-badge__txt{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:0 32px 40px;max-width:440px;margin:0 auto}
+.fundador-badge__eyebrow{font:700 13px/1 Urbanist,var(--display,sans-serif);letter-spacing:.28em;text-transform:uppercase;color:#ffb648}
+.fundador-badge__txt strong{font:900 clamp(28px,3vw,36px)/1.05 Urbanist,var(--display,sans-serif);text-transform:uppercase;background:linear-gradient(180deg,#ffe2b0,#ff9f2a 60%,#ff6a10);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fundador-badge__txt p{margin:0;font-size:16px;line-height:1.5;color:#d9dcea}
+@media (max-width:640px){.fundador-badge__txt{padding:0 24px 32px}.fundador-badge__txt p{font-size:15px}}
+
+.split__card--video{background:#141a32!important}
+.split__card--video .fundador-video{-webkit-mask-image:linear-gradient(180deg,#000 78%,transparent 100%);mask-image:linear-gradient(180deg,#000 78%,transparent 100%)}
 </style></head><body><div id="root"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -989,7 +1001,8 @@ document.querySelector('#root').innerHTML = `
         <a class="btn" href="${MAIN_URL}">${MAIN_LABEL}</a>
       </div>
       <div class="split__card split__card--video">
-        <video class="fundador-video" autoplay muted loop playsinline preload="metadata" poster="./assets/videos/fundador-poster.jpg?v=2" width="1080" height="1008" aria-label="Badge de Fundador animado do ANIMAE"><source src="./assets/videos/fundador-loop.mp4?v=2" type="video/mp4"></video>
+        <video class="fundador-video" autoplay muted loop playsinline preload="metadata" poster="./assets/videos/fundador-poster.jpg?v=3" width="1080" height="1008" aria-label="Badge de Fundador animado do ANIMAE"><source src="./assets/videos/fundador-loop.mp4?v=3" type="video/mp4"></video>
+        <div class="fundador-badge__txt"><span class="fundador-badge__eyebrow">Conquista rara</span><strong>Você é fundador</strong><p>Você entrou no Animae antes de todo mundo. Seu número de fundador é único e fica no seu perfil para sempre.</p></div>
       </div>
     </div>
   </section>
